@@ -138,6 +138,7 @@
     <Compile Include="Attributes\TestExpectedResult.cs" />
     <Compile Include="Attributes\TestOrderAttributeTests.cs" />
     <Compile Include="Internal\AssemblyHelperTests.cs" />
+    <Compile Include="Internal\AsyncConsistencyTests.cs" />
     <Compile Include="Internal\EventListenerTextWriterTests.cs" />
     <Compile Include="Internal\Execution\ParallelExecutionStrategyTests.cs" />
     <Compile Include="Internal\Execution\ParallelWorkItemDispatcherTests.cs" />
