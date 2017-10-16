@@ -123,5 +123,7 @@
     </None>
     <None Include="nunitlite.tests-4.5.project.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Header.cs.template" />
+  </ItemGroup>
 </Project>

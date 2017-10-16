@@ -104,4 +104,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Header.cs.template" />
+  </ItemGroup>
 </Project>

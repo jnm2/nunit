@@ -122,4 +122,7 @@
   <PropertyGroup>
     <NuGetTargetMoniker>.NETStandard,Version=v1.6</NuGetTargetMoniker>
   </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Header.cs.template" />
+  </ItemGroup>
 </Project>

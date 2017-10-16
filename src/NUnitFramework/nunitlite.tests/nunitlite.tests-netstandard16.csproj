@@ -133,4 +133,7 @@
     <StartArguments>$(TargetPath)</StartArguments>
     <DebugEngines>{2E36F1D4-B23C-435D-AB41-18E608940038}</DebugEngines>
   </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Header.cs.template" />
+  </ItemGroup>
 </Project>

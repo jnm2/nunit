@@ -120,4 +120,7 @@
   <ItemGroup>
     <EmbeddedResource Include="TestListFile.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Header.cs.template" />
+  </ItemGroup>
 </Project>

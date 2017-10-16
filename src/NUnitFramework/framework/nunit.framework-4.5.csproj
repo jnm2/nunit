@@ -460,4 +460,7 @@
     </None>
     <None Include="nunit.framework-4.5.project.json" />
   </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Header.cs.template" />
+  </ItemGroup>
 </Project>

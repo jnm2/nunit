@@ -371,4 +371,7 @@
     <None Include="nunit.framework.tests-2.0.project.json" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\Header.cs.template" />
+  </ItemGroup>
 </Project>
