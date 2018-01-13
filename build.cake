@@ -141,11 +141,11 @@ Task("Build")
     .IsDependentOn("NuGetRestore")
     .Does(() =>
     {
-        MSBuild(SOLUTION_FILE, CreateSettings());
+        MSBuild(SOLUTION_FILE, CreateMSBuildSettings());
 
         Information("Publishing netcoreapp1.1 tests so that dependencies are present...");
 
-        MSBuild("src/NUnitFramework/tests/nunit.framework.tests.csproj", CreateSettings()
+        MSBuild("src/NUnitFramework/tests/nunit.framework.tests.csproj", CreateMSBuildSettings()
             .WithTarget("Publish")
             .WithProperty("TargetFramework", "netcoreapp1.1")
             .WithProperty("NoBuild", "true") // https://github.com/dotnet/cli/issues/5331#issuecomment-338392972
@@ -153,7 +153,7 @@ Task("Build")
             .WithRawArgument("/nologo"));
     });
 
-MSBuildSettings CreateSettings()
+MSBuildSettings CreateMSBuildSettings()
 {
     var settings = new MSBuildSettings { Verbosity = Verbosity.Minimal, Configuration = configuration };
 
@@ -322,12 +322,12 @@ Task("PackageFramework")
 
         CreateDirectory(PACKAGE_DIR);
 
-        NuGetPack("nuget/framework/nunit.nuspec", new NuGetPackSettings()
-        {
-            Version = packageVersion,
-            BasePath = currentImageDir,
-            OutputDirectory = PACKAGE_DIR
-        });
+        var packSettings = CreateMSBuildSettings()
+            .WithTarget("Pack")
+            .WithProperty("PackageOutputPath", PACKAGE_DIR)
+            .WithRawArgument("/nologo");
+
+        MSBuild("src/NUnitFramework/framework/nunit.framework.csproj", packSettings);
 
         NuGetPack("nuget/nunitlite/nunitlite.nuspec", new NuGetPackSettings()
         {

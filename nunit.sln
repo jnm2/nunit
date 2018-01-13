@@ -39,11 +39,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nunitlite-runner", "src\NUn
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{863DEE19-B23F-4FA6-951A-A6304F91ED67}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "framework", "framework", "{CE68713C-2E19-43E8-9333-6ED817110D52}"
-	ProjectSection(SolutionItems) = preProject
-		nuget\framework\nunit.nuspec = nuget\framework\nunit.nuspec
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nunitlite", "nunitlite", "{8D43A220-7FE8-4214-BBB4-08568B88C7AA}"
 	ProjectSection(SolutionItems) = preProject
 		nuget\nunitlite\install.ps1 = nuget\nunitlite\install.ps1
@@ -96,7 +91,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{863DEE19-B23F-4FA6-951A-A6304F91ED67} = {5A163AE0-C741-4824-8250-E56E1B3DF68A}
-		{CE68713C-2E19-43E8-9333-6ED817110D52} = {863DEE19-B23F-4FA6-951A-A6304F91ED67}
 		{8D43A220-7FE8-4214-BBB4-08568B88C7AA} = {863DEE19-B23F-4FA6-951A-A6304F91ED67}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

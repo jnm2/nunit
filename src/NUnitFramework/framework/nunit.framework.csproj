@@ -8,12 +8,39 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net20'">
-    <PackageReference Include="NUnit.System.Linq" Version="0.6.0" />
+    <PackageReference Include="NUnit.System.Linq" Version="0.6.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <PackageId>NUnit</PackageId>
+    <MinClientVersion>2.12</MinClientVersion>
+    <Authors>Charlie Poole, Rob Prouse</Authors>
+    <Copyright>Copyright (c) 2017 Charlie Poole, Rob Prouse</Copyright>
+    <Description>NUnit is a unit-testing framework for all .NET languages with a strong TDD focus. NUnit features a fluent assert syntax, parameterized, generic and theory tests, and is user-extensible.</Description>
+    <PackageReleaseNotes>This package includes the NUnit 3 framework assembly, which is referenced by your tests. You will need to install version 3 of the nunit3-console program or a third-party runner that supports NUnit 3 in order to execute tests. Runners intended for use with NUnit 2.x will not run NUnit 3 tests correctly.</PackageReleaseNotes>
+    <PackageTags>nunit test testing tdd framework fluent assert theory plugin addin</PackageTags>
+    <PackageLicenseUrl>http://nunit.org/nuget/nunit3-license.txt</PackageLicenseUrl>
+    <PackageProjectUrl>http://nunit.org</PackageProjectUrl>
+    <PackageIconUrl>https://cdn.rawgit.com/nunit/resources/master/images/icon/nunit_256.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE.txt" Pack="true" PackagePath="\" />
+    <None Include="..\..\..\NOTICES.txt" Pack="true" PackagePath="\" />
+    <None Include="..\..\..\CHANGES.md" Pack="true" PackagePath="\" />
+    <None Include="NUnit.props" Pack="true" PackagePath="build\" />
+  </ItemGroup>
+
+  <!-- https://github.com/NuGet/Home/issues/3891 -->
+  <Target Name="Bundle-NUnit-System-Linq" BeforeTargets="_GetBuildOutputFilesWithTfm">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' == 'NUnit.System.Linq'" />
+    </ItemGroup>
+  </Target>
 
 </Project>
