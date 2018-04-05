@@ -1,5 +1,5 @@
-﻿// ***********************************************************************
-// Copyright (c) 2015 Charlie Poole, Rob Prouse
+// ***********************************************************************
+// Copyright (c) 2018 Charlie Poole, Rob Prouse
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -21,21 +21,23 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
-namespace NUnit.Framework.Interfaces
-{
-    /// <summary>
-    /// The IReflectionInfo interface is implemented by NUnit wrapper objects that perform reflection.
-    /// </summary>
-    public interface IReflectionInfo
-    {
-        /// <summary>
-        /// Returns an array of custom attributes of the specified type applied to this object
-        /// </summary>
-        T[] GetCustomAttributes<T>(bool inherit) where T : class;
+using System;
+using System.Reflection;
+using NUnit.Compatibility;
+using NUnit.Framework.Interfaces;
 
-        /// <summary>
-        /// Returns a value indicating whether an attribute of the specified type is defined on this object.
-        /// </summary>
-        bool IsDefined<T>(bool inherit);
+namespace NUnit.Framework
+{
+    internal static class Extensions
+    {
+        public static FixtureMethod GetFixtureMethod(this Type type, string methodName)
+        {
+            return new FixtureMethod(type, type.GetTypeInfo().GetMethod(methodName));
+        }
+
+        public static FixtureMethod GetFixtureMethod(this Type type, string methodName, BindingFlags bindingAttr)
+        {
+            return new FixtureMethod(type, type.GetTypeInfo().GetMethod(methodName, bindingAttr));
+        }
     }
 }

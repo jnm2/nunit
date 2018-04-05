@@ -22,19 +22,14 @@
 // ***********************************************************************
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 #if !NET20 && !NET35 && !NETSTANDARD1_6
 using System.Runtime.ExceptionServices;
 #endif
 using NUnit.Compatibility;
 using NUnit.Framework.Interfaces;
-
-#if NETSTANDARD1_6
-using System.Linq;
-#endif
 
 namespace NUnit.Framework.Internal
 {
@@ -153,8 +148,7 @@ namespace NUnit.Framework.Internal
             if (arguments == null) return Construct(type);
 
             Type[] argTypes = GetTypeArray(arguments);
-            ITypeInfo typeInfo = new TypeWrapper(type);
-            ConstructorInfo ctor = typeInfo.GetConstructor(argTypes);
+            ConstructorInfo ctor = GetConstructors(type, argTypes).FirstOrDefault();
             if (ctor == null)
                 throw new InvalidTestFixtureException(type.FullName + " does not have a suitable constructor");
 
@@ -176,6 +170,65 @@ namespace NUnit.Framework.Internal
                 types[index++] = o == null ? typeof(NUnitNullType) : o.GetType();
             }
             return types;
+        }
+
+        /// <summary>
+        /// Gets the constructors to which the specified argument types can be coerced.
+        /// </summary>
+        internal static IEnumerable<ConstructorInfo> GetConstructors(Type type, Type[] matchingTypes)
+        {
+            return type
+                .GetConstructors()
+                .Where(c => c.GetParameters().ParametersMatch(matchingTypes));
+        }
+
+        /// <summary>
+        /// Determines if the given types can be coerced to match the given parameters.
+        /// </summary>
+        internal static bool ParametersMatch(this ParameterInfo[] pinfos, Type[] ptypes)
+        {
+            if (pinfos.Length != ptypes.Length)
+                return false;
+
+            for (int i = 0; i < pinfos.Length; i++)
+            {
+                if (!ptypes[i].CanImplicitlyConvertTo(pinfos[i].ParameterType))
+                    return false;
+            }
+            return true;
+        }
+
+        // §6.1.2 (Implicit numeric conversions) of the specification
+        private static Dictionary<Type, List<Type>> convertibleValueTypes = new Dictionary<Type, List<Type>>() {
+            { typeof(decimal), new List<Type> { typeof(sbyte), typeof(byte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(ulong), typeof(char) } },
+            { typeof(double), new List<Type> { typeof(sbyte), typeof(byte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(ulong), typeof(char), typeof(float) } },
+            { typeof(float), new List<Type> { typeof(sbyte), typeof(byte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(ulong), typeof(char), typeof(float) } },
+            { typeof(ulong), new List<Type> { typeof(byte), typeof(ushort), typeof(uint), typeof(char) } },
+            { typeof(long), new List<Type> { typeof(sbyte), typeof(byte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(char) } },
+            { typeof(uint), new List<Type> { typeof(byte), typeof(ushort), typeof(char) } },
+            { typeof(int), new List<Type> { typeof(sbyte), typeof(byte), typeof(short), typeof(ushort), typeof(char) } },
+            { typeof(ushort), new List<Type> { typeof(byte), typeof(char) } },
+            { typeof(short), new List<Type> { typeof(byte) } }
+        };
+
+        /// <summary>
+        /// Determines whether the current type can be implicitly converted to the specified type.
+        /// </summary>
+        internal static bool CanImplicitlyConvertTo(this Type from, Type to)
+        {
+            if (to.IsAssignableFrom(from))
+                return true;
+
+            // Look for the marker that indicates from was null
+            if (from == typeof(NUnitNullType) && (to.GetTypeInfo().IsClass || to.FullName.StartsWith("System.Nullable")))
+                return true;
+
+            if (convertibleValueTypes.ContainsKey(to) && convertibleValueTypes[to].Contains(from))
+                return true;
+
+            return from
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Any(m => m.ReturnType == to && m.Name == "op_Implicit");
         }
 
         #endregion
