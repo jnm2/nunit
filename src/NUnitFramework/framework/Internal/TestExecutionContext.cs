@@ -544,7 +544,7 @@ namespace NUnit.Framework.Internal
         ///         // Code that should not impact the result
         ///     }
         /// </example>
-        public class IsolatedContext : IDisposable
+        public sealed class IsolatedContext : IDisposable
         {
             private readonly TestExecutionContext _originalContext;
 
@@ -577,7 +577,7 @@ namespace NUnit.Framework.Internal
         /// but not available in CurrentContext. This happens when tests are run
         /// on an ad-hoc basis or Asserts are used outside of tests.
         /// </summary>
-        public class AdhocContext : TestExecutionContext
+        public sealed class AdhocContext : TestExecutionContext
         {
             /// <summary>
             /// Construct an AdhocTestExecutionContext, which is used

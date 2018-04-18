@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal.Builders
     /// <summary>
     /// Built-in SuiteBuilder for all types of test classes.
     /// </summary>
-    public class DefaultSuiteBuilder : ISuiteBuilder
+    public sealed class DefaultSuiteBuilder : ISuiteBuilder
     {
         // Builder we use for fixtures without any fixture attribute specified
         private readonly NUnitTestFixtureBuilder _defaultBuilder = new NUnitTestFixtureBuilder();

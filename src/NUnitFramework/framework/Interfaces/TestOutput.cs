@@ -29,7 +29,7 @@ namespace NUnit.Framework.Interfaces
     /// The TestOutput class holds a unit of output from 
     /// a test to a specific output stream
     /// </summary>
-	public class TestOutput
+    public sealed class TestOutput
 	{
         /// <summary>
         /// Construct with text, output destination type and

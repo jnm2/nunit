@@ -94,7 +94,7 @@ at wrapping a non-async method invocation in an async region was done");
         public virtual void Dispose()
         { }
 
-        private class AsyncTaskInvocationRegion : AsyncInvocationRegion
+        private sealed class AsyncTaskInvocationRegion : AsyncInvocationRegion
         {
             private const string TaskWaitMethod = "Wait";
             private const string TaskResultProperty = "Result";

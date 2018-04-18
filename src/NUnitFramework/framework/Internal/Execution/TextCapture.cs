@@ -34,7 +34,7 @@ namespace NUnit.Framework.Internal.Execution
     /// default destination, normally the original destination of the
     /// intercepted output.
     /// </summary>
-    public class TextCapture : TextWriter
+    public sealed class TextCapture : TextWriter
     {
         private readonly TextWriter _defaultWriter;
 

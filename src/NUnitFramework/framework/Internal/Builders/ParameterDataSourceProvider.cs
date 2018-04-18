@@ -34,7 +34,7 @@ namespace NUnit.Framework.Internal.Builders
     /// ParameterDataSourceProvider supplies individual argument values for
     /// single parameters using attributes implementing IParameterDataSource.
     /// </summary>
-    public class ParameterDataSourceProvider : IParameterDataProvider
+    public sealed class ParameterDataSourceProvider : IParameterDataProvider
     {
         #region IParameterDataProvider Members
 

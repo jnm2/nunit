@@ -48,7 +48,7 @@ namespace NUnit.Framework.Internal
     /// arrays or strings use the prefix "Get..." to avoid 
     /// confusion with the single-value methods.
     /// </remarks>
-    public class Randomizer : Random
+    public sealed class Randomizer : Random
     {
         #region Static Members
 

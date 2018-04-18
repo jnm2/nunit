@@ -36,7 +36,7 @@ namespace NUnit.Framework.Internal.Builders
     /// called by the attribute and in the second directly by
     /// NUnitSuiteBuilder.
     /// </summary>
-    public class NUnitTestFixtureBuilder
+    public sealed class NUnitTestFixtureBuilder
     {
         #region Messages
 

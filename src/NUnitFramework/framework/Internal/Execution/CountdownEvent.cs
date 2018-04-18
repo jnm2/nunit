@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal.Execution
     /// for use in earlier versions of .NET. Only the methods
     /// used by NUnit are implemented.
     /// </summary>
-    public class CountdownEvent
+    public sealed class CountdownEvent
     {
         readonly int _initialCount;
         int _remainingCount;

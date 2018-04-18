@@ -29,7 +29,7 @@ namespace NUnit.Common
     /// OutputSpecification encapsulates a file output path and format
     /// for use in saving the results of a run.
     /// </summary>
-    public class OutputSpecification
+    public sealed class OutputSpecification
     {
         #region Constructor
 

@@ -35,7 +35,7 @@ namespace NUnit.Framework.Internal
 #if !NETSTANDARD1_6
     [Serializable]
 #endif
-    public class TestCaseTimeoutException : Exception
+    public sealed class TestCaseTimeoutException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCaseTimeoutException"/> class.
@@ -61,7 +61,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Serialization Constructor
         /// </summary>
-        protected TestCaseTimeoutException(SerializationInfo info,
+        private TestCaseTimeoutException(SerializationInfo info,
             StreamingContext context) : base(info,context){}
 #endif
     }

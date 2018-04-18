@@ -72,7 +72,7 @@ namespace NUnit.Framework
         /// <summary>
         /// The test command for the RepeatAttribute
         /// </summary>
-        public class RepeatedTestCommand : DelegatingTestCommand
+        private sealed class RepeatedTestCommand : DelegatingTestCommand
         {
             private readonly int repeatCount;
 

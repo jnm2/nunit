@@ -30,7 +30,7 @@ namespace NUnit.Framework.Internal
     /// <summary>
     /// Used for resolving the type difference between objects.
     /// </summary>
-    public class TypeNameDifferenceResolver
+    public static class TypeNameDifferenceResolver
     {
         /// <summary>
         /// Gets the shortened type name difference between <paramref name="expected"/> and <paramref name="actual"/>.
@@ -39,7 +39,7 @@ namespace NUnit.Framework.Internal
         /// <param name="actual">The actual object.</param>
         /// <param name="expectedTypeShortened">Output of the unique type name for the expected object.</param>
         /// <param name="actualTypeShortened">Output of the unique type name for actual object.</param>
-        public void ResolveTypeNameDifference(object expected, object actual, out string expectedTypeShortened, out string actualTypeShortened)
+        public static void ResolveTypeNameDifference(object expected, object actual, out string expectedTypeShortened, out string actualTypeShortened)
         {
             ResolveTypeNameDifference(expected.GetType(), actual.GetType(), out expectedTypeShortened, out actualTypeShortened);
         }
@@ -51,7 +51,7 @@ namespace NUnit.Framework.Internal
         /// <param name="actual">The actual object <see cref="Type"/>.</param>
         /// <param name="expectedTypeShortened">Output of the unique type name for the expected object.</param>
         /// <param name="actualTypeShortened">Output of the unique type name for actual object.</param>
-        public void ResolveTypeNameDifference(Type expected, Type actual, out string expectedTypeShortened, out string actualTypeShortened)
+        public static void ResolveTypeNameDifference(Type expected, Type actual, out string expectedTypeShortened, out string actualTypeShortened)
         {
             if (IsTypeGeneric(expected) && IsTypeGeneric(actual))
             {
@@ -83,7 +83,7 @@ namespace NUnit.Framework.Internal
         /// <param name="actualFullType">The actual <see cref="Type"/>.</param>
         /// <param name="shortenedParamsExpected">Shortened generic parameters of the expected <see cref="Type"/>.</param>
         /// <param name="shortenedParamsActual">Shortened generic parameters of the actual <see cref="Type"/>.</param>
-        private void GetShortenedGenericParams(Type expectedFullType, Type actualFullType, out List<string> shortenedParamsExpected, out List<string> shortenedParamsActual)
+        private static void GetShortenedGenericParams(Type expectedFullType, Type actualFullType, out List<string> shortenedParamsExpected, out List<string> shortenedParamsActual)
         {
             List<Type> templateParamsExpected = new List<Type>(expectedFullType.GetGenericArguments());
             List<Type> templateParamsActual = new List<Type>(actualFullType.GetGenericArguments());
@@ -116,7 +116,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Obtain a shortened name of the given <see cref="Type"/>.
         /// </summary>
-        public string FullyShortenTypeName(Type GenericType)
+        public static string FullyShortenTypeName(Type GenericType)
         {
             if (IsTypeGeneric(GenericType))
             {
@@ -141,7 +141,7 @@ namespace NUnit.Framework.Internal
         /// <param name="actualType">The actual <see cref="Type"/>.</param>
         /// <param name="expectedTypeShortened">The shortened expected <see cref="Type"/> name.</param>
         /// <param name="actualTypeShortened">The shortened actual <see cref="Type"/> name.</param>
-        public void ShortenTypeNames(Type expectedType, Type actualType, out string expectedTypeShortened, out string actualTypeShortened)
+        public static void ShortenTypeNames(Type expectedType, Type actualType, out string expectedTypeShortened, out string actualTypeShortened)
         {
             string[] expectedOriginalType = expectedType.FullName.Split('.');
             string[] actualOriginalType = actualType.FullName.Split('.');
@@ -177,7 +177,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Returns whether or not the <see cref="Type"/> is generic.
         /// </summary>
-        public bool IsTypeGeneric(Type type)
+        public static bool IsTypeGeneric(Type type)
         {
             Guard.ArgumentNotNull(type, nameof(type));
 
@@ -187,7 +187,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Returns the fully qualified generic <see cref="Type"/> name of a given <see cref="Type"/>.
         /// </summary>
-        public string GetGenericTypeName(Type type)
+        public static string GetGenericTypeName(Type type)
         {
             Guard.ArgumentNotNull(type, nameof(type));
 
@@ -208,7 +208,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="GenericTypeName">The name of the generic type, including the number of template parameters expected.</param>
         /// <param name="TemplateParamNames">A <see cref="List"/> of names of the template parameters of the provided generic type.</param>
-        public string ReconstructGenericTypeName(string GenericTypeName, List<string> TemplateParamNames)
+        public static string ReconstructGenericTypeName(string GenericTypeName, List<string> TemplateParamNames)
         {
             return GenericTypeName + "[" + string.Join(",", TemplateParamNames.ToArray()) + "]";
         }
@@ -220,7 +220,7 @@ namespace NUnit.Framework.Internal
         /// <param name="actual">The actual <see cref="Type"/>.</param>
         /// <param name="shortenedGenericNameExpected">The shortened expected generic name.</param>
         /// <param name="shortenedGenericNameActual">The shortened actual generic name.</param>
-        public void GetShortenedGenericTypes(Type expected, Type actual, out string shortenedGenericNameExpected, out string shortenedGenericNameActual)
+        public static void GetShortenedGenericTypes(Type expected, Type actual, out string shortenedGenericNameExpected, out string shortenedGenericNameActual)
         {
             Type toplevelGenericExpected = expected.GetGenericTypeDefinition();
             Type toplevelGenericActual = actual.GetGenericTypeDefinition();

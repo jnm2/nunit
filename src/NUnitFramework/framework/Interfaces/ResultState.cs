@@ -32,7 +32,7 @@ namespace NUnit.Framework.Interfaces
     /// skipped or was inconclusive. The Label provides a more
     /// detailed breakdown for use by client runners.
     /// </summary>
-    public class ResultState
+    public sealed class ResultState
     {
         #region Constructors
 

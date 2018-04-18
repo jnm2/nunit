@@ -33,7 +33,7 @@ namespace NUnit.Framework.Internal.Execution
     /// marked as completed immediately upon execution. This
     /// class is also used for skipped or ignored test suites.
     /// </summary>
-    public class SimpleWorkItem : WorkItem
+    public sealed class SimpleWorkItem : WorkItem
     {
         readonly TestMethod _testMethod;
 

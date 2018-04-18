@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Execution
     /// A TestWorker pulls work items from a queue
     /// and executes them.
     /// </summary>
-    public class TestWorker
+    public sealed class TestWorker
     {
         private static readonly Logger log = InternalTrace.GetLogger("TestWorker");
 

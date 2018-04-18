@@ -150,7 +150,7 @@ using System.Runtime.Serialization;
 
 namespace NUnit.Options
 {
-    public class OptionValueCollection : IList, IList<string> {
+    public sealed class OptionValueCollection : IList, IList<string> {
         readonly List<string> values = new List<string>();
         readonly OptionContext c;
 
@@ -239,7 +239,7 @@ namespace NUnit.Options
         }
     }
 
-    public class OptionContext {
+    public sealed class OptionContext {
         private Option                option;
         private string                name;
         private int                   index;
@@ -471,7 +471,7 @@ namespace NUnit.Options
 #if !NETSTANDARD1_6
     [Serializable]
 #endif
-    public class OptionException : Exception
+    public sealed class OptionException : Exception
     {
         private readonly string option;
 
@@ -492,7 +492,7 @@ namespace NUnit.Options
         }
 
 #if !NETSTANDARD1_6
-        protected OptionException (SerializationInfo info, StreamingContext context)
+        private OptionException (SerializationInfo info, StreamingContext context)
             : base (info, context)
         {
             this.option = info.GetString ("OptionName");
@@ -515,7 +515,7 @@ namespace NUnit.Options
 
     public delegate void OptionAction<TKey, TValue> (TKey key, TValue value);
 
-    public class OptionSet : KeyedCollection<string, Option>
+    public abstract class OptionSet : KeyedCollection<string, Option>
     {
         string localizer(string msg)
         {

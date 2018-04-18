@@ -44,7 +44,7 @@ namespace NUnit.Framework.Api
     /// <summary>
     /// Implementation of ITestAssemblyRunner
     /// </summary>
-    public class NUnitTestAssemblyRunner : ITestAssemblyRunner
+    public sealed class NUnitTestAssemblyRunner : ITestAssemblyRunner
     {
         private static readonly Logger log = InternalTrace.GetLogger("DefaultTestAssemblyRunner");
 

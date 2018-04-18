@@ -35,7 +35,7 @@ namespace NUnit.Framework.Internal
 #if !NETSTANDARD1_6
     [Serializable]
 #endif
-    public class InvalidTestFixtureException : Exception
+    public sealed class InvalidTestFixtureException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidTestFixtureException"/> class.
@@ -61,7 +61,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Serialization Constructor
         /// </summary>
-        protected InvalidTestFixtureException(SerializationInfo info,
+        private InvalidTestFixtureException(SerializationInfo info,
             StreamingContext context) : base(info,context){}
 #endif
     }

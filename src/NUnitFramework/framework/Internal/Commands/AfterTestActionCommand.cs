@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Commands
     /// TestActionAfterCommand handles the AfterTest method of a single 
     /// TestActionItem, provided the items BeforeTest has been run.
     /// </summary>
-    public class AfterTestActionCommand : AfterTestCommand
+    public sealed class AfterTestActionCommand : AfterTestCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AfterTestActionCommand"/> class.

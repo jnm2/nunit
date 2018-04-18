@@ -48,7 +48,7 @@ namespace NUnit.Framework.Internal.Builders
     /// http://burtleburtle.net/bob/math/jenny.html
     /// </para>
     /// </remarks>
-    public class PairwiseStrategy : ICombiningStrategy
+    public sealed class PairwiseStrategy : ICombiningStrategy
     {
         // NOTE: Terminology in this class is based on the literature
         // relating to strategies for combining variable features when
@@ -62,7 +62,7 @@ namespace NUnit.Framework.Internal.Builders
         /// FleaRand is a pseudo-random number generator developed by Bob Jenkins:
         /// http://burtleburtle.net/bob/rand/talksmall.html#flea
         /// </summary>
-        internal class FleaRand
+        private sealed class FleaRand
         {
             private uint _b;
             private uint _c;
@@ -141,14 +141,14 @@ namespace NUnit.Framework.Internal.Builders
         /// Feature is the index of the supplied value in that parameter's list of
         /// sources.
         /// </summary>
-        internal class FeatureInfo
+        internal sealed class FeatureInfo
         {
             public readonly int Dimension;
 
             public readonly int Feature;
 
             /// <summary>
-            /// Initializes a new instance of FeatureInfo class.
+            /// Initializes a new instance of <see cref="FeatureInfo"/> struct.
             /// </summary>
             /// <param name="dimension">Index of a dimension.</param>
             /// <param name="feature">Index of a feature.</param>
@@ -166,7 +166,7 @@ namespace NUnit.Framework.Internal.Builders
         /// tuples actually may contain only single feature or pair of features, but
         /// the algorithm itself works with triplets, quadruples and so on.
         /// </summary>
-        internal class FeatureTuple
+        internal sealed class FeatureTuple
         {
             private readonly FeatureInfo[] _features;
 
@@ -299,7 +299,7 @@ namespace NUnit.Framework.Internal.Builders
         /// probes in a different order.
         /// </para>
         /// </remarks>
-        internal class PairwiseTestCaseGenerator
+        private sealed class PairwiseTestCaseGenerator
         {
             private FleaRand _prng;
 

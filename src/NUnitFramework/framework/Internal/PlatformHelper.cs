@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal
     /// PlatformHelper class is used by the PlatformAttribute class to
     /// determine whether a platform is supported.
     /// </summary>
-    public class PlatformHelper
+    public sealed class PlatformHelper
     {
         private readonly OSPlatform _os;
         private readonly RuntimeFramework _rt;

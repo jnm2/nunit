@@ -33,7 +33,7 @@ using NUnit.Framework.Internal;
 
 namespace NUnitLite
 {
-    public class TextUI
+    public sealed class TextUI
     {
         public ExtendedTextWriter Writer { get; private set; }
 

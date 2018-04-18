@@ -30,11 +30,11 @@ namespace NUnit.Compatibility
     /// A MarshalByRefObject that lives forever
     /// </summary>
 #if NETSTANDARD1_6
-    public class LongLivedMarshalByRefObject
+    public abstract class LongLivedMarshalByRefObject
     {
     }
 #else
-    public class LongLivedMarshalByRefObject : MarshalByRefObject
+    public abstract class LongLivedMarshalByRefObject : MarshalByRefObject
     {
         /// <summary>
         /// Obtains a lifetime service object to control the lifetime policy for this instance.

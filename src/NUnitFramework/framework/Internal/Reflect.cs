@@ -81,7 +81,7 @@ namespace NUnit.Framework.Internal
             return list.ToArray();
         }
 
-        private class BaseTypesFirstComparer : IComparer<MethodInfo>
+        private sealed class BaseTypesFirstComparer : IComparer<MethodInfo>
         {
             public int Compare(MethodInfo m1, MethodInfo m2)
             {

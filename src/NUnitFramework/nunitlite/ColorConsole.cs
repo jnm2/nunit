@@ -28,7 +28,7 @@ namespace NUnit.Common
     /// <summary>
     /// Sets the console color in the constructor and resets it in the dispose
     /// </summary>
-    public class ColorConsole : IDisposable
+    public sealed class ColorConsole : IDisposable
     {
         private readonly ConsoleColor _originalColor;
 

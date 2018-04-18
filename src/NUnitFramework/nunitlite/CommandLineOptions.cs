@@ -40,7 +40,7 @@ namespace NUnit.Common
     /// Options OptionSet class and provides a central location
     /// for defining and parsing options.
     /// </summary>
-    public class CommandLineOptions : OptionSet
+    public abstract class CommandLineOptions : OptionSet
     {
         private static readonly string DEFAULT_WORK_DIRECTORY =
             Directory.GetCurrentDirectory();

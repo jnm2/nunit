@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Commands
     /// to a test. It runs the BeforeTest method, then runs the
     /// test and finally runs the AfterTest method.
     /// </summary>
-    public class TestActionCommand : BeforeAndAfterTestCommand
+    public sealed class TestActionCommand : BeforeAndAfterTestCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TestActionCommand"/> class.

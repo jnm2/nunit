@@ -29,7 +29,7 @@ namespace NUnit.Common
     /// TestNameParser is used to parse the arguments to the 
     /// -run option, separating testnames at the correct point.
     /// </summary>
-    public class TestNameParser
+    public static class TestNameParser
     {
         /// <summary>
         /// Parse the -run argument and return an array of argument

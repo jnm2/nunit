@@ -34,7 +34,7 @@ namespace NUnit.Framework.Internal.Commands
     /// SetUpTearDownCommand runs SetUp methods for a suite,
     /// runs the test and then runs TearDown methods.
     /// </summary>
-    public class SetUpTearDownCommand : BeforeAndAfterTestCommand
+    public sealed class SetUpTearDownCommand : BeforeAndAfterTestCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SetUpTearDownCommand"/> class.

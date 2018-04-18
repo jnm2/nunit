@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Commands
     /// SetUpTearDownItem holds the setup and teardown methods
     /// for a single level of the inheritance hierarchy.
     /// </summary>
-    public class SetUpTearDownItem
+    public sealed class SetUpTearDownItem
     {
         private readonly IList<MethodInfo> _setUpMethods;
         private readonly IList<MethodInfo> _tearDownMethods;

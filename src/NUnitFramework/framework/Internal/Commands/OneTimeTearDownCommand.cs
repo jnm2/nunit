@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal.Commands
     /// specified for a suite and calls Dispose on the user
     /// test object, if any.
     /// </summary>
-    public class OneTimeTearDownCommand : AfterTestCommand
+    public sealed class OneTimeTearDownCommand : AfterTestCommand
     {
         /// <summary>
         /// Construct a OneTimeTearDownCommand

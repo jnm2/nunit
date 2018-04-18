@@ -29,7 +29,7 @@ namespace NUnit.Framework.Internal
     /// ParameterizedMethodSuite holds a collection of individual
     /// TestMethods with their arguments applied.
     /// </summary>
-    public class ParameterizedMethodSuite : TestSuite
+    public sealed class ParameterizedMethodSuite : TestSuite
     {
         private readonly bool _isTheory;
 

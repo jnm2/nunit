@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal
     /// TestNameGenerator is able to create test names according to
     /// a coded pattern.
     /// </summary>
-    public class TestNameGenerator
+    public sealed class TestNameGenerator
     {
         // TODO: Using a static here is not good it's the easiest
         // way to get a temporary implementation without passing the
@@ -451,7 +451,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private class TestIDFragment : NameFragment
+        private sealed class TestIDFragment : NameFragment
         {
             public override string GetText(MethodInfo method, object[] args)
             {
@@ -464,7 +464,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private class FixedTextFragment : NameFragment
+        private sealed class FixedTextFragment : NameFragment
         {
             private readonly string _text;
 
@@ -479,7 +479,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private class MethodNameFragment : NameFragment
+        private sealed class MethodNameFragment : NameFragment
         {
             public override string GetText(MethodInfo method, object[] args)
             {
@@ -494,7 +494,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private class NamespaceFragment : NameFragment
+        private sealed class NamespaceFragment : NameFragment
         {
             public override string GetText(MethodInfo method, object[] args)
             {
@@ -502,7 +502,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private class MethodFullNameFragment : NameFragment
+        private sealed class MethodFullNameFragment : NameFragment
         {
             public override string GetText(MethodInfo method, object[] args)
             {
@@ -519,7 +519,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private class ClassNameFragment : NameFragment
+        private sealed class ClassNameFragment : NameFragment
         {
             public override string GetText(MethodInfo method, object[] args)
             {
@@ -527,7 +527,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private class ClassFullNameFragment : NameFragment
+        private sealed class ClassFullNameFragment : NameFragment
         {
             public override string GetText(MethodInfo method, object[] args)
             {
@@ -535,7 +535,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private class ArgListFragment : NameFragment
+        private sealed class ArgListFragment : NameFragment
         {
             private readonly int _maxStringLength;
 
@@ -565,7 +565,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private class ArgumentFragment : NameFragment
+        private sealed class ArgumentFragment : NameFragment
         {
             private readonly int _index;
             private readonly int _maxStringLength;

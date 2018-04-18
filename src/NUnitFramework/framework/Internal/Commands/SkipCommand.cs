@@ -29,7 +29,7 @@ namespace NUnit.Framework.Internal.Commands
     /// <summary>
     /// TODO: Documentation needed for class
     /// </summary>
-    public class SkipCommand : TestCommand
+    public sealed class SkipCommand : TestCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SkipCommand"/> class.

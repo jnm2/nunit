@@ -37,7 +37,7 @@ namespace NUnit.Common
         Symbol
     }
 
-    public class Token
+    public sealed class Token
     {
         public Token(TokenKind kind) : this(kind, string.Empty) { }
 
@@ -102,7 +102,7 @@ namespace NUnit.Common
     /// quoted strings. This is sufficient for the simple DSL we use to
     /// select which tests to run.
     /// </summary>
-    public class Tokenizer
+    public sealed class Tokenizer
     {
         private readonly string _input;
         private int _index;

@@ -29,7 +29,7 @@ namespace NUnit.Framework.Internal.Commands
     /// <summary>
     /// ConstructFixtureCommand constructs the user test object if necessary.
     /// </summary>
-    public class ConstructFixtureCommand : BeforeTestCommand
+    public sealed class ConstructFixtureCommand : BeforeTestCommand
     {
         /// <summary>
         /// Constructs a OneTimeSetUpCommand for a suite

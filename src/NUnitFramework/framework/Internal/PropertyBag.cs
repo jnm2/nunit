@@ -36,7 +36,7 @@ namespace NUnit.Framework.Internal
     /// may be of any type. Null values are not permitted, since
     /// a null entry represents the absence of the key.
     /// </summary>
-    public class PropertyBag : IPropertyBag
+    public sealed class PropertyBag : IPropertyBag
     {
         private readonly Dictionary<string, IList> inner = new Dictionary<string, IList>();
 

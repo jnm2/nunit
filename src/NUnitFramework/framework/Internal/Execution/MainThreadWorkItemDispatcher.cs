@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Execution
     /// from the SimpleWorkItemDispatcher where the work item is dispatched
     /// onto its own thread.
     /// </summary>
-    public class MainThreadWorkItemDispatcher : IWorkItemDispatcher
+    public sealed class MainThreadWorkItemDispatcher : IWorkItemDispatcher
     {
 
         #region IWorkItemDispatcher Members

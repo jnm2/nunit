@@ -32,7 +32,7 @@ namespace NUnitLite
     /// TeamCityEventListener class handles ITestListener events
     /// by issuing TeamCity service messages on the Console.
     /// </summary>
-    public class TeamCityEventListener : ITestListener
+    public sealed class TeamCityEventListener : ITestListener
     {
         readonly TextWriter _outWriter;
 

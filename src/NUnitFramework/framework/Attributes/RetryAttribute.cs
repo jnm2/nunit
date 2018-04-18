@@ -65,7 +65,7 @@ namespace NUnit.Framework
         /// <summary>
         /// The test command for the <see cref="RetryAttribute"/>
         /// </summary>
-        public class RetryCommand : DelegatingTestCommand
+        private sealed class RetryCommand : DelegatingTestCommand
         {
             private readonly int _tryCount;
 

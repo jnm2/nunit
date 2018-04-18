@@ -56,7 +56,7 @@ namespace NUnit.Framework.Internal.Execution
     /// the client without using the CallContext of the test
     /// runner thread.
     /// </summary>
-    public class EventPump : IDisposable
+    public sealed class EventPump : IDisposable
     {
         static readonly Logger log = InternalTrace.GetLogger("EventPump");
 

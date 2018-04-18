@@ -58,7 +58,7 @@ namespace NUnit.Framework.Internal.Execution
     /// be run, either initially or after some dependency
     /// has been satisfied.
     /// </summary>
-    public class WorkItemQueue
+    public sealed class WorkItemQueue
     {
         private const int SPIN_COUNT = 5;
 
@@ -74,7 +74,7 @@ namespace NUnit.Framework.Internal.Execution
 
         private ConcurrentQueue<WorkItem>[] _innerQueues;
 
-        private class SavedState
+        private struct SavedState
         {
             public readonly ConcurrentQueue<WorkItem>[] InnerQueues;
             public readonly int AddId;

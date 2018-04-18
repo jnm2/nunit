@@ -29,7 +29,7 @@ namespace NUnitLite
     /// <summary>
     /// Helper class used to summarize the result of a test run
     /// </summary>
-    public class ResultSummary
+    public sealed class ResultSummary
     {
         #region Constructor
 

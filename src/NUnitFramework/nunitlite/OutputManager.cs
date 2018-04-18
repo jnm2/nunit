@@ -37,7 +37,7 @@ namespace NUnitLite
     /// OutputManager is responsible for creating output files
     /// from a test run in various formats.
     /// </summary>
-    public class OutputManager
+    public sealed class OutputManager
     {
         private readonly string _workDirectory;
 

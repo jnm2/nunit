@@ -37,14 +37,14 @@ namespace NUnit.TestUtilities
     {
         #region GetTestMethod
 
-        public static FakeTestMethod GetTestMethod(Type type, string name)
+        public static TestMethod GetTestMethod(Type type, string name)
         {
-            return new FakeTestMethod(type, name);
+            return new TestMethod(new FixtureMethod(type, type.GetMethod(name, BF.Public | BF.NonPublic | BF.Static | BF.Instance)));
         }
 
-        public static FakeTestMethod GetTestMethod(object obj, string name)
+        public static TestMethod GetTestMethod(object obj, string name)
         {
-            return new FakeTestMethod(obj, name);
+            return GetTestMethod(obj.GetType(), name);
         }
 
         #endregion
@@ -83,22 +83,6 @@ namespace NUnit.TestUtilities
 
         #endregion
     }
-
-    #region FakeTestMethod Class
-
-    /// <summary>
-    /// FakeTestMethod is used in tests to simulate an actual TestMethod
-    /// </summary>
-    public class FakeTestMethod : TestMethod
-    {
-        public FakeTestMethod(object obj, string name)
-            : this(obj.GetType(), name) { }
-
-        public FakeTestMethod(Type type, string name)
-            : base(new FixtureMethod(type, type.GetMethod(name, BF.Public | BF.NonPublic | BF.Static | BF.Instance))) { }
-    }
-
-    #endregion
 
     #region FakeWorkItem Class
 

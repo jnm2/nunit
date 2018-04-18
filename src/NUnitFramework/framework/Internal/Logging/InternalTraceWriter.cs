@@ -28,7 +28,7 @@ namespace NUnit.Framework.Internal
     /// A trace listener that writes to a separate file per domain
     /// and process using it.
     /// </summary>
-    public class InternalTraceWriter : TextWriter
+    public sealed class InternalTraceWriter : TextWriter
     {
         TextWriter writer;
         readonly object myLock = new object();

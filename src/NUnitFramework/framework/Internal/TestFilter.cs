@@ -206,7 +206,7 @@ namespace NUnit.Framework.Internal
 #if !NETSTANDARD1_6
         [Serializable]
 #endif
-        private class EmptyFilter : TestFilter
+        private sealed class EmptyFilter : TestFilter
         {
             public override bool Match( ITest test )
             {

@@ -30,7 +30,7 @@ namespace NUnit.Framework.Internal.Commands
     /// TestMethodCommand is the lowest level concrete command
     /// used to run actual test cases.
     /// </summary>
-    public class TestMethodCommand : TestCommand
+    public sealed class TestMethodCommand : TestCommand
     {
         private readonly TestMethod testMethod;
         private readonly object[] arguments;

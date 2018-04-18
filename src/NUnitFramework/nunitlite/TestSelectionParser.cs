@@ -30,7 +30,7 @@ using System.Text;
 
 namespace NUnit.Common
 {
-    public class TestSelectionParser
+    public sealed class TestSelectionParser
     {
         private Tokenizer _tokenizer;
 

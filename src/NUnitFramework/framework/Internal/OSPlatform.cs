@@ -37,7 +37,7 @@ namespace NUnit.Framework.Internal
     // Callers of this method have no influence on how these methods are used so we define a 'SecuritySafeCriticalAttribute' 
     // rather than a 'SecurityCriticalAttribute' to enable use by security transparent callers.
     [SecuritySafeCritical]
-    public class OSPlatform
+    public sealed class OSPlatform
     {
         readonly PlatformID _platform;
         readonly Version _version;

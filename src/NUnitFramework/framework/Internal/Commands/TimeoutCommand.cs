@@ -36,7 +36,7 @@ namespace NUnit.Framework.Internal.Commands
     /// a test if it exceeds a specified time and adjusts
     /// the test result if it did time out.
     /// </summary>
-    public class TimeoutCommand : BeforeAndAfterTestCommand
+    public sealed class TimeoutCommand : BeforeAndAfterTestCommand
     {
         Timer _commandTimer;
         private bool _commandTimedOut = false;

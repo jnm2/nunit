@@ -51,7 +51,7 @@ namespace NUnitLite
     /// ColorConsoleWriter) and input is usually Console.In
     /// and is used by the --wait option.
     /// </summary>
-    public class AutoRun
+    public sealed class AutoRun
     {
         private readonly Assembly _testAssembly;
 

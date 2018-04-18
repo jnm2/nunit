@@ -29,7 +29,7 @@ namespace NUnit.Framework.Internal
     /// The PropertyNames class provides static constants for the
     /// standard property ids that NUnit uses on tests.
     /// </summary>
-    public class PropertyNames
+    public static class PropertyNames
     {
         #region Internal Properties
 

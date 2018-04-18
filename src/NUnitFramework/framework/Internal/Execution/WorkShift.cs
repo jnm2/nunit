@@ -49,7 +49,7 @@ namespace NUnit.Framework.Internal.Execution
     /// shift may begin. This cycle continues until all the tests
     /// have been run.
     /// </summary>
-    public class WorkShift
+    public sealed class WorkShift
     {
         private static readonly Logger log = InternalTrace.GetLogger("WorkShift");
 

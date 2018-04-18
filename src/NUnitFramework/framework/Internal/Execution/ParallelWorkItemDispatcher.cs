@@ -34,7 +34,7 @@ namespace NUnit.Framework.Internal.Execution
     /// ParallelWorkItemDispatcher handles execution of work items by
     /// queuing them for worker threads to process.
     /// </summary>
-    public class ParallelWorkItemDispatcher : IWorkItemDispatcher
+    public sealed class ParallelWorkItemDispatcher : IWorkItemDispatcher
     {
         private static readonly Logger log = InternalTrace.GetLogger("Dispatcher");
 

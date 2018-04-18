@@ -1,5 +1,5 @@
 // ***********************************************************************
-// Copyright (c) 2009 Charlie Poole, Rob Prouse
+// Copyright (c) 2009–2018 Charlie Poole, Rob Prouse
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -21,46 +21,28 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
-using System;
 using NUnit.Framework.Interfaces;
 
 namespace NUnit.Framework.Internal
 {
     /// <summary>
-    /// TestListener provides an implementation of ITestListener that
-    /// does nothing. It is used only through its NULL property.
+    /// Provides an implementation of <see cref="ITestListener"/> through
+    /// its <see cref="NULL"/> property that does nothing.
     /// </summary>
-    public class TestListener : ITestListener
+    public static class TestListener
     {
-        /// <summary>
-        /// Called when a test has just started
-        /// </summary>
-        /// <param name="test">The test that is starting</param>
-        public void TestStarted(ITest test){}
-
-        /// <summary>
-        /// Called when a test case has finished
-        /// </summary>
-        /// <param name="result">The result of the test</param>
-        public void TestFinished(ITestResult result){}
-
-        /// <summary>
-        /// Called when a test produces output for immediate display
-        /// </summary>
-        /// <param name="output">A TestOutput object containing the text to display</param>
-        public void TestOutput(TestOutput output) { }
-
-        /// <summary>
-        /// Construct a new TestListener - private so it may not be used.
-        /// </summary>
-        private TestListener() { }
-
         /// <summary>
         /// Get a listener that does nothing
         /// </summary>
-        public static ITestListener NULL
+        public static ITestListener NULL { get; } = new NullTestListener();
+
+        private sealed class NullTestListener : ITestListener
         {
-            get { return new TestListener();}
+        public void TestStarted(ITest test){}
+
+        public void TestFinished(ITestResult result){}
+
+        public void TestOutput(TestOutput output) { }
         }
     }
 }

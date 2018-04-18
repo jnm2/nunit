@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal
     /// entries from a stack trace so that the resulting
     /// trace provides better information about the test.
     /// </summary>
-    public class StackFilter
+    public sealed class StackFilter
     {
         private const string DEFAULT_TOP_OF_STACK_PATTERN = @" NUnit\.Framework\.(Assert|Assume|Warn|CollectionAssert|StringAssert|FileAssert|DirectoryAssert)\.";
         private const string DEFAULT_BOTTOM_OF_STACK_PATTERN = @" System\.(Reflection|RuntimeMethodHandle|Threading\.ExecutionContext)\.";

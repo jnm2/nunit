@@ -35,7 +35,7 @@ namespace NUnit.Framework.Internal.Commands
     /// between the setup and teardown chains, the two calls can
     /// be coordinated.
     /// </summary>
-    public class TestActionItem
+    public sealed class TestActionItem
     {
         private readonly ITestAction _action;
 

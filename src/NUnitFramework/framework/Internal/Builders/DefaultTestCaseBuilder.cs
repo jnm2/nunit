@@ -39,7 +39,7 @@ namespace NUnit.Framework.Internal.Builders
     /// takes a different branch depending on whether any parameters are
     /// provided, but all four cases are dealt with in lower-level methods
     /// </summary>
-    public class DefaultTestCaseBuilder : ITestCaseBuilder
+    public sealed class DefaultTestCaseBuilder : ITestCaseBuilder
     {
         private readonly NUnitTestCaseBuilder _nunitTestCaseBuilder = new NUnitTestCaseBuilder();
 

@@ -30,7 +30,7 @@ namespace NUnit.Framework.Internal
     /// CultureDetector is a helper class used by NUnit to determine
     /// whether a test should be run based on the current culture.
     /// </summary>
-    public class CultureDetector
+    public sealed class CultureDetector
     {
         private readonly CultureInfo currentCulture;
 

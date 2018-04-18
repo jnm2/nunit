@@ -34,14 +34,14 @@ namespace NUnit.Framework.Constraints
     /// input constraints as well as the results of each
     /// operator applied.
     /// </summary>
-    public class ConstraintBuilder : IResolveConstraint
+    public sealed class ConstraintBuilder : IResolveConstraint
     {
         #region Nested Operator Stack Class
 
         /// <summary>
         /// OperatorStack is a type-safe stack for holding ConstraintOperators
         /// </summary>
-        public class OperatorStack
+        internal sealed class OperatorStack
         {
             private readonly Stack<ConstraintOperator> stack = new Stack<ConstraintOperator>();
 
@@ -96,7 +96,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// ConstraintStack is a type-safe stack for holding Constraints
         /// </summary>
-        public class ConstraintStack
+        public sealed class ConstraintStack
         {
             private readonly Stack<IConstraint> stack = new Stack<IConstraint>();
             private readonly ConstraintBuilder builder;

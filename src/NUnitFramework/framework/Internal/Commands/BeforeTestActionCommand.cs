@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Commands
     /// TestActionBeforeCommand handles the BeforeTest method of a single 
     /// TestActionItem, relying on the item to remember it has been run.
     /// </summary>
-    public class BeforeTestActionCommand : BeforeTestCommand
+    public sealed class BeforeTestActionCommand : BeforeTestCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BeforeTestActionCommand"/> class.

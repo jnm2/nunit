@@ -33,7 +33,7 @@ namespace NUnit.Framework.Internal.Builders
     /// The ParameterDataProvider class implements IParameterDataProvider
     /// and hosts one or more individual providers.
     /// </summary>
-    public class ParameterDataProvider : IParameterDataProvider
+    public sealed class ParameterDataProvider : IParameterDataProvider
     {
         private readonly List<IParameterDataProvider> _providers = new List<IParameterDataProvider>();
 

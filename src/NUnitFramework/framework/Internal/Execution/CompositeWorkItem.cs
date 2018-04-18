@@ -36,7 +36,7 @@ namespace NUnit.Framework.Internal.Execution
     /// encapsulates the execution of the suite as well
     /// as all its child tests.
     /// </summary>
-    public class CompositeWorkItem : WorkItem
+    public sealed class CompositeWorkItem : WorkItem
     {
         //        static Logger log = InternalTrace.GetLogger("CompositeWorkItem");
 
@@ -416,7 +416,7 @@ namespace NUnit.Framework.Internal.Execution
         /// OneTimeTearDownWorkItem represents the cleanup
         /// and one-time teardown phase of a CompositeWorkItem
         /// </summary>
-        public class OneTimeTearDownWorkItem : WorkItem
+        internal sealed class OneTimeTearDownWorkItem : WorkItem
         {
             private readonly CompositeWorkItem _originalWorkItem;
 

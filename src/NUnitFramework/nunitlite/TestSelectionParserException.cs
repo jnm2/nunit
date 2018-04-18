@@ -35,7 +35,7 @@ namespace NUnit.Common
 #if !NETSTANDARD1_6
     [Serializable]
 #endif
-    public class TestSelectionParserException : Exception
+    public sealed class TestSelectionParserException : Exception
     {
         /// <summary>
         /// Construct with a message
@@ -53,7 +53,7 @@ namespace NUnit.Common
         /// <summary>
         /// Serialization constructor
         /// </summary>
-        public TestSelectionParserException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        private TestSelectionParserException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 #endif
     }
 }

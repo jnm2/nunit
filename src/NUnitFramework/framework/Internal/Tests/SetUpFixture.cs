@@ -30,7 +30,7 @@ namespace NUnit.Framework.Internal
     /// SetUpFixture extends TestSuite and supports
     /// Setup and TearDown methods.
     /// </summary>
-    public class SetUpFixture : TestSuite, IDisposableFixture
+    public sealed class SetUpFixture : TestSuite, IDisposableFixture
     {
         #region Constructor
 

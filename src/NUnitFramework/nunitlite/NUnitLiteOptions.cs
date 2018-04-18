@@ -31,7 +31,7 @@ namespace NUnitLite
     /// options that are shared with nunit3-console. If NUnitLite should
     /// acquire some unique options, they should be placed here.
     /// </summary>
-    public class NUnitLiteOptions : CommandLineOptions
+    public sealed class NUnitLiteOptions : CommandLineOptions
     {
         /// <summary>
         /// Constructor

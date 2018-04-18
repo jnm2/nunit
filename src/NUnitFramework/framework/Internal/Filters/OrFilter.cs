@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Filters
     /// Combines multiple filters so that a test must pass one 
     /// of them in order to pass this filter.
     /// </summary>
-    internal class OrFilter : CompositeFilter
+    internal sealed class OrFilter : CompositeFilter
     {
         /// <summary>
         /// Constructs an empty OrFilter

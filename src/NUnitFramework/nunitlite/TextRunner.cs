@@ -51,7 +51,7 @@ namespace NUnitLite
     /// as Windows Phone, the results will simply not appear if
     /// you fail to specify a file in the call itself or as an option.
     /// </summary>
-    public class TextRunner : ITestListener
+    public sealed class TextRunner : ITestListener
     {
         #region Runner Return Codes
 

@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Commands
     /// use it to avoid testing for null when executing a chain of
     /// DelegatingTestCommands.
     /// </summary>
-    public class EmptyTestCommand : TestCommand
+    public sealed class EmptyTestCommand : TestCommand
     {
         /// <summary>
         /// Construct a NullCommand for a test

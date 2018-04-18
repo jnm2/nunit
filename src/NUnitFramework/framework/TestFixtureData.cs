@@ -33,7 +33,7 @@ namespace NUnit.Framework
     /// fixture. It is derived from TestFixtureParameters and adds a
     /// fluent syntax for use in initializing the fixture.
     /// </summary>
-    public class TestFixtureData : TestFixtureParameters
+    public sealed class TestFixtureData : TestFixtureParameters
     {
 
         #region Constructors

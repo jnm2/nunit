@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Commands
     /// OneTimeSetUpCommand runs any one-time setup methods for a suite,
     /// constructing the user test object if necessary.
     /// </summary>
-    public class OneTimeSetUpCommand : BeforeTestCommand
+    public sealed class OneTimeSetUpCommand : BeforeTestCommand
     {
         /// <summary>
         /// Constructs a OneTimeSetUpCommand for a suite

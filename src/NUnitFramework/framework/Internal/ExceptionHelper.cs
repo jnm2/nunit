@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal
     /// <summary>
     /// ExceptionHelper provides static methods for working with exceptions
     /// </summary>
-    public class ExceptionHelper
+    public static class ExceptionHelper
     {
 #if NET20 || NET35 || NET40
         private static readonly Action<Exception> PreserveStackTrace;

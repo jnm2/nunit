@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal.Builders
     /// NUnitTestCaseBuilder is a utility class used by attributes
     /// that build test cases.
     /// </summary>
-    public class NUnitTestCaseBuilder
+    public sealed class NUnitTestCaseBuilder
     {
         private readonly Randomizer _randomizer = Randomizer.CreateRandomizer();
         private readonly TestNameGenerator _nameGenerator;

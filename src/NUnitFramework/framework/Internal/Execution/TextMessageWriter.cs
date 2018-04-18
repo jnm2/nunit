@@ -34,7 +34,7 @@ namespace NUnit.Framework.Internal
     /// of individual message components to form the standard message
     /// format of NUnit assertion failure messages.
     /// </summary>
-    public class TextMessageWriter : MessageWriter
+    public sealed class TextMessageWriter : MessageWriter
     {
         #region Message Formats and Constants
         private static readonly int DEFAULT_LINE_LENGTH = 78;
@@ -134,9 +134,9 @@ namespace NUnit.Framework.Internal
         /// <param name="actual">The actual value causing the failure</param>
         /// <param name="expectedType">Output of the unique type name for expected</param>
         /// <param name="actualType">Output of the unique type name for actual</param>
-        private void ResolveTypeNameDifference(object expected, object actual, out string expectedType, out string actualType) {
-            TypeNameDifferenceResolver resolver = new TypeNameDifferenceResolver();
-            resolver.ResolveTypeNameDifference(expected, actual, out expectedType, out actualType);
+        private void ResolveTypeNameDifference(object expected, object actual, out string expectedType, out string actualType)
+        {
+            TypeNameDifferenceResolver.ResolveTypeNameDifference(expected, actual, out expectedType, out actualType);
 
             expectedType = $" ({expectedType})";
             actualType = $" ({actualType})";

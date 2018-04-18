@@ -30,7 +30,7 @@ namespace NUnit.Framework.Internal.Builders
     /// Class that can build a tree of automatic namespace
     /// suites from a group of fixtures.
     /// </summary>
-    public class NamespaceTreeBuilder
+    public sealed class NamespaceTreeBuilder
     {
         #region Instance Variables
 

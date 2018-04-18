@@ -29,7 +29,7 @@ namespace NUnit.Framework
 	/// The List class is a helper class with properties and methods
 	/// that supply a number of constraints used with lists and collections.
 	/// </summary>
-	public class List
+       public static class List
 	{
 		/// <summary>
 		/// List.Map returns a ListMapper, which can be used to map

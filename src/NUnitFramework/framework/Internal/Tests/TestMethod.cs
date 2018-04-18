@@ -29,7 +29,7 @@ namespace NUnit.Framework.Internal
     /// <summary>
     /// The TestMethod class represents a Test implemented as a method.
     /// </summary>
-    public class TestMethod : Test
+    public sealed class TestMethod : Test
     {
         #region Fields
         private static readonly object[] NoArguments = new object[0];

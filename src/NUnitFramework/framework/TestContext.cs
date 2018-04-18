@@ -38,7 +38,7 @@ namespace NUnit.Framework
     /// This is an adapter for the internal ExecutionContext
     /// class, hiding the internals from the user test.
     /// </summary>
-    public class TestContext
+    public sealed class TestContext
     {
         private readonly TestExecutionContext _testExecutionContext;
         private TestAdapter _test;
@@ -353,7 +353,7 @@ namespace NUnit.Framework
         /// TestAdapter adapts a Test for consumption by
         /// the user test code.
         /// </summary>
-        public class TestAdapter
+        public sealed class TestAdapter
         {
             private readonly Test _test;
 
@@ -445,7 +445,7 @@ namespace NUnit.Framework
         /// ResultAdapter adapts a TestResult for consumption by
         /// the user test code.
         /// </summary>
-        public class ResultAdapter
+        public sealed class ResultAdapter
         {
             private readonly TestResult _result;
 
@@ -495,7 +495,7 @@ namespace NUnit.Framework
             /// Gets any stack trace associated with an
             /// error or failure.
             /// </summary>
-            public virtual string StackTrace
+            public string StackTrace
             {
                 get { return _result.StackTrace; }
             }
@@ -556,7 +556,7 @@ namespace NUnit.Framework
         /// <see cref="PropertyBagAdapter"/> adapts an <see cref="IPropertyBag"/>
         /// for consumption by the user.
         /// </summary>
-        public class PropertyBagAdapter
+        public sealed class PropertyBagAdapter
         {
             private readonly IPropertyBag _source;
             

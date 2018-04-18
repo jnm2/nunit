@@ -33,7 +33,7 @@ namespace NUnit.Framework
     /// ListMapper is used to transform a collection used as an actual argument
     /// producing another collection to be used in the assertion.
     /// </summary>
-    public class ListMapper
+    public sealed class ListMapper
     {
         readonly ICollection original;
 

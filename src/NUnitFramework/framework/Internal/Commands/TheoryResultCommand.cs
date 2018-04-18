@@ -29,7 +29,7 @@ namespace NUnit.Framework.Internal.Commands
     /// TheoryResultCommand adjusts the result of a Theory so that
     /// it fails if all the results were inconclusive.
     /// </summary>
-    public class TheoryResultCommand : AfterTestCommand
+    public sealed class TheoryResultCommand : AfterTestCommand
     {
         /// <summary>
         /// Constructs a TheoryResultCommand 

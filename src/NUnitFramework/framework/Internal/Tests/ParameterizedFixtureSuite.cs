@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal
     /// ParameterizedFixtureSuite serves as a container for the set of test 
     /// fixtures created from a given Type using various parameters.
     /// </summary>
-    public class ParameterizedFixtureSuite : TestSuite
+    public sealed class ParameterizedFixtureSuite : TestSuite
     {
         private readonly bool _genericFixture;
 

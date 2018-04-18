@@ -34,7 +34,7 @@ namespace NUnit.Framework.Internal.Execution
     /// listener is active in the context, or if there is no context,
     /// the output is forwarded to the supplied default writer.
     /// </summary>
-	public class EventListenerTextWriter : TextWriter
+    public sealed class EventListenerTextWriter : TextWriter
 	{
         private readonly TextWriter _defaultWriter;
 		private readonly string _streamName;

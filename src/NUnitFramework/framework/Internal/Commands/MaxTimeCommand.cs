@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Commands
     /// <summary>
     /// TODO: Documentation needed for class
     /// </summary>
-    public class MaxTimeCommand : AfterTestCommand
+    public sealed class MaxTimeCommand : AfterTestCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MaxTimeCommand"/> class.

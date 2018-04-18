@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal
     /// GenericMethodHelper is able to deduce the Type arguments for
     /// a generic method from the actual arguments provided.
     /// </summary>
-    public class GenericMethodHelper
+    public sealed class GenericMethodHelper
     {
         private static class ConflictingTypesMarkerClass { }
 

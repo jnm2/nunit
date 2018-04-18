@@ -57,7 +57,7 @@ namespace NUnit.Framework.Internal.Execution
     /// <summary>
     /// TestStartedEvent holds information needed to call the TestStarted method.
     /// </summary>
-    public class TestStartedEvent : Event
+    public sealed class TestStartedEvent : Event
     {
         private readonly ITest _test;
 
@@ -83,7 +83,7 @@ namespace NUnit.Framework.Internal.Execution
     /// <summary>
     /// TestFinishedEvent holds information needed to call the TestFinished method.
     /// </summary>
-    public class TestFinishedEvent : Event
+    public sealed class TestFinishedEvent : Event
     {
         private readonly ITestResult _result;
 
@@ -109,7 +109,7 @@ namespace NUnit.Framework.Internal.Execution
     /// <summary>
     /// TestOutputEvent holds information needed to call the TestOutput method.
     /// </summary>
-    public class TestOutputEvent : Event
+    public sealed class TestOutputEvent : Event
     {
         private readonly TestOutput _output;
 
@@ -138,7 +138,7 @@ namespace NUnit.Framework.Internal.Execution
     /// Implements a queue of work items each of which
     /// is queued as a WaitCallback.
     /// </summary>
-    public class EventQueue
+    public sealed class EventQueue
     {
         private const int spinCount = 5;
 
