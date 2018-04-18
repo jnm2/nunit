@@ -35,7 +35,7 @@ namespace NUnit.Framework.Internal
 #if !NETSTANDARD1_6
     [Serializable]
 #endif
-    public class NUnitException : Exception
+    internal sealed class NUnitException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NUnitException"/> class.

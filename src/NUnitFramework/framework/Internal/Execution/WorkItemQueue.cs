@@ -35,7 +35,7 @@ namespace NUnit.Framework.Internal.Execution
     /// <summary>
     /// WorkItemQueueState indicates the current state of a WorkItemQueue
     /// </summary>
-    public enum WorkItemQueueState
+    internal enum WorkItemQueueState
     {
         /// <summary>
         /// The queue is paused
@@ -58,7 +58,7 @@ namespace NUnit.Framework.Internal.Execution
     /// be run, either initially or after some dependency
     /// has been satisfied.
     /// </summary>
-    public class WorkItemQueue
+    internal sealed class WorkItemQueue
     {
         private const int SPIN_COUNT = 5;
 

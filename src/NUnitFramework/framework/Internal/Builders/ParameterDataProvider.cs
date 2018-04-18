@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,7 @@ namespace NUnit.Framework.Internal.Builders
     /// The ParameterDataProvider class implements IParameterDataProvider
     /// and hosts one or more individual providers.
     /// </summary>
-    public class ParameterDataProvider : IParameterDataProvider
+    internal sealed class ParameterDataProvider : IParameterDataProvider
     {
         private readonly List<IParameterDataProvider> _providers = new List<IParameterDataProvider>();
 

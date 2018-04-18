@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,7 +37,7 @@ namespace NUnit.Framework.Internal
     /// <summary>
     /// Represents the result of running a test suite
     /// </summary>
-    public class TestSuiteResult : TestResult
+    internal sealed class TestSuiteResult : TestResult
     {
         private int _passCount = 0;
         private int _failCount = 0;
@@ -212,7 +212,7 @@ namespace NUnit.Framework.Internal
         /// ResultState to Failure if the child result failed.
         /// </summary>
         /// <param name="result">The result to be added</param>
-        public virtual void AddResult(ITestResult result)
+        public void AddResult(ITestResult result)
         {
 #if PARALLEL
             _children.Enqueue(result);

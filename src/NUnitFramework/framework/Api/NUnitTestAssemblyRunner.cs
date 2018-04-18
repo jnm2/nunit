@@ -44,7 +44,7 @@ namespace NUnit.Framework.Api
     /// <summary>
     /// Implementation of ITestAssemblyRunner
     /// </summary>
-    public class NUnitTestAssemblyRunner : ITestAssemblyRunner
+    public sealed class NUnitTestAssemblyRunner : ITestAssemblyRunner
     {
         private static readonly Logger log = InternalTrace.GetLogger("DefaultTestAssemblyRunner");
 
@@ -357,7 +357,7 @@ namespace NUnit.Framework.Api
                 (bool)Settings[FrameworkPackageSettings.RunOnMainThread])
                 Context.Dispatcher = new MainThreadWorkItemDispatcher();
             else if (levelOfParallelism > 0)
-                Context.Dispatcher = new ParallelWorkItemDispatcher(levelOfParallelism); 
+                Context.Dispatcher = new ParallelWorkItemDispatcher(levelOfParallelism);
             else
                 Context.Dispatcher = new SimpleWorkItemDispatcher();
 #else

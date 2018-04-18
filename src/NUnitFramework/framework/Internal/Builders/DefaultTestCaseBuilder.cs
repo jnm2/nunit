@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,7 +39,7 @@ namespace NUnit.Framework.Internal.Builders
     /// takes a different branch depending on whether any parameters are
     /// provided, but all four cases are dealt with in lower-level methods
     /// </summary>
-    public class DefaultTestCaseBuilder : ITestCaseBuilder
+    internal sealed class DefaultTestCaseBuilder : ITestCaseBuilder
     {
         private readonly NUnitTestCaseBuilder _nunitTestCaseBuilder = new NUnitTestCaseBuilder();
 
@@ -129,7 +129,7 @@ namespace NUnit.Framework.Internal.Builders
             foreach (var attr in builders)
             {
                 foreach (var test in attr.BuildFrom(method, suite))
-                    tests.Add(test); 
+                    tests.Add(test);
             }
 
             return hasBuildersSpecified && method.Method.GetParameters().Length > 0 || tests.Count > 0

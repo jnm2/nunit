@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Copyright (c) 2014 Charlie Poole, Rob Prouse
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -34,7 +34,7 @@ namespace NUnit.Framework.Internal.Execution
     /// default destination, normally the original destination of the
     /// intercepted output.
     /// </summary>
-    public class TextCapture : TextWriter
+    internal sealed class TextCapture : TextWriter
     {
         private readonly TextWriter _defaultWriter;
 

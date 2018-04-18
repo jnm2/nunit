@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,7 +26,6 @@ using System.Runtime.InteropServices;
 
 namespace NUnit.Framework.Constraints
 {
-
     /// <summary>Helper routines for working with floating point numbers</summary>
     /// <remarks>
     ///   <para>
@@ -45,9 +44,8 @@ namespace NUnit.Framework.Constraints
     ///     as low as 0.0000001 for small numbers or as high as 10.0 for large numbers.
     ///   </para>
     /// </remarks>
-    public class FloatingPointNumerics
+    internal static class FloatingPointNumerics
     {
-
         #region struct FloatIntUnion
 
         /// <summary>Union of a floating point variable and an integer</summary>
@@ -256,10 +254,6 @@ namespace NUnit.Framework.Constraints
             DoubleLongUnion union = new DoubleLongUnion();
             union.Long = value;
             return union.Double;
-        }
-
-        private FloatingPointNumerics()
-        {
         }
     }
 }

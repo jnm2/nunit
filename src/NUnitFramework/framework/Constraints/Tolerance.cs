@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,13 +29,13 @@ namespace NUnit.Framework.Constraints
     /// The Tolerance class generalizes the notion of a tolerance
     /// within which an equality test succeeds. Normally, it is
     /// used with numeric types, but it can be used with any
-    /// type that supports taking a difference between two 
+    /// type that supports taking a difference between two
     /// objects and comparing that difference to a value.
     /// </summary>
 #if !NETSTANDARD1_6
     [Serializable]
 #endif
-    public class Tolerance
+    public sealed class Tolerance
     {
         #region Constants and Static Properties
 
@@ -106,7 +106,7 @@ namespace NUnit.Framework.Constraints
         }
 
         /// <summary>
-        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using 
+        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using
         /// the current amount as a number of days.
         /// </summary>
         public Tolerance Days
@@ -119,7 +119,7 @@ namespace NUnit.Framework.Constraints
         }
 
         /// <summary>
-        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using 
+        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using
         /// the current amount as a number of hours.
         /// </summary>
         public Tolerance Hours
@@ -132,7 +132,7 @@ namespace NUnit.Framework.Constraints
         }
 
         /// <summary>
-        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using 
+        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using
         /// the current amount as a number of minutes.
         /// </summary>
         public Tolerance Minutes
@@ -145,7 +145,7 @@ namespace NUnit.Framework.Constraints
         }
 
         /// <summary>
-        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using 
+        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using
         /// the current amount as a number of seconds.
         /// </summary>
         public Tolerance Seconds
@@ -158,7 +158,7 @@ namespace NUnit.Framework.Constraints
         }
 
         /// <summary>
-        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using 
+        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using
         /// the current amount as a number of milliseconds.
         /// </summary>
         public Tolerance Milliseconds
@@ -171,7 +171,7 @@ namespace NUnit.Framework.Constraints
         }
 
         /// <summary>
-        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using 
+        /// Returns a new tolerance with a <see cref="TimeSpan"/> as the amount, using
         /// the current amount as a number of clock ticks.
         /// </summary>
         public Tolerance Ticks
@@ -237,7 +237,7 @@ namespace NUnit.Framework.Constraints
         #region Helper Methods
 
         /// <summary>
-        /// Tests that the current Tolerance is linear with a 
+        /// Tests that the current Tolerance is linear with a
         /// numeric value, throwing an exception if it is not.
         /// </summary>
         private void CheckLinearAndNumeric()
@@ -324,7 +324,7 @@ namespace NUnit.Framework.Constraints
         /// Tolerance.Range represents the range of values that match
         /// a specific tolerance, when applied to a specific value.
         /// </summary>
-        public class Range
+        public struct Range
         {
             /// <summary>
             /// The lower bound of the range
@@ -332,12 +332,12 @@ namespace NUnit.Framework.Constraints
             public readonly object LowerBound;
 
             /// <summary>
-            /// The Upper bound of the range
+            /// The upper bound of the range
             /// </summary>
             public readonly object UpperBound;
 
             /// <summary>
-            ///  Construct a Range
+            /// Constructs a range
             /// </summary>
             public Range(object lowerBound, object upperBound)
             {

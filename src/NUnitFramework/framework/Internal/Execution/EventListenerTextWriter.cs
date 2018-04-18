@@ -34,21 +34,21 @@ namespace NUnit.Framework.Internal.Execution
     /// listener is active in the context, or if there is no context,
     /// the output is forwarded to the supplied default writer.
     /// </summary>
-	public class EventListenerTextWriter : TextWriter
-	{
+    internal sealed class EventListenerTextWriter : TextWriter
+    {
         private readonly TextWriter _defaultWriter;
-		private readonly string _streamName;
+        private readonly string _streamName;
 
         /// <summary>
         /// Construct an EventListenerTextWriter
         /// </summary>
         /// <param name="streamName">The name of the stream to use for events</param>
         /// <param name="defaultWriter">The default writer to use if no listener is available</param>
-		public EventListenerTextWriter( string streamName, TextWriter defaultWriter )
-		{
-			_streamName = streamName;
+        public EventListenerTextWriter( string streamName, TextWriter defaultWriter )
+        {
+            _streamName = streamName;
             _defaultWriter = defaultWriter;
-		}
+        }
 
         /// <summary>
         /// Get the Encoding for this TextWriter
@@ -61,7 +61,7 @@ namespace NUnit.Framework.Internal.Execution
             if (context == null || context.Listener == null)
                 return false;
 
-            context.Listener.TestOutput(new TestOutput(text, _streamName, 
+            context.Listener.TestOutput(new TestOutput(text, _streamName,
                 context.CurrentTest?.Id, context.CurrentTest?.FullName));
 
             return true;
@@ -170,7 +170,6 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Write a ulong
         /// </summary>
-        [CLSCompliant(false)]
         public override void Write(ulong value)
         {
             if (!TrySendToListener(value.ToString(FormatProvider)))
@@ -189,7 +188,6 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Write a uint
         /// </summary>
-        [CLSCompliant(false)]
         public override void Write(uint value)
         {
             if (!TrySendToListener(value.ToString(FormatProvider)))
@@ -342,7 +340,6 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Write a uint with newline
         /// </summary>
-        [CLSCompliant(false)]
         public override void WriteLine(uint value)
         {
             if (!TrySendLineToListener(value.ToString(FormatProvider)))
@@ -352,7 +349,6 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Write a ulong with newline
         /// </summary>
-        [CLSCompliant(false)]
         public override void WriteLine(ulong value)
         {
             if (!TrySendLineToListener(value.ToString(FormatProvider)))

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,12 +30,12 @@ namespace NUnit.Framework.Internal.Builders
     /// Class that can build a tree of automatic namespace
     /// suites from a group of fixtures.
     /// </summary>
-    public class NamespaceTreeBuilder
+    internal sealed class NamespaceTreeBuilder
     {
         #region Instance Variables
 
         /// <summary>
-        /// NamespaceDictionary of all test suites we have created to represent 
+        /// NamespaceDictionary of all test suites we have created to represent
         /// namespaces. Used to locate namespace parent suites for fixtures.
         /// </summary>
         readonly Dictionary<string, TestSuite> _namespaceIndex  = new Dictionary<string, TestSuite>();
@@ -145,7 +145,7 @@ namespace NUnit.Framework.Internal.Builders
         private void AddSetUpFixture(TestSuite newSetupFixture, TestSuite containingSuite, string ns)
         {
             // The SetUpFixture must replace the namespace suite
-            // in which it is "contained". 
+            // in which it is "contained".
             //
             // First, add the old suite's children to the new
             // SetUpFixture and clear them from the old suite.

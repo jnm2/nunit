@@ -205,7 +205,7 @@ namespace NUnit.Framework.Constraints
         /// FailurePoint class represents one point of failure
         /// in an equality test.
         /// </summary>
-        public class FailurePoint
+        public sealed class FailurePoint
         {
             /// <summary>
             /// The location of the failure

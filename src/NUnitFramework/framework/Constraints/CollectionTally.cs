@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,24 +26,24 @@ using System.Collections.Generic;
 
 namespace NUnit.Framework.Constraints
 {
-    /// <summary><see cref="CollectionTally"/> counts (tallies) the number of occurrences 
+    /// <summary><see cref="CollectionTally"/> counts (tallies) the number of occurrences
     /// of each object in one or more enumerations.</summary>
-    public class CollectionTally
+    public sealed class CollectionTally
     {
         /// <summary>The result of a <see cref="CollectionTally"/>.</summary>
-        public class CollectionTallyResult
+        public sealed class CollectionTallyResult
         {
             /// <summary>Items that were not in the expected collection.</summary>
-            public List<object> ExtraItems { get; set; }
+            public List<object> ExtraItems { get; }
 
             /// <summary>Items that were not accounted for in the expected collection.</summary>
-            public List<object> MissingItems { get; set; }
+            public List<object> MissingItems { get; }
 
             /// <summary>Constructs an empty <see cref="CollectionTallyResult"/>.</summary>
-            public CollectionTallyResult()
+            public CollectionTallyResult(List<object> missingItems, List<object> extraItems)
             {
-                ExtraItems = new List<object>();
-                MissingItems = new List<object>();
+                MissingItems = missingItems;
+                ExtraItems = extraItems;
             }
         }
 
@@ -54,11 +54,9 @@ namespace NUnit.Framework.Constraints
         {
             get
             {
-                return new CollectionTallyResult()
-                {
-                    MissingItems = new List<object>(_missingItems),
-                    ExtraItems = new List<object>(_extraItems)
-                };
+                return new CollectionTallyResult(
+                    new List<object>(_missingItems),
+                    new List<object>(_extraItems));
             }
         }
 

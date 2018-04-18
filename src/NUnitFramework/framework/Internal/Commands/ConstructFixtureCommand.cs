@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,14 +29,14 @@ namespace NUnit.Framework.Internal.Commands
     /// <summary>
     /// ConstructFixtureCommand constructs the user test object if necessary.
     /// </summary>
-    public class ConstructFixtureCommand : BeforeTestCommand
+    internal sealed class ConstructFixtureCommand : BeforeTestCommand
     {
         /// <summary>
         /// Constructs a OneTimeSetUpCommand for a suite
         /// </summary>
         /// <param name="innerCommand">The inner command to which the command applies</param>
         public ConstructFixtureCommand(TestCommand innerCommand)
-            : base(innerCommand) 
+            : base(innerCommand)
         {
             Guard.ArgumentValid(Test is TestSuite, "ConstructFixtureCommand must reference a TestSuite", nameof(innerCommand));
 

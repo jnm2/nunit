@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,10 +28,10 @@ using System.Threading;
 namespace NUnit.Framework.Internal.Commands
 {
     /// <summary>
-    /// TestActionAfterCommand handles the AfterTest method of a single 
+    /// TestActionAfterCommand handles the AfterTest method of a single
     /// TestActionItem, provided the items BeforeTest has been run.
     /// </summary>
-    public class AfterTestActionCommand : AfterTestCommand
+    internal sealed class AfterTestActionCommand : AfterTestCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AfterTestActionCommand"/> class.

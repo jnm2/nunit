@@ -44,7 +44,7 @@ namespace NUnit.Framework.Internal.Execution
     /// and is responsible for re-establishing that context in the
     /// current thread before it begins or resumes execution.
     /// </summary>
-    public abstract class WorkItem : IDisposable
+    internal abstract class WorkItem : IDisposable
     {
         static readonly Logger log = InternalTrace.GetLogger("WorkItem");
 

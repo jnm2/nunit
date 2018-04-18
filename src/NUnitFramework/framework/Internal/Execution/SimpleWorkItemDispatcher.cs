@@ -34,7 +34,7 @@ namespace NUnit.Framework.Internal.Execution
     /// is always available in the context, thereby simplifying the
     /// code needed to run child tests.
     /// </summary>
-    public class SimpleWorkItemDispatcher : IWorkItemDispatcher
+    internal sealed class SimpleWorkItemDispatcher : IWorkItemDispatcher
     {
         // The first WorkItem to be dispatched, assumed to be top-level item
         private WorkItem _topLevelWorkItem;

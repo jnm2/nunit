@@ -50,7 +50,7 @@ namespace NUnit.Framework.Api
     /// other actions. The driver may support other actions, such as
     /// reload on run, by combining these calls.
     /// </summary>
-    public class FrameworkController : LongLivedMarshalByRefObject
+    public sealed class FrameworkController : LongLivedMarshalByRefObject
     {
         private const string LOG_FILE_FORMAT = "InternalTrace.{0}.{1}.log";
 
@@ -490,7 +490,7 @@ namespace NUnit.Framework.Api
         /// <summary>
         /// LoadTestsAction loads a test into the FrameworkController
         /// </summary>
-        public class LoadTestsAction : FrameworkControllerAction
+        public sealed class LoadTestsAction : FrameworkControllerAction
         {
             /// <summary>
             /// LoadTestsAction loads the tests in an assembly.
@@ -510,7 +510,7 @@ namespace NUnit.Framework.Api
         /// <summary>
         /// ExploreTestsAction returns info about the tests in an assembly
         /// </summary>
-        public class ExploreTestsAction : FrameworkControllerAction
+        public sealed class ExploreTestsAction : FrameworkControllerAction
         {
             /// <summary>
             /// Initializes a new instance of the <see cref="ExploreTestsAction"/> class.
@@ -532,7 +532,7 @@ namespace NUnit.Framework.Api
         /// CountTestsAction counts the number of test cases in the loaded TestSuite
         /// held by the FrameworkController.
         /// </summary>
-        public class CountTestsAction : FrameworkControllerAction
+        public sealed class CountTestsAction : FrameworkControllerAction
         {
             /// <summary>
             /// Construct a CountsTestAction and perform the count of test cases.
@@ -553,7 +553,7 @@ namespace NUnit.Framework.Api
         /// <summary>
         /// RunTestsAction runs the loaded TestSuite held by the FrameworkController.
         /// </summary>
-        public class RunTestsAction : FrameworkControllerAction
+        public sealed class RunTestsAction : FrameworkControllerAction
         {
             /// <summary>
             /// Construct a RunTestsAction and run all tests in the loaded TestSuite.
@@ -574,7 +574,7 @@ namespace NUnit.Framework.Api
         /// <summary>
         /// RunAsyncAction initiates an asynchronous test run, returning immediately
         /// </summary>
-        public class RunAsyncAction : FrameworkControllerAction
+        public sealed class RunAsyncAction : FrameworkControllerAction
         {
             /// <summary>
             /// Construct a RunAsyncAction and run all tests in the loaded TestSuite.
@@ -595,7 +595,7 @@ namespace NUnit.Framework.Api
         /// <summary>
         /// StopRunAction stops an ongoing run.
         /// </summary>
-        public class StopRunAction : FrameworkControllerAction
+        public sealed class StopRunAction : FrameworkControllerAction
         {
             /// <summary>
             /// Construct a StopRunAction and stop any ongoing run. If no

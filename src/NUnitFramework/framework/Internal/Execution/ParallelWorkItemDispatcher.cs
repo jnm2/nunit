@@ -34,7 +34,7 @@ namespace NUnit.Framework.Internal.Execution
     /// ParallelWorkItemDispatcher handles execution of work items by
     /// queuing them for worker threads to process.
     /// </summary>
-    public class ParallelWorkItemDispatcher : IWorkItemDispatcher
+    internal sealed class ParallelWorkItemDispatcher : IWorkItemDispatcher
     {
         private static readonly Logger log = InternalTrace.GetLogger("Dispatcher");
 
@@ -283,7 +283,7 @@ namespace NUnit.Framework.Internal.Execution
         private void RestoreQueues()
         {
             Guard.OperationValid(_isolationLevel > 0, $"Called {nameof(RestoreQueues)} with no saved queues.");
-            
+
             // Keep lock until we can remove for both methods
             lock (_queueLock)
             {

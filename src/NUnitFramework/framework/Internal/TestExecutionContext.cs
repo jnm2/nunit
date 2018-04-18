@@ -306,11 +306,7 @@ namespace NUnit.Framework.Internal
             set { _listener = value; }
         }
 
-        /// <summary>
-        /// The current WorkItemDispatcher. Made public for
-        /// use by nunitlite.tests
-        /// </summary>
-        public IWorkItemDispatcher Dispatcher { get; set; }
+        internal IWorkItemDispatcher Dispatcher { get; set; }
 
         /// <summary>
         /// The ParallelScope to be used by tests running in this context.
@@ -329,7 +325,7 @@ namespace NUnit.Framework.Internal
         /// The worker that spawned the context.
         /// For builds without the parallel feature, it is null.
         /// </summary>
-        public TestWorker TestWorker {get; internal set;}
+        internal TestWorker TestWorker { get; set; }
 #endif
 
         /// <summary>

@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal.Execution
     /// Handler for ShiftChange events.
     /// </summary>
     /// <param name="shift">The shift that is starting or ending.</param>
-    public delegate void ShiftChangeEventHandler(WorkShift shift);
+    internal delegate void ShiftChangeEventHandler(WorkShift shift);
 
     /// <summary>
     /// The dispatcher needs to do different things at different,
@@ -49,7 +49,7 @@ namespace NUnit.Framework.Internal.Execution
     /// shift may begin. This cycle continues until all the tests
     /// have been run.
     /// </summary>
-    public class WorkShift
+    internal sealed class WorkShift
     {
         private static readonly Logger log = InternalTrace.GetLogger("WorkShift");
 
@@ -71,7 +71,7 @@ namespace NUnit.Framework.Internal.Execution
         /// Event that fires when the shift has ended
         /// </summary>
         public event ShiftChangeEventHandler EndOfShift;
-        
+
         /// <summary>
         /// The Name of this shift
         /// </summary>
@@ -161,7 +161,7 @@ namespace NUnit.Framework.Internal.Execution
 
             _firstStart = false;
         }
-    
+
         private void StartWorkers()
         {
             foreach (var worker in Workers)

@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Execution
     /// from the SimpleWorkItemDispatcher where the work item is dispatched
     /// onto its own thread.
     /// </summary>
-    public class MainThreadWorkItemDispatcher : IWorkItemDispatcher
+    internal sealed class MainThreadWorkItemDispatcher : IWorkItemDispatcher
     {
 
         #region IWorkItemDispatcher Members
@@ -62,7 +62,7 @@ namespace NUnit.Framework.Internal.Execution
         }
 
         /// <summary>
-        /// This method is not supported for 
+        /// This method is not supported for
         /// this dispatcher. Using it will throw a
         /// NotSupportedException.
         /// </summary>

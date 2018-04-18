@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,7 @@ namespace NUnit.Framework.Internal.Builders
     /// Provides data from fields marked with the DatapointAttribute or the
     /// DatapointsAttribute.
     /// </summary>
-    public class DatapointProvider : IParameterDataProvider
+    internal sealed class DatapointProvider : IParameterDataProvider
     {
         #region IDataPointProvider Members
 
@@ -86,7 +86,7 @@ namespace NUnit.Framework.Internal.Builders
                 {
                     var field = member as FieldInfo;
                     if (GetTypeFromMemberInfo(member) == parameterType && field != null)
-                    {                        
+                    {
                         if (field.IsStatic)
                             datapoints.Add(field.GetValue(null));
                         else

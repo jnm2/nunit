@@ -30,7 +30,7 @@ namespace NUnit.Framework.Internal.Execution
     /// <summary>
     /// WorkItemBuilder class knows how to build a tree of work items from a tree of tests
     /// </summary>
-    public static class WorkItemBuilder
+    internal static class WorkItemBuilder
     {
         #region Static Factory Method
 

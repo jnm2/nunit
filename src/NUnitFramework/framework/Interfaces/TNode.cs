@@ -37,7 +37,7 @@ namespace NUnit.Framework.Interfaces
     /// System.Xml.Linq.XElement, providing a minimal set of methods
     /// for operating on the XML in a platform-independent manner.
     /// </summary>
-    public class TNode
+    public sealed class TNode
     {
         #region Constructors
 
@@ -406,14 +406,14 @@ namespace NUnit.Framework.Interfaces
     /// <summary>
     /// Class used to represent a list of XmlResults
     /// </summary>
-    public class NodeList : System.Collections.Generic.List<TNode>
+    public sealed class NodeList : System.Collections.Generic.List<TNode>
     {
     }
 
     /// <summary>
     /// Class used to represent the attributes of a node
     /// </summary>
-    public class AttributeDictionary : System.Collections.Generic.Dictionary<string, string>
+    public sealed class AttributeDictionary : System.Collections.Generic.Dictionary<string, string>
     {
         /// <summary>
         /// Gets or sets the value associated with the specified key.

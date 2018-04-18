@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Execution
     /// A TestWorker pulls work items from a queue
     /// and executes them.
     /// </summary>
-    public class TestWorker
+    internal sealed class TestWorker
     {
         private static readonly Logger log = InternalTrace.GetLogger("TestWorker");
 
@@ -123,10 +123,10 @@ namespace NUnit.Framework.Internal.Execution
                     _currentWorkItem.TestWorker = this;
 
                     // During this Busy call, the queue state may be saved.
-                    // This gives us a new set of queues, which are initially 
+                    // This gives us a new set of queues, which are initially
                     // empty. The intention is that only children of the current
                     // executing item should make use of the new set of queues.
-                    // TODO: If we had a separate NonParallelTestWorker, it 
+                    // TODO: If we had a separate NonParallelTestWorker, it
                     // could simply create the isolated queue without any
                     // worrying about competing workers.
                     Busy(this, _currentWorkItem);

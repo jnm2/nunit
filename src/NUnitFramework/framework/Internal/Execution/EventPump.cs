@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,7 +56,7 @@ namespace NUnit.Framework.Internal.Execution
     /// the client without using the CallContext of the test
     /// runner thread.
     /// </summary>
-    public class EventPump : IDisposable
+    internal sealed class EventPump : IDisposable
     {
         static readonly Logger log = InternalTrace.GetLogger("EventPump");
 
@@ -178,7 +178,7 @@ namespace NUnit.Framework.Internal.Execution
                     Event e = _events.Dequeue( PumpState == EventPumpState.Pumping );
                     if ( e == null )
                         break;
-                    try 
+                    try
                     {
                         e.Send(_eventListener);
                         //e.Send(hostListeners);

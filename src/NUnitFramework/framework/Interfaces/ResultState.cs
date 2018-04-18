@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,7 +32,7 @@ namespace NUnit.Framework.Interfaces
     /// skipped or was inconclusive. The Label provides a more
     /// detailed breakdown for use by client runners.
     /// </summary>
-    public class ResultState
+    public sealed class ResultState
     {
         #region Constructors
 
@@ -83,9 +83,9 @@ namespace NUnit.Framework.Interfaces
         /// The result is inconclusive
         /// </summary>
         public readonly static ResultState Inconclusive = new ResultState(TestStatus.Inconclusive);
-        
+
         /// <summary>
-        /// The test has been skipped. 
+        /// The test has been skipped.
         /// </summary>
         public readonly static ResultState Skipped = new ResultState(TestStatus.Skipped);
 
@@ -143,7 +143,7 @@ namespace NUnit.Framework.Interfaces
         /// A suite is marked ignored because one or more child tests were ignored
         /// </summary>
         public readonly static ResultState ChildIgnored = ResultState.Ignored.WithSite(FailureSite.Child);
-        
+
         /// <summary>
         /// A suite failed in its OneTimeSetUp
         /// </summary>
@@ -227,7 +227,7 @@ namespace NUnit.Framework.Interfaces
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {

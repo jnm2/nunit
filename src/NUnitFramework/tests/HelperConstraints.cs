@@ -28,7 +28,7 @@ using NUnit.Framework.Constraints;
 
 namespace NUnit.Framework
 {
-    public sealed class HelperConstraints
+    public static class HelperConstraints
     {
         public static Constraint HasMaxTime(int milliseconds)
         {

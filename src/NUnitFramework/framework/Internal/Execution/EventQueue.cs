@@ -45,7 +45,7 @@ namespace NUnit.Framework.Internal.Execution
     /// or to queue them for forwarding on another thread or at
     /// a later time.
     /// </summary>
-    public abstract class Event
+    internal abstract class Event
     {
         /// <summary>
         /// The Send method is implemented by derived classes to send the event to the specified listener.
@@ -57,7 +57,7 @@ namespace NUnit.Framework.Internal.Execution
     /// <summary>
     /// TestStartedEvent holds information needed to call the TestStarted method.
     /// </summary>
-    public class TestStartedEvent : Event
+    internal sealed class TestStartedEvent : Event
     {
         private readonly ITest _test;
 
@@ -83,7 +83,7 @@ namespace NUnit.Framework.Internal.Execution
     /// <summary>
     /// TestFinishedEvent holds information needed to call the TestFinished method.
     /// </summary>
-    public class TestFinishedEvent : Event
+    internal sealed class TestFinishedEvent : Event
     {
         private readonly ITestResult _result;
 
@@ -109,7 +109,7 @@ namespace NUnit.Framework.Internal.Execution
     /// <summary>
     /// TestOutputEvent holds information needed to call the TestOutput method.
     /// </summary>
-    public class TestOutputEvent : Event
+    internal sealed class TestOutputEvent : Event
     {
         private readonly TestOutput _output;
 
@@ -138,7 +138,7 @@ namespace NUnit.Framework.Internal.Execution
     /// Implements a queue of work items each of which
     /// is queued as a WaitCallback.
     /// </summary>
-    public class EventQueue
+    internal sealed class EventQueue
     {
         private const int spinCount = 5;
 
@@ -198,7 +198,7 @@ namespace NUnit.Framework.Internal.Execution
             } while (true);
 
             // Setting this to anything other than 0 causes NUnit to be sensitive
-            // to the windows timer resolution - see issue #2217 
+            // to the windows timer resolution - see issue #2217
             Thread.Sleep(0);  // give EventPump thread a chance to process the event
         }
 

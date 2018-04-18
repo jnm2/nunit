@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,7 +29,7 @@ namespace NUnit.Framework.Internal
     /// <summary>
     /// The TestMethod class represents a Test implemented as a method.
     /// </summary>
-    public class TestMethod : Test
+    public sealed class TestMethod : Test
     {
         #region Fields
         private static readonly object[] NoArguments = new object[0];

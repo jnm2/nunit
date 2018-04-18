@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal.Builders
     /// <summary>
     /// Built-in SuiteBuilder for all types of test classes.
     /// </summary>
-    public class DefaultSuiteBuilder : ISuiteBuilder
+    internal sealed class DefaultSuiteBuilder : ISuiteBuilder
     {
         // Builder we use for fixtures without any fixture attribute specified
         private readonly NUnitTestFixtureBuilder _defaultBuilder = new NUnitTestFixtureBuilder();
@@ -122,8 +122,8 @@ namespace NUnit.Framework.Internal.Builders
         }
 
         /// <summary>
-        /// We look for attributes implementing IFixtureBuilder at one level 
-        /// of inheritance at a time. Attributes on base classes are not used 
+        /// We look for attributes implementing IFixtureBuilder at one level
+        /// of inheritance at a time. Attributes on base classes are not used
         /// unless there are no fixture builder attributes at all on the derived
         /// class. This is by design.
         /// </summary>
@@ -156,7 +156,7 @@ namespace NUnit.Framework.Internal.Builders
                     // If none of them have args, return the first one
                     if (withArgs == 0)
                         return new IFixtureBuilder[] { attrs[0] };
-                    
+
                     // Some of each - extract those with args
                     var result = new IFixtureBuilder[withArgs];
                     int count = 0;

@@ -41,7 +41,7 @@ namespace NUnit.Framework.Internal
     /// TODO: add some buffering and a separate writer thread as an option.
     /// TODO: figure out a way to turn on trace in specific classes only.
     /// </summary>
-    public static class InternalTrace
+    internal static class InternalTrace
     {
         private static InternalTraceLevel traceLevel;
         private static InternalTraceWriter traceWriter;

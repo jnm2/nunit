@@ -40,7 +40,7 @@ namespace NUnit.TestUtilities
     /// <summary>
     /// Utility Class used to build and run NUnit tests used as test data
     /// </summary>
-    public static class TestBuilder
+    internal static class TestBuilder
     {
         #region Build Tests
 

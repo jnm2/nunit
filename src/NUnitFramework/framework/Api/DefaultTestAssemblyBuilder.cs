@@ -38,7 +38,7 @@ namespace NUnit.Framework.Api
     /// DefaultTestAssemblyBuilder loads a single assembly and builds a TestSuite
     /// containing test fixtures present in the assembly.
     /// </summary>
-    public class DefaultTestAssemblyBuilder : ITestAssemblyBuilder
+    public sealed class DefaultTestAssemblyBuilder : ITestAssemblyBuilder
     {
         static readonly Logger log = InternalTrace.GetLogger(typeof(DefaultTestAssemblyBuilder));
 

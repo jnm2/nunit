@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,7 @@ namespace NUnit.Framework.Internal.Execution
     /// marked as completed immediately upon execution. This
     /// class is also used for skipped or ignored test suites.
     /// </summary>
-    public class SimpleWorkItem : WorkItem
+    internal sealed class SimpleWorkItem : WorkItem
     {
         readonly TestMethod _testMethod;
 
@@ -42,7 +42,7 @@ namespace NUnit.Framework.Internal.Execution
         /// </summary>
         /// <param name="test">The test to be executed</param>
         /// <param name="filter">The filter used to select this test</param>
-        public SimpleWorkItem(TestMethod test, ITestFilter filter) 
+        public SimpleWorkItem(TestMethod test, ITestFilter filter)
             : base(test, filter)
         {
             _testMethod = test;
@@ -59,7 +59,7 @@ namespace NUnit.Framework.Internal.Execution
             }
             catch (Exception ex)
             {
-                // Currently, if there are no command wrappers, test 
+                // Currently, if there are no command wrappers, test
                 // actions, setup or teardown, we have to catch any
                 // exception from the test here. In addition, since
                 // users may create their own command wrappers, etc.
@@ -102,13 +102,13 @@ namespace NUnit.Framework.Internal.Execution
                     if (action.Targets == ActionTargets.Default || action.Targets.HasFlag(ActionTargets.Test))
                         command = new TestActionCommand(command, action); ;
 
-                // Try to locate the parent fixture. In current implementations, the test method 
-                // is either one or two levels below the TestFixture - if this changes, 
+                // Try to locate the parent fixture. In current implementations, the test method
+                // is either one or two levels below the TestFixture - if this changes,
                 // so should the following code.
                 TestFixture parentFixture = Test.Parent as TestFixture ?? Test.Parent?.Parent as TestFixture;
 
                 // In normal operation we should always get the methods from the parent fixture.
-                // However, some of NUnit's own tests can create a TestMethod without a parent 
+                // However, some of NUnit's own tests can create a TestMethod without a parent
                 // fixture. Most likely, we should stop doing this, but it affects 100s of cases.
                 var setUpMethods = parentFixture?.SetUpMethods ?? Reflect.GetMethodsWithAttribute(Test.Type, typeof(SetUpAttribute), true);
                 var tearDownMethods = parentFixture?.TearDownMethods ?? Reflect.GetMethodsWithAttribute(Test.Type, typeof(TearDownAttribute), true);
@@ -119,7 +119,7 @@ namespace NUnit.Framework.Internal.Execution
                     command = new SetUpTearDownCommand(command, item);
 
                 // In the current implementation, upstream actions only apply to tests. If that should change in the future,
-                // then actions would have to be tested for here. For now we simply assert it in Debug. We allow 
+                // then actions would have to be tested for here. For now we simply assert it in Debug. We allow
                 // ActionTargets.Default, because it is passed down by ParameterizedMethodSuite.
                 int index = Context.UpstreamActions.Count;
                 while (--index >= 0)

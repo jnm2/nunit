@@ -23,28 +23,27 @@
 
 using System;
 using NUnit.Compatibility;
-using NUnit.Framework.Interfaces;
+using NUnit.Framework;
 using NUnit.Framework.Internal;
 using NUnit.Framework.Internal.Execution;
-using BF = System.Reflection.BindingFlags;
 
 namespace NUnit.TestUtilities
 {
     /// <summary>
     /// Fakes provides static methods for creating test dummies of various kinds
     /// </summary>
-    public static class Fakes
+    internal static class Fakes
     {
         #region GetTestMethod
 
-        public static FakeTestMethod GetTestMethod(Type type, string name)
+        public static TestMethod GetTestMethod(Type type, string name)
         {
-            return new FakeTestMethod(type, name);
+            return new TestMethod(type.GetFixtureMethod(name));
         }
 
-        public static FakeTestMethod GetTestMethod(object obj, string name)
+        public static TestMethod GetTestMethod(object obj, string name)
         {
-            return new FakeTestMethod(obj, name);
+            return GetTestMethod(obj.GetType(), name);
         }
 
         #endregion
@@ -84,28 +83,12 @@ namespace NUnit.TestUtilities
         #endregion
     }
 
-    #region FakeTestMethod Class
-
-    /// <summary>
-    /// FakeTestMethod is used in tests to simulate an actual TestMethod
-    /// </summary>
-    public class FakeTestMethod : TestMethod
-    {
-        public FakeTestMethod(object obj, string name)
-            : this(obj.GetType(), name) { }
-
-        public FakeTestMethod(Type type, string name)
-            : base(new FixtureMethod(type, type.GetMethod(name, BF.Public | BF.NonPublic | BF.Static | BF.Instance))) { }
-    }
-
-    #endregion
-
     #region FakeWorkItem Class
 
     /// <summary>
     /// FakeWorkItem is used in tests to simulate an actual WorkItem
     /// </summary>
-    public class FakeWorkItem : WorkItem
+    internal sealed class FakeWorkItem : WorkItem
     {
         public event System.EventHandler Executed;
 

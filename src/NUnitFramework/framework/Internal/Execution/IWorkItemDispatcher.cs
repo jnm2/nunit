@@ -26,7 +26,7 @@ namespace NUnit.Framework.Internal.Execution
     /// <summary>
     /// An IWorkItemDispatcher handles execution of work items.
     /// </summary>
-    public interface IWorkItemDispatcher
+    internal interface IWorkItemDispatcher
     {
         /// <summary>
         /// The level of parallelism supported. Zero if not supported.

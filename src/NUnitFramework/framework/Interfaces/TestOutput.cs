@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,11 +26,11 @@ using System;
 namespace NUnit.Framework.Interfaces
 {
     /// <summary>
-    /// The TestOutput class holds a unit of output from 
+    /// The TestOutput class holds a unit of output from
     /// a test to a specific output stream
     /// </summary>
-	public class TestOutput
-	{
+    public sealed class TestOutput
+    {
         /// <summary>
         /// Construct with text, output destination type and
         /// the name of the test that produced the output.
@@ -51,20 +51,20 @@ namespace NUnit.Framework.Interfaces
         /// Return string representation of the object for debugging
         /// </summary>
         /// <returns></returns>
-		public override string ToString()
-		{
-			return Stream + ": " + Text;
-		}
+        public override string ToString()
+        {
+            return Stream + ": " + Text;
+        }
 
         /// <summary>
-        /// Get the text 
+        /// Get the text
         /// </summary>
-		public string Text { get; }
+        public string Text { get; }
 
         /// <summary>
         /// Get the output type
         /// </summary>
-		public string Stream { get; }
+        public string Stream { get; }
 
         /// <summary>
         /// Get the name of the test that created the output

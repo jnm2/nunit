@@ -35,7 +35,7 @@ namespace NUnit.Framework.Internal
 #if !NETSTANDARD1_6
     [Serializable]
 #endif
-    public class InvalidDataSourceException : Exception
+    internal sealed class InvalidDataSourceException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidTestFixtureException"/> class.

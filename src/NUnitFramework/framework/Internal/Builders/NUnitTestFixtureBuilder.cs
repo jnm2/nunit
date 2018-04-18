@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,7 +36,7 @@ namespace NUnit.Framework.Internal.Builders
     /// called by the attribute and in the second directly by
     /// NUnitSuiteBuilder.
     /// </summary>
-    public class NUnitTestFixtureBuilder
+    internal sealed class NUnitTestFixtureBuilder
     {
         #region Messages
 
@@ -82,7 +82,7 @@ namespace NUnit.Framework.Internal.Builders
 
         /// <summary>
         /// Overload of BuildFrom called by tests that have arguments.
-        /// Builds a fixture using the provided type and information 
+        /// Builds a fixture using the provided type and information
         /// in the ITestFixtureData object.
         /// </summary>
         /// <param name="type">The Type for which to construct a fixture.</param>
@@ -196,7 +196,7 @@ namespace NUnit.Framework.Internal.Builders
         /// any global TestCaseBuilder addin wants to build the
         /// test case. If not, it uses the internal builder
         /// collection maintained by this fixture builder.
-        /// 
+        ///
         /// The default implementation has no test case builders.
         /// Derived classes should add builders to the collection
         /// in their constructor.

@@ -48,7 +48,7 @@ namespace NUnit.Framework.Internal.Builders
     /// http://burtleburtle.net/bob/math/jenny.html
     /// </para>
     /// </remarks>
-    public class PairwiseStrategy : ICombiningStrategy
+    internal sealed class PairwiseStrategy : ICombiningStrategy
     {
         // NOTE: Terminology in this class is based on the literature
         // relating to strategies for combining variable features when

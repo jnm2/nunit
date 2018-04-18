@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal.Commands
     /// OneTimeSetUpCommand runs any one-time setup methods for a suite,
     /// constructing the user test object if necessary.
     /// </summary>
-    public class OneTimeSetUpCommand : BeforeTestCommand
+    internal sealed class OneTimeSetUpCommand : BeforeTestCommand
     {
         /// <summary>
         /// Constructs a OneTimeSetUpCommand for a suite
@@ -39,9 +39,9 @@ namespace NUnit.Framework.Internal.Commands
         /// <param name="innerCommand">The inner command to which the command applies</param>
         /// <param name="setUpTearDown">A SetUpTearDownList for use by the command</param>
         public OneTimeSetUpCommand(TestCommand innerCommand, SetUpTearDownItem setUpTearDown)
-            : base(innerCommand) 
+            : base(innerCommand)
         {
-            Guard.ArgumentValid(Test is TestSuite && Test.Type != null, 
+            Guard.ArgumentValid(Test is TestSuite && Test.Type != null,
                 "OneTimeSetUpCommand must reference a TestFixture or SetUpFixture", nameof(innerCommand));
 
             BeforeTest = (context) =>
