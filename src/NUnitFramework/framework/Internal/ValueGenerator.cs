@@ -64,11 +64,7 @@ namespace NUnit.Framework.Internal
                     yield return current;
 
                     T next;
-                    try
-                    {
-                        next = step.Apply(current);
-                    }
-                    catch (OverflowException)
+                    if (!step.TryApply(current, out next))
                     {
                         // We overflowed which means we tried to step past the end.
                         break;
@@ -98,46 +94,6 @@ namespace NUnit.Framework.Internal
         }
 
         /// <summary>
-        /// Provides a convenient shorthand when <typeparamref name="TStep"/> is <see cref="IComparable{TStep}"/>
-        /// and the default value of <typeparamref name="TStep"/> represents zero.
-        /// </summary>
-        public sealed class ComparableStep<TStep> : Step where TStep : IComparable<TStep>
-        {
-            private readonly TStep _step;
-            private readonly Func<T, TStep, T> _apply;
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="ComparableStep{TStep}"/> class.
-            /// </summary>
-            /// <param name="value">The amount by which to increment each time this step is applied.</param>
-            /// <param name="apply">
-            /// Must increment the given value and return the result.
-            /// If the result is outside the range representable by <typeparamref name="T"/>,
-            /// must throw <see cref="OverflowException"/>. If the result does not change due to lack
-            /// of precision representable by <typeparamref name="T"/>, must throw <see cref="ArithmeticException"/>.
-            /// </param>
-            public ComparableStep(TStep value, Func<T, TStep, T> apply)
-            {
-                if (apply == null) throw new ArgumentNullException(nameof(apply));
-                _step = value;
-                _apply = apply;
-            }
-
-            public override bool IsPositive => Comparer<TStep>.Default.Compare(default(TStep), _step) < 0;
-            public override bool IsNegative => Comparer<TStep>.Default.Compare(_step, default(TStep)) < 0;
-
-            /// <summary>
-            /// Increments the given value and returns the result.
-            /// If the result is outside the range representable by <typeparamref name="T"/>,
-            /// throws <see cref="OverflowException"/>. If the result does not change due to lack
-            /// of precision representable by <typeparamref name="T"/>, throws <see cref="ArithmeticException"/>.
-            /// </summary>
-            /// <exception cref="OverflowException"/>
-            /// <exception cref="ArithmeticException"/>
-            public override T Apply(T value) => _apply.Invoke(value, _step);
-        }
-
-        /// <summary>
         /// Encapsulates the ability to increment a <typeparamref name="T"/> value by an amount
         /// which may be of a different type.
         /// </summary>
@@ -146,12 +102,11 @@ namespace NUnit.Framework.Internal
             /// <summary>
             /// Increments the given value and returns the result.
             /// If the result is outside the range representable by <typeparamref name="T"/>,
-            /// throws <see cref="OverflowException"/>. If the result does not change due to lack
+            /// returns <see langword="false"/>. If the result does not change due to lack
             /// of precision representable by <typeparamref name="T"/>, throws <see cref="ArithmeticException"/>.
             /// </summary>
-            /// <exception cref="OverflowException"/>
             /// <exception cref="ArithmeticException"/>
-            public abstract T Apply(T value);
+            public abstract bool TryApply(T value, out T nextValue);
         }
 
         /// <summary>

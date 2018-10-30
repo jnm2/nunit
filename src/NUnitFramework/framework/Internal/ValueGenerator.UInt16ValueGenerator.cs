@@ -31,17 +31,55 @@ namespace NUnit.Framework.Internal
             {
                 if (value is ushort)
                 {
-                    step = new ComparableStep<ushort>((ushort)value, (prev, stepValue) => checked((ushort)(prev + stepValue)));
+                    step = new UInt16Step((ushort)value);
                     return true;
                 }
 
                 if (value is int)
                 {
-                    step = new ComparableStep<int>((int)value, (prev, stepValue) => checked((ushort)(prev + stepValue)));
+                    step = new Int32Step((int)value);
                     return true;
                 }
 
                 return base.TryCreateStep(value, out step);
+            }
+
+            private sealed class UInt16Step : Step
+            {
+                private readonly ushort _stepValue;
+
+                public UInt16Step(ushort value)
+                {
+                    _stepValue = value;
+                }
+
+                public override bool TryApply(ushort value, out ushort nextValue)
+                {
+                    nextValue = (ushort)(value + _stepValue);
+                    return nextValue > value;
+                }
+
+                public override bool IsPositive => _stepValue > 0;
+                public override bool IsNegative => false;
+            }
+
+            private sealed class Int32Step : Step
+            {
+                private readonly int _stepValue;
+
+                public Int32Step(int value)
+                {
+                    _stepValue = value;
+                }
+
+                public override bool TryApply(ushort value, out ushort nextValue)
+                {
+                    nextValue = (ushort)(value + _stepValue);
+                    return _stepValue > 0 ? nextValue > value : nextValue < value;
+                }
+
+                public override bool IsPositive => _stepValue > 0;
+                public override bool IsNegative => _stepValue < 0;
             }
         }
     }

@@ -33,17 +33,32 @@ namespace NUnit.Framework.Internal
             {
                 if (value is float)
                 {
-                    step = new ComparableStep<float>((float)value, (prev, stepValue) =>
-                    {
-                        var next = prev + stepValue;
-                        if (stepValue > 0 ? next <= prev : prev <= next)
-                            throw new ArithmeticException($"Not enough precision to represent the next step; {prev:r} + {stepValue:r} = {next:r}.");
-                        return next;
-                    });
+                    step = new SingleStep((float)value);
                     return true;
                 }
 
                 return base.TryCreateStep(value, out step);
+            }
+
+            private sealed class SingleStep : Step
+            {
+                private readonly float _stepValue;
+
+                public SingleStep(float value)
+                {
+                    _stepValue = value;
+                }
+
+                public override bool TryApply(float value, out float nextValue)
+                {
+                    nextValue = value + _stepValue;
+                    if (_stepValue > 0 ? nextValue <= value : value <= nextValue)
+                        throw new ArithmeticException($"Not enough precision to represent the next step; {value:r} + {_stepValue:r} = {nextValue:r}.");
+                    return true;
+                }
+
+                public override bool IsPositive => _stepValue > 0;
+                public override bool IsNegative => _stepValue < 0;
             }
         }
     }

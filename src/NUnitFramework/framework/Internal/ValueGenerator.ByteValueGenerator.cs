@@ -31,7 +31,7 @@ namespace NUnit.Framework.Internal
             {
                 if (value is byte)
                 {
-                    step = new ComparableStep<byte>((byte)value, (prev, stepValue) => checked((byte)(prev + stepValue)));
+                    step = new ByteStep((byte)value);
                     return true;
                 }
 
@@ -40,11 +40,49 @@ namespace NUnit.Framework.Internal
                 // -1 can be converted natively to Int16, SByte and Decimal, so we can fall back on the automatic conversion for them.
                 if (value is int)
                 {
-                    step = new ComparableStep<int>((int)value, (prev, stepValue) => checked((byte)(prev + stepValue)));
+                    step = new Int32Step((int)value);
                     return true;
                 }
 
                 return base.TryCreateStep(value, out step);
+            }
+
+            private sealed class ByteStep : Step
+            {
+                private readonly byte _stepValue;
+
+                public ByteStep(byte value)
+                {
+                    _stepValue = value;
+                }
+
+                public override bool TryApply(byte value, out byte nextValue)
+                {
+                    nextValue = (byte)(value + _stepValue);
+                    return nextValue > value;
+                }
+
+                public override bool IsPositive => _stepValue > 0;
+                public override bool IsNegative => false;
+            }
+
+            private sealed class Int32Step : Step
+            {
+                private readonly int _stepValue;
+
+                public Int32Step(int value)
+                {
+                    _stepValue = value;
+                }
+
+                public override bool TryApply(byte value, out byte nextValue)
+                {
+                    nextValue = (byte)(value + _stepValue);
+                    return _stepValue > 0 ? nextValue > value : nextValue < value;
+                }
+
+                public override bool IsPositive => _stepValue > 0;
+                public override bool IsNegative => _stepValue < 0;
             }
         }
     }

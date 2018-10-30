@@ -31,11 +31,30 @@ namespace NUnit.Framework.Internal
             {
                 if (value is short)
                 {
-                    step = new ComparableStep<short>((short)value, (prev, stepValue) => checked((short)(prev + stepValue)));
+                    step = new Int16Step((short)value);
                     return true;
                 }
 
                 return base.TryCreateStep(value, out step);
+            }
+
+            private sealed class Int16Step : Step
+            {
+                private readonly short _stepValue;
+
+                public Int16Step(short value)
+                {
+                    _stepValue = value;
+                }
+
+                public override bool TryApply(short value, out short nextValue)
+                {
+                    nextValue = (short)(value + _stepValue);
+                    return _stepValue > 0 ? nextValue > value : nextValue < value;
+                }
+
+                public override bool IsPositive => _stepValue > 0;
+                public override bool IsNegative => _stepValue < 0;
             }
         }
     }

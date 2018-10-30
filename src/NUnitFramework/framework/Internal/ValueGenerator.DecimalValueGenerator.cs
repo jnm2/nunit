@@ -33,17 +33,41 @@ namespace NUnit.Framework.Internal
             {
                 if (value is decimal)
                 {
-                    step = new ComparableStep<decimal>((decimal)value, (prev, stepValue) =>
-                    {
-                        var next = prev + stepValue;
-                        if (stepValue > 0 ? next <= prev : prev <= next)
-                            throw new ArithmeticException($"Not enough precision to represent the next step; {prev} + {stepValue} = {next}.");
-                        return next;
-                    });
+                    step = new DecimalStep((decimal)value);
                     return true;
                 }
 
                 return base.TryCreateStep(value, out step);
+            }
+
+            private sealed class DecimalStep : Step
+            {
+                private readonly decimal _stepValue;
+
+                public DecimalStep(decimal value)
+                {
+                    _stepValue = value;
+                }
+
+                public override bool TryApply(decimal value, out decimal nextValue)
+                {
+                    try
+                    {
+                        nextValue = value + _stepValue;
+                    }
+                    catch (OverflowException)
+                    {
+                        nextValue = 0;
+                        return false;
+                    }
+
+                    if (_stepValue > 0 ? nextValue <= value : value <= nextValue)
+                        throw new ArithmeticException($"Not enough precision to represent the next step; {value} + {_stepValue} = {nextValue}.");
+                    return true;
+                }
+
+                public override bool IsPositive => _stepValue > 0;
+                public override bool IsNegative => _stepValue < 0;
             }
         }
     }

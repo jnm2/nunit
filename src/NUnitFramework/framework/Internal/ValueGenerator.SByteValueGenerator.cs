@@ -31,11 +31,30 @@ namespace NUnit.Framework.Internal
             {
                 if (value is sbyte)
                 {
-                    step = new ComparableStep<sbyte>((sbyte)value, (prev, stepValue) => checked((sbyte)(prev + stepValue)));
+                    step = new SByteStep((sbyte)value);
                     return true;
                 }
 
                 return base.TryCreateStep(value, out step);
+            }
+
+            private sealed class SByteStep : Step
+            {
+                private readonly sbyte _stepValue;
+
+                public SByteStep(sbyte value)
+                {
+                    _stepValue = value;
+                }
+
+                public override bool TryApply(sbyte value, out sbyte nextValue)
+                {
+                    nextValue = (sbyte)(value + _stepValue);
+                    return _stepValue > 0 ? nextValue > value : nextValue < value;
+                }
+
+                public override bool IsPositive => _stepValue > 0;
+                public override bool IsNegative => _stepValue < 0;
             }
         }
     }
