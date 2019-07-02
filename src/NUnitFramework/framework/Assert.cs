@@ -404,7 +404,29 @@ namespace NUnit.Framework
         private static readonly StackFilter SystemEnvironmentFilter = new StackFilter(@" System\.Environment\.");
 
         private static string GetStackTrace() =>
-            StackFilter.DefaultFilter.Filter(SystemEnvironmentFilter.Filter(Environment.StackTrace));
+            StackFilter.DefaultFilter.Filter(SystemEnvironmentFilter.Filter(GetEnvironmentStackTraceWithoutThrowing()));
+
+        /// <summary>
+        /// Gets the current stack trace. If no stack trace is provided, returns "SomeException thrown while attempting
+        /// to access the exception’s stack trace." See also <see cref="ExceptionHelper.GetStackTraceWithoutThrowing"/>.
+        /// </summary>
+#if !(NET35 || NETSTANDARD1_4)
+        // https://github.com/dotnet/coreclr/issues/19698 is also currently present in .NET Framework 4.7 and 4.8. A
+        // race condition between threads reading the same PDB file to obtain file and line info for a stack trace
+        // results in AccessViolationException when the stack trace is accessed even indirectly e.g. Exception.ToString.
+        [System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptions]
+#endif
+        public static string GetEnvironmentStackTraceWithoutThrowing()
+        {
+            try
+            {
+                return Environment.StackTrace;
+            }
+            catch (Exception ex)
+            {
+                return ex.GetType().Name + " thrown while attempting to access Environment.StackTrace.";
+            }
+        }
 
         private static void IncrementAssertCount()
         {

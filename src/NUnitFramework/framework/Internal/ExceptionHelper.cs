@@ -1,4 +1,3 @@
-// ***********************************************************************
 // Copyright (c) 2010 Charlie Poole, Rob Prouse
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -73,7 +72,7 @@ namespace NUnit.Framework.Internal
 
         /// <summary>
         /// Builds up a message, using the Message field of the specified exception
-        /// as well as any InnerExceptions. Optionally excludes exception names, 
+        /// as well as any InnerExceptions. Optionally excludes exception names,
         /// creating a more readable message.
         /// </summary>
         /// <param name="exception">The exception.</param>
@@ -110,7 +109,7 @@ namespace NUnit.Framework.Internal
         /// <returns>A combined stack trace.</returns>
         public static string BuildStackTrace(Exception exception)
         {
-            StringBuilder sb = new StringBuilder(GetSafeStackTrace(exception));
+            StringBuilder sb = new StringBuilder(GetStackTraceWithoutThrowing(exception));
 
             foreach (Exception inner in FlattenExceptionHierarchy(exception))
             {
@@ -118,27 +117,31 @@ namespace NUnit.Framework.Internal
                 sb.Append("--");
                 sb.Append(inner.GetType().Name);
                 sb.Append(Environment.NewLine);
-                sb.Append(GetSafeStackTrace(inner));
+                sb.Append(GetStackTraceWithoutThrowing(inner));
             }
 
             return sb.ToString();
         }
 
         /// <summary>
-        /// Gets the stack trace of the exception. If no stack trace
-        /// is provided, returns "No stack trace available".
+        /// Gets the stack trace of the exception. If no stack trace is provided, returns "SomeException thrown while
+        /// attempting to access the exception’s stack trace." See also <see cref="Assert.GetStackTrace"/>.
         /// </summary>
-        /// <param name="exception">The exception.</param>
-        /// <returns>A string representation of the stack trace.</returns>
-        private static string GetSafeStackTrace(Exception exception)
+#if !(NET35 || NETSTANDARD1_4)
+        // https://github.com/dotnet/coreclr/issues/19698 is also currently present in .NET Framework 4.7 and 4.8. A
+        // race condition between threads reading the same PDB file to obtain file and line info for a stack trace
+        // results in AccessViolationException when the stack trace is accessed even indirectly e.g. Exception.ToString.
+        [System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptions]
+#endif
+        public static string GetStackTraceWithoutThrowing(Exception exception)
         {
             try
             {
                 return exception.StackTrace;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return "No stack trace available";
+                return ex.GetType().Name + " thrown while attempting to access the exception’s stack trace.";
             }
         }
 

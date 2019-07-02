@@ -571,27 +571,27 @@ namespace NUnit.Framework.Internal
         {
             public ResultState ResultState { get; }
             public string Message { get; }
-            public string StackTrace { get; } 
+            public string StackTrace { get; }
             public Exception Exception { get; }
 
             public ExceptionResult(Exception ex, FailureSite site)
             {
-                ex = ValidateAndUnwrap(ex); 
-                
+                ex = ValidateAndUnwrap(ex);
+
                 Exception = ex;
 
                 if (ex is ResultStateException)
                 {
                     ResultState = ((ResultStateException)ex).ResultState.WithSite(site);
                     Message = ex.Message;
-                    StackTrace = StackFilter.DefaultFilter.Filter(ex.StackTrace);
+                    StackTrace = StackFilter.DefaultFilter.Filter(ExceptionHelper.GetStackTraceWithoutThrowing(ex));
                 }
 #if THREAD_ABORT
                 else if (ex is ThreadAbortException)
                 {
                     ResultState = ResultState.Cancelled.WithSite(site);
                     Message = "Test cancelled by user";
-                    StackTrace = ex.StackTrace;
+                    StackTrace = ExceptionHelper.GetStackTraceWithoutThrowing(ex);
                 }
 #endif
                 else
