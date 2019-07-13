@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp1.1<!-- Move to: netcoreapp2.1;netcoreapp2.2 --></TargetFrameworks>
+    <TargetFrameworkOfAssemblyToTest>netstandard1.4</TargetFrameworkOfAssemblyToTest>
+  </PropertyGroup>
+
+  <Import Project="nunit.framework.tests.props" />
+
+</Project>

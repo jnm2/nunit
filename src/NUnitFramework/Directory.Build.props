@@ -7,7 +7,10 @@
     <AssemblyOriginatorKeyFile>..\..\nunit.snk</AssemblyOriginatorKeyFile>
 
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <OutputPath>..\..\..\bin\$(Configuration)\</OutputPath>
+
+    <!-- Enables multiple csprojs to share a folder without overwriting each other’s obj\project.assets.json
+         and messing up NuGet restore (https://github.com/NuGet/Home/issues/4463#issuecomment-404806889) -->
+    <MSBuildProjectExtensionsPath>obj\$(MSBuildProjectName)\</MSBuildProjectExtensionsPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'">

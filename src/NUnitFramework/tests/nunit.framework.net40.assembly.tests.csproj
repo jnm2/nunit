@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net40<!-- To add: net472 --></TargetFrameworks>
+    <TargetFrameworkOfAssemblyToTest>net40</TargetFrameworkOfAssemblyToTest>
+  </PropertyGroup>
+
+  <Import Project="nunit.framework.tests.props" />
+
+</Project>
