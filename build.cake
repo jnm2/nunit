@@ -54,14 +54,6 @@ var IMAGE_DIR = PROJECT_DIR + "images/";
 
 var SOLUTION_FILE = "./nunit.sln";
 
-// Test Runners
-var NUNITLITE_RUNNER_DLL = "nunitlite-runner.dll";
-
-// Test Assemblies
-var FRAMEWORK_TESTS = "nunit.framework.tests.dll";
-var EXECUTABLE_NUNITLITE_TESTS_EXE = "nunitlite.tests.exe";
-var EXECUTABLE_NUNITLITE_TESTS_DLL = "nunitlite.tests.dll";
-
 // Packages
 var ZIP_PACKAGE = PACKAGE_DIR + "NUnit.Framework-" + packageVersion + ".zip";
 
@@ -146,15 +138,6 @@ Task("Build")
     .Does(() =>
     {
         MSBuild(SOLUTION_FILE, CreateSettings());
-
-        Information("Publishing netcoreapp1.1 tests so that dependencies are present...");
-
-        MSBuild("src/NUnitFramework/tests/nunit.framework.tests.csproj", CreateSettings()
-            .WithTarget("Publish")
-            .WithProperty("TargetFramework", "netcoreapp1.1")
-            .WithProperty("NoBuild", "true") // https://github.com/dotnet/cli/issues/5331#issuecomment-338392972
-            .WithProperty("PublishDir", BIN_DIR + "netcoreapp1.1/")
-            .WithRawArgument("/nologo"));
     });
 
 MSBuildSettings CreateSettings()
@@ -198,69 +181,63 @@ Task("CheckForError")
     .Does(() => CheckForError(ref ErrorDetail));
 
 Task("Test45")
-    .Description("Tests the .NET 4.5 version of the framework")
+    .Description("Tests the .NET Framework 4.5 version of the framework")
     .IsDependentOn("Build")
     .OnError(exception => { ErrorDetail.Add(exception.Message); })
-    .Does(() =>
-    {
-        var runtime = "net45";
-        var dir = BIN_DIR + runtime + "/";
-        RunNUnitTests(dir, FRAMEWORK_TESTS, runtime, ref ErrorDetail);
-        RunTest(dir + EXECUTABLE_NUNITLITE_TESTS_EXE, dir, runtime, ref ErrorDetail);
-        PublishTestResults(runtime);
-    });
+    .Does(() => RunTestsOfNUnitLibraryTarget("net45"));
 
 Task("Test40")
-    .Description("Tests the .NET 4.0 version of the framework")
+    .Description("Tests the .NET Framework 4.0 version of the framework")
     .IsDependentOn("Build")
     .OnError(exception => { ErrorDetail.Add(exception.Message); })
-    .Does(() =>
-    {
-        var runtime = "net40";
-        var dir = BIN_DIR + runtime + "/";
-        RunNUnitTests(dir, FRAMEWORK_TESTS, runtime, ref ErrorDetail);
-        RunTest(dir + EXECUTABLE_NUNITLITE_TESTS_EXE, dir, runtime, ref ErrorDetail);
-        PublishTestResults(runtime);
-    });
+    .Does(() => RunTestsOfNUnitLibraryTarget("net40"));
 
 Task("Test35")
-    .Description("Tests the .NET 3.5 version of the framework")
+    .Description("Tests the .NET Framework 3.5 version of the framework")
     .IsDependentOn("Build")
     .OnError(exception => { ErrorDetail.Add(exception.Message); })
-    .Does(() =>
-    {
-        var runtime = "net35";
-        var dir = BIN_DIR + runtime + "/";
-        RunNUnitTests(dir, FRAMEWORK_TESTS, runtime, ref ErrorDetail);
-        RunTest(dir + EXECUTABLE_NUNITLITE_TESTS_EXE, dir, runtime, ref ErrorDetail);
-        PublishTestResults(runtime);
-    });
+    .Does(() => RunTestsOfNUnitLibraryTarget("net35"));
 
 Task("TestNetStandard14")
     .Description("Tests the .NET Standard 1.4 version of the framework")
     .IsDependentOn("Build")
     .OnError(exception => { ErrorDetail.Add(exception.Message); })
-    .Does(() =>
-    {
-        var runtime = "netcoreapp1.1";
-        var dir = BIN_DIR + runtime + "/";
-        RunDotnetCoreTests(dir + NUNITLITE_RUNNER_DLL, dir, FRAMEWORK_TESTS, runtime, GetResultXmlPath(FRAMEWORK_TESTS, runtime), ref ErrorDetail);
-        RunDotnetCoreTests(dir + EXECUTABLE_NUNITLITE_TESTS_DLL, dir, runtime, ref ErrorDetail);
-        PublishTestResults(runtime);
-    });
+    .Does(() => RunTestsOfNUnitLibraryTarget("netstandard1.4"));
 
 Task("TestNetStandard20")
     .Description("Tests the .NET Standard 2.0 version of the framework")
     .IsDependentOn("Build")
     .OnError(exception => { ErrorDetail.Add(exception.Message); })
-    .Does(() =>
+    .Does(() => RunTestsOfNUnitLibraryTarget("netstandard2.0"));
+
+void RunTestsOfNUnitLibraryTarget(string targetFramework)
+{
+    foreach (var frameworkCombinationDir in GetDirectories($"src/NUnitFramework/tests/bin/{configuration}/{targetFramework} on *"))
     {
-        var runtime = "netcoreapp2.0";
-        var dir = BIN_DIR + runtime + "/";
-        RunDotnetCoreTests(dir + NUNITLITE_RUNNER_DLL, dir, FRAMEWORK_TESTS, runtime, GetResultXmlPath(FRAMEWORK_TESTS, runtime), ref ErrorDetail);
-        RunDotnetCoreTests(dir + EXECUTABLE_NUNITLITE_TESTS_DLL, dir, runtime, ref ErrorDetail);
-        PublishTestResults(runtime);
-    });
+        Information(frameworkCombinationDir.ToString());
+        var frameworkCombination = frameworkCombinationDir.GetDirectoryName();
+        var testsTargetFramework = frameworkCombination.Substring((targetFramework + " on ").Length);
+        var testAssembly = frameworkCombinationDir.CombineWithFilePath("nunit.framework.tests.dll");
+
+        if (testsTargetFramework.StartsWith("netcoreapp", StringComparison.Ordinal))
+            RunTestsWithNetCoreAppNUnitLiteRunner(frameworkCombination, testAssembly);
+        else
+            RunTestsWithNUnitConsole(frameworkCombination, testAssembly);
+    }
+
+    {
+        // For now
+        var (testsTargetFramework, useDotNetCore) =
+            targetFramework == "netstandard1.4" ? ("netcoreapp1.1", true) :
+            targetFramework == "netstandard2.0" ? ("netcoreapp2.0", true) :
+            (targetFramework, false);
+
+        RunSelfExecutingTests(
+            frameworkCombination: $"{targetFramework} on {testsTargetFramework}",
+            testAssembly: File($"src/NUnitFramework/nunitlite.tests/bin/{configuration}/{testsTargetFramework}/nunitlite.tests." + (useDotNetCore ? "dll" : "exe")),
+            useDotNetCore);
+    }
+}
 
 //////////////////////////////////////////////////////////////////////
 // PACKAGE
@@ -430,82 +407,110 @@ void CheckForError(ref List<string> errorDetail)
 // HELPER METHODS - TEST
 //////////////////////////////////////////////////////////////////////
 
-FilePath GetResultXmlPath(string testAssembly, string framework)
+FilePath GetResultXmlPath(string frameworkCombination, string testAssembly)
 {
     var assemblyName = System.IO.Path.GetFileNameWithoutExtension(testAssembly);
 
-    CreateDirectory($@"test-results\{framework}");
+    CreateDirectory($@"test-results\{frameworkCombination}");
 
-    return MakeAbsolute(new FilePath($@"test-results\{framework}\{assemblyName}.xml"));
+    return MakeAbsolute(new FilePath($@"test-results\{frameworkCombination}\{assemblyName}.xml"));
 }
 
-void RunNUnitTests(DirectoryPath workingDir, string testAssembly, string framework, ref List<string> errorDetail)
+void RunTestsWithNUnitConsole(string frameworkCombination, FilePath testAssembly)
 {
+    var testResultsFile = GetResultXmlPath(frameworkCombination, testAssembly.FullPath);
+
     try
     {
-        var path = workingDir.CombineWithFilePath(testAssembly);
-
-        var settings = new NUnit3Settings();
-        settings.Results = new[] { new NUnit3Result { FileName = GetResultXmlPath(testAssembly, framework) } };
+        var settings = new NUnit3Settings
+        {
+            Results = { new NUnit3Result { FileName = testResultsFile } }
+        };
 
         if (!IsRunningOnWindows())
             settings.Process = NUnit3ProcessOption.InProcess;
 
-        NUnit3(path.ToString(), settings);
+        NUnit3(testAssembly.FullPath, settings);
     }
-    catch(CakeException ce)
+    catch (CakeException ex)
     {
-        errorDetail.Add(string.Format("{0}: {1}", framework, ce.Message));
+        ErrorDetail.Add($"{frameworkCombination}: {ex.Message}");
     }
+
+    PublishTestResult(frameworkCombination, testResultsFile);
 }
 
-void RunTest(FilePath exePath, DirectoryPath workingDir, string framework, ref List<string> errorDetail)
+void RunSelfExecutingTests(string frameworkCombination, FilePath testAssembly, bool useDotNetCore)
 {
-    RunTest(exePath, workingDir, null, framework, ref errorDetail);
-}
+    var exePath = MakeAbsolute(testAssembly).FullPath;
+    var testResultsFile = GetResultXmlPath(frameworkCombination, testAssembly.FullPath);
 
-void RunTest(FilePath exePath, DirectoryPath workingDir, string arguments, string framework, ref List<string> errorDetail)
-{
-    int rc = StartProcess(
-        MakeAbsolute(exePath),
+    var arguments = new ProcessArgumentBuilder();
+    if (useDotNetCore) arguments.AppendQuoted(exePath);
+    arguments.AppendSwitchQuoted("--result", ":", testResultsFile.FullPath);
+
+    var exitCode = StartProcess(
+        useDotNetCore ? "dotnet" : exePath,
         new ProcessSettings
         {
-            Arguments = new ProcessArgumentBuilder()
-                .Append(arguments)
-                .AppendSwitchQuoted("--result", ":", GetResultXmlPath(exePath.FullPath, framework).FullPath)
-                .Render(),
-            WorkingDirectory = workingDir
+            Arguments = arguments.Render(),
+            WorkingDirectory = testAssembly.GetDirectory()
         });
 
-    if (rc > 0)
-        errorDetail.Add(string.Format("{0}: {1} tests failed", framework, rc));
-    else if (rc < 0)
-        errorDetail.Add(string.Format("{0} returned rc = {1}", exePath, rc));
+    if (exitCode > 0)
+        ErrorDetail.Add($"{frameworkCombination}: {exitCode} tests failed");
+    else if (exitCode < 0)
+        ErrorDetail.Add($"{exePath} returned exit code {exitCode}");
+
+    PublishTestResult(frameworkCombination, testResultsFile);
 }
 
-void RunDotnetCoreTests(FilePath exePath, DirectoryPath workingDir, string framework, ref List<string> errorDetail)
+void RunTestsWithNetCoreAppNUnitLiteRunner(string frameworkCombination, FilePath testAssembly)
 {
-    RunDotnetCoreTests(exePath, workingDir, null, framework, GetResultXmlPath(exePath.FullPath, framework), ref errorDetail);
-}
+    var testResultsFile = GetResultXmlPath(frameworkCombination, testAssembly.FullPath);
 
-void RunDotnetCoreTests(FilePath exePath, DirectoryPath workingDir, string arguments, string framework, FilePath resultFile, ref List<string> errorDetail)
-{
-    int rc = StartProcess(
+    var runnerPath = System.IO.Path.GetFullPath($"src/NUnitFramework/nunitlite-runner/bin/{configuration}/netcoreapp2.1/nunitlite-runner.dll");
+
+    var arguments = new ProcessArgumentBuilder()
+        .AppendQuoted(runnerPath)
+        .AppendQuoted(MakeAbsolute(testAssembly).FullPath)
+        .AppendSwitchQuoted("--result", ":", testResultsFile.FullPath);
+
+    var exitCode = StartProcess(
         "dotnet",
         new ProcessSettings
         {
-            Arguments = new ProcessArgumentBuilder()
-                .AppendQuoted(exePath.FullPath)
-                .Append(arguments)
-                .AppendSwitchQuoted("--result", ":", resultFile.FullPath)
-                .Render(),
-            WorkingDirectory = workingDir
+            Arguments = arguments.Render(),
+            WorkingDirectory = testAssembly.GetDirectory()
         });
 
-    if (rc > 0)
-        errorDetail.Add(string.Format("{0}: {1} tests failed", framework, rc));
-    else if (rc < 0)
-        errorDetail.Add(string.Format("{0} returned rc = {1}", exePath, rc));
+    if (exitCode > 0)
+        ErrorDetail.Add($"{frameworkCombination}: {exitCode} tests failed");
+    else if (exitCode < 0)
+        ErrorDetail.Add($"{runnerPath} returned exit code {exitCode}");
+
+    PublishTestResult(frameworkCombination, testResultsFile);
+}
+
+void PublishTestResult(string frameworkCombination, FilePath testResultsFile)
+{
+    if (EnvironmentVariable("TF_BUILD", false))
+    {
+        var fullTestRunTitle = frameworkCombination;
+        var ciRunName = Argument<string>("test-run-name");
+        if (!string.IsNullOrEmpty(ciRunName))
+            fullTestRunTitle += '/' + ciRunName;
+
+        TFBuild.Commands.PublishTestResults(new TFBuildPublishTestResultsData
+        {
+            TestResultsFiles = new[] { testResultsFile },
+            TestRunTitle = fullTestRunTitle,
+            TestRunner = TFTestRunnerType.NUnit,
+            MergeTestResults = true,
+            PublishRunAttachments = true,
+            Configuration = configuration
+        });
+    }
 }
 
 void PublishTestResults(string framework)
