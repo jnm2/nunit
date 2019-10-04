@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using NUnit.Compatibility;
 using NUnit.Framework.Interfaces;
@@ -44,12 +45,12 @@ namespace NUnit.Framework
         /// This constructor is not CLS-Compliant
         /// </summary>
         /// <param name="arguments"></param>
-        public TestCaseAttribute(params object[] arguments)
+        public TestCaseAttribute(params object?[]? arguments)
         {
             RunState = RunState.Runnable;
 
             if (arguments == null)
-                Arguments = new object[] { null };
+                Arguments = new object?[] { null };
             else
                 Arguments = arguments;
 
@@ -110,7 +111,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Gets the list of arguments to a test case
         /// </summary>
-        public object[] Arguments { get; }
+        public object?[] Arguments { get; }
 
         /// <summary>
         /// Gets the properties of the test case
@@ -125,7 +126,7 @@ namespace NUnit.Framework
         /// Gets or sets the expected result.
         /// </summary>
         /// <value>The result.</value>
-        public object ExpectedResult
+        public object? ExpectedResult
         {
             get { return _expectedResult; }
             set
@@ -134,7 +135,7 @@ namespace NUnit.Framework
                 HasExpectedResult = true;
             }
         }
-        private object _expectedResult;
+        private object? _expectedResult;
 
         /// <summary>
         /// Returns true if the expected result has been set
@@ -149,34 +150,42 @@ namespace NUnit.Framework
         /// Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
-        public string Description
+        [DisallowNull]
+        public string? Description
         {
             get { return Properties.Get(PropertyNames.Description) as string; }
-            set { Properties.Set(PropertyNames.Description, value); }
+            set { Properties.Set(PropertyNames.Description, value ?? throw new ArgumentNullException(nameof(value))); }
         }
 
         /// <summary>
         /// The author of this test
         /// </summary>
-        public string Author
+        [DisallowNull]
+        public string? Author
         {
             get { return Properties.Get(PropertyNames.Author) as string; }
-            set { Properties.Set(PropertyNames.Author, value); }
+            set { Properties.Set(PropertyNames.Author, value ?? throw new ArgumentNullException(nameof(value))); }
         }
 
         /// <summary>
         /// The type that this test is testing
         /// </summary>
-        public Type TestOf
+        [DisallowNull]
+        public Type? TestOf
         {
             get { return _testOf; }
             set
             {
-                _testOf = value;
-                Properties.Set(PropertyNames.TestOf, value.FullName);
+                _testOf = value
+                    ?? throw new ArgumentNullException(nameof(value));
+
+                var typeName = value.FullName
+                    ?? throw new ArgumentException("The specified type must have a name.", nameof(value));
+
+                Properties.Set(PropertyNames.TestOf, typeName);
             }
         }
-        private Type _testOf;
+        private Type? _testOf;
 
         /// <summary>
         /// Gets or sets the reason for ignoring the test
@@ -228,23 +237,26 @@ namespace NUnit.Framework
         /// <summary>
         /// Comma-delimited list of platforms to run the test for
         /// </summary>
-        public string IncludePlatform { get; set; }
+        public string? IncludePlatform { get; set; }
 
         /// <summary>
         /// Comma-delimited list of platforms to not run the test for
         /// </summary>
-        public string ExcludePlatform { get; set; }
+        public string? ExcludePlatform { get; set; }
 #endif
 
         /// <summary>
         /// Gets and sets the category for this test case.
         /// May be a comma-separated list of categories.
         /// </summary>
-        public string Category
+        [DisallowNull]
+        public string? Category
         {
             get { return Properties.Get(PropertyNames.Category) as string; }
             set
             {
+                if (value is null) throw new ArgumentNullException(nameof(value));
+
                 foreach (string cat in value.Split(new char[] { ',' }) )
                     Properties.Add(PropertyNames.Category, cat);
             }
@@ -278,10 +290,11 @@ namespace NUnit.Framework
                 {
                     IParameterInfo lastParameter = parameters[argsNeeded - 1];
                     Type lastParameterType = lastParameter.ParameterType;
-                    Type elementType = lastParameterType.GetElementType();
 
                     if (lastParameterType.IsArray && lastParameter.IsDefined<ParamArrayAttribute>(false))
                     {
+                        Type elementType = lastParameterType.GetElementType()!;
+
                         if (argsProvided == argsNeeded)
                         {
                             if (!lastParameterType.IsInstanceOfType(parms.Arguments[argsProvided - 1]))
@@ -383,7 +396,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="method">The MethodInfo for which tests are to be constructed.</param>
         /// <param name="suite">The suite to which the tests will be added.</param>
-        public IEnumerable<TestMethod> BuildFrom(IMethodInfo method, Test suite)
+        public IEnumerable<TestMethod> BuildFrom(IMethodInfo method, Test? suite)
         {
             TestMethod test = new NUnitTestCaseBuilder().BuildTestMethod(method, suite, GetParametersForTestCase(method));
 

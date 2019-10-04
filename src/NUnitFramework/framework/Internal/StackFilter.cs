@@ -22,6 +22,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -76,7 +77,8 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="rawTrace">The original stack trace</param>
         /// <returns>A filtered stack trace</returns>
-        public string Filter(string rawTrace)
+        [return: NotNullIfNotNull("rawTrace")]
+        public string? Filter(string? rawTrace)
         {
             if (rawTrace == null) return null;
 
@@ -85,7 +87,7 @@ namespace NUnit.Framework.Internal
 
             try
             {
-                string line = sr.ReadLine();
+                string? line = sr.ReadLine();
 
                 if (_topOfStackRegex != null)
                     // First, skip past any Assert, Assume or MultipleAssertBlock lines

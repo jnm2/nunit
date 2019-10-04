@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,14 +35,14 @@ namespace NUnit.Framework.Constraints
     public class ContainsConstraint : Constraint
     {
         private readonly object _expected;
-        private Constraint _realConstraint;
+        private Constraint? _realConstraint;
         private bool _ignoreCase;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ContainsConstraint"/> class.
         /// </summary>
         /// <param name="expected">The expected value contained within the string/collection.</param>
-        public ContainsConstraint(object expected)
+        public ContainsConstraint(object? expected)
         {
             this._expected = expected;
         }
@@ -51,7 +51,7 @@ namespace NUnit.Framework.Constraints
         /// The Description of what this constraint tests, for
         /// use in messages and in the ConstraintResult.
         /// </summary>
-        public override string Description
+        public override string? Description
         {
             get
             {

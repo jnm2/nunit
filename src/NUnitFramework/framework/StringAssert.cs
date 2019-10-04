@@ -72,7 +72,7 @@ namespace NUnit.Framework
         /// <param name="actual">The string to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void Contains(string expected, string actual, string message, params object[] args)
+        static public void Contains(string expected, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Does.Contain(expected), message, args);
         }
@@ -98,7 +98,7 @@ namespace NUnit.Framework
         /// <param name="actual">The string to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void DoesNotContain(string expected, string actual, string message, params object[] args)
+        static public void DoesNotContain(string expected, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Does.Not.Contain(expected), message, args );
         }
@@ -124,7 +124,7 @@ namespace NUnit.Framework
         /// <param name="actual">The string to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void StartsWith(string expected, string actual, string message, params object[] args)
+        static public void StartsWith(string expected, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Does.StartWith(expected), message, args);
         }
@@ -150,7 +150,7 @@ namespace NUnit.Framework
         /// <param name="actual">The string to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void DoesNotStartWith(string expected, string actual, string message, params object[] args)
+        static public void DoesNotStartWith(string expected, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Does.Not.StartWith(expected), message, args);
         }
@@ -176,7 +176,7 @@ namespace NUnit.Framework
         /// <param name="actual">The string to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void EndsWith(string expected, string actual, string message, params object[] args)
+        static public void EndsWith(string expected, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Does.EndWith(expected), message, args);
         }
@@ -202,7 +202,7 @@ namespace NUnit.Framework
         /// <param name="actual">The string to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void DoesNotEndWith(string expected, string actual, string message, params object[] args)
+        static public void DoesNotEndWith(string expected, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Does.Not.EndWith(expected), message, args);
         }
@@ -227,7 +227,7 @@ namespace NUnit.Framework
         /// <param name="actual">The actual string</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void AreEqualIgnoringCase(string expected, string actual, string message, params object[] args)
+        static public void AreEqualIgnoringCase(string expected, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.EqualTo(expected).IgnoreCase, message, args);
         }
@@ -251,7 +251,7 @@ namespace NUnit.Framework
         /// <param name="actual">The actual string</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void AreNotEqualIgnoringCase(string expected, string actual, string message, params object[] args)
+        static public void AreNotEqualIgnoringCase(string expected, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.EqualTo(expected).IgnoreCase, message, args);
         }
@@ -275,7 +275,7 @@ namespace NUnit.Framework
         /// <param name="actual">The actual string</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void IsMatch(string pattern, string actual, string message, params object[] args)
+        static public void IsMatch(string pattern, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Does.Match(pattern), message, args);
         }
@@ -299,7 +299,7 @@ namespace NUnit.Framework
         /// <param name="actual">The actual string</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Arguments used in formatting the message</param>
-        static public void DoesNotMatch(string pattern, string actual, string message, params object[] args)
+        static public void DoesNotMatch(string pattern, string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Does.Not.Match(pattern), message, args);
         }

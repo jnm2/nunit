@@ -38,10 +38,10 @@ namespace NUnit.Framework.Internal.Execution
     public class SimpleWorkItemDispatcher : IWorkItemDispatcher
     {
         // The first WorkItem to be dispatched, assumed to be top-level item
-        private WorkItem _topLevelWorkItem;
+        private WorkItem? _topLevelWorkItem;
 
         // Thread used to run and cancel tests
-        private Thread _runnerThread;
+        private Thread? _runnerThread;
 
         #region IWorkItemDispatcher Members
 
@@ -90,7 +90,7 @@ namespace NUnit.Framework.Internal.Execution
 
         private void RunnerThreadProc()
         {
-            _topLevelWorkItem.Execute();
+            _topLevelWorkItem!.Execute();
         }
 
 

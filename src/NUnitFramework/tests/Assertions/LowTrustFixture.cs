@@ -95,7 +95,7 @@ namespace NUnit.Framework.Assertions
         /// Creates a low trust <see cref="TestSandBox"/> instance.
         /// </summary>
         /// <param name="fullTrustAssemblies">Strong named assemblies that will have full trust in the sandbox.</param>
-        public TestSandBox(params Assembly[] fullTrustAssemblies)
+        public TestSandBox(params Assembly[]? fullTrustAssemblies)
             : this(null, fullTrustAssemblies)
         { }
 
@@ -105,7 +105,7 @@ namespace NUnit.Framework.Assertions
         /// <param name="permissions">Optional <see cref="TestSandBox"/> permission set. By default a minimal trust
         /// permission set is used.</param>
         /// <param name="fullTrustAssemblies">Strong named assemblies that will have full trust in the sandbox.</param>
-        public TestSandBox(PermissionSet permissions, params Assembly[] fullTrustAssemblies)
+        public TestSandBox(PermissionSet? permissions, params Assembly[]? fullTrustAssemblies)
         {
             var setup = new AppDomainSetup { ApplicationBase = AppDomain.CurrentDomain.BaseDirectory };
 
@@ -124,7 +124,7 @@ namespace NUnit.Framework.Assertions
             _appDomain = AppDomain.CreateDomain(
                 "TestSandBox" + DateTime.Now.Ticks, null, setup,
                 permissions ?? GetLowTrustPermissionSet(),
-                strongNames.ToArray());
+                strongNames.ToArray())!;
         }
 
 #endregion
@@ -180,31 +180,30 @@ namespace NUnit.Framework.Assertions
 
         public T Run<T>(Func<T> func)
         {
-            return (T)Run(func.Method);
+            return (T)Run(func.Method)!;
         }
 
         public void Run(Action action)
         {
             Run(action.Method);
         }
-        public object Run(MethodInfo method, params object[] parameters)
+
+        public object? Run(MethodInfo method, params object[] parameters)
         {
             if (method == null) throw new ArgumentNullException(nameof(method));
             if (_appDomain == null) throw new ObjectDisposedException(null);
 
             var methodRunnerType = typeof(MethodRunner);
             var methodRunnerProxy = (MethodRunner)_appDomain.CreateInstanceAndUnwrap(
-                methodRunnerType.Assembly.FullName, methodRunnerType.FullName);
+                methodRunnerType.Assembly.FullName!, methodRunnerType.FullName!)!;
 
             try
             {
                 return methodRunnerProxy.Run(method, parameters);
             }
-            catch (Exception e)
+            catch (TargetInvocationException ex) when (ex.InnerException is { } inner)
             {
-                throw e is TargetInvocationException
-                    ? e.InnerException
-                    : e;
+                throw inner;
             }
         }
 
@@ -232,11 +231,11 @@ namespace NUnit.Framework.Assertions
         [Serializable]
         internal class MethodRunner : MarshalByRefObject
         {
-            public object Run(MethodInfo method, params object[] parameters)
+            public object? Run(MethodInfo method, params object[] parameters)
             {
                 var instance = method.IsStatic
                     ? null
-                    : Activator.CreateInstance(method.ReflectedType);
+                    : Activator.CreateInstance(method.ReflectedType!);
                 try
                 {
                     return method.Invoke(instance, parameters);

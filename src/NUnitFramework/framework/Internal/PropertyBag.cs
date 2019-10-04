@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -83,7 +83,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public object Get(string key)
+        public object? Get(string key)
         {
             return inner.TryGetValue(key, out var list) && list.Count > 0
                 ? list[0]
@@ -159,13 +159,13 @@ namespace NUnit.Framework.Internal
 
             foreach (string key in Keys)
             {
-                foreach (object value in this[key])
+                foreach (var value in this[key])
                 {
                     TNode prop = properties.AddElement("property");
 
                     // TODO: Format as string
                     prop.AddAttribute("name", key.ToString());
-                    prop.AddAttribute("value", value.ToString());
+                    prop.AddAttribute("value", value!.ToString() ?? string.Empty);
                 }
             }
 

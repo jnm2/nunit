@@ -119,7 +119,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Gets the unique name of the Worker that is executing this test.
         /// </summary>
-        public string WorkerId
+        public string? WorkerId
         {
             get { return _testExecutionContext.TestWorker?.Name; }
         }
@@ -132,7 +132,7 @@ namespace NUnit.Framework
         {
             get
             {
-                Assembly assembly = _testExecutionContext?.CurrentTest?.TypeInfo?.Assembly;
+                Assembly? assembly = _testExecutionContext?.CurrentTest?.TypeInfo?.Assembly;
 
                 if (assembly != null)
                     return AssemblyHelper.GetDirectoryName(assembly);
@@ -314,7 +314,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="filePath">Relative or absolute file path to attachment</param>
         /// <param name="description">Optional description of attachment</param>
-        public static void AddTestAttachment(string filePath, string description = null)
+        public static void AddTestAttachment(string filePath, string? description = null)
         {
             Guard.ArgumentNotNull(filePath, nameof(filePath));
             Guard.ArgumentValid(filePath.IndexOfAny(Path.GetInvalidPathChars()) == -1,

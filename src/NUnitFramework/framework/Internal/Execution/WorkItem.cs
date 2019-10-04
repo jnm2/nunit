@@ -63,9 +63,8 @@ namespace NUnit.Framework.Internal.Execution
             Result = test.MakeTestResult();
             State = WorkItemState.Ready;
 
-            ParallelScope = Test.Properties.ContainsKey(PropertyNames.ParallelScope)
-                ? (ParallelScope)Test.Properties.Get(PropertyNames.ParallelScope)
-                : ParallelScope.Default;
+            ParallelScope = Test.Properties.Get(PropertyNames.ParallelScope) as ParallelScope?
+                ?? ParallelScope.Default;
 
 #if APARTMENT_STATE
             TargetApartment = GetTargetApartment(Test);
@@ -125,7 +124,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Event triggered when the item is complete
         /// </summary>
-        public event EventHandler Completed;
+        public event EventHandler? Completed;
 
         /// <summary>
         /// Gets the current state of the WorkItem
@@ -148,7 +147,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Filter used to include or exclude child tests
         /// </summary>
-        public ITestFilter Filter { get; }
+        public ITestFilter? Filter { get; }
 
         /// <summary>
         /// The execution context
@@ -159,7 +158,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// The worker executing this item.
         /// </summary>
-        public TestWorker TestWorker { get; internal set; }
+        public TestWorker? TestWorker { get; internal set; }
 
         private ParallelExecutionStrategy? _executionStrategy;
 
@@ -396,7 +395,7 @@ namespace NUnit.Framework.Internal.Execution
 
             var list = new List<SetUpTearDownItem>();
 
-            Type fixtureType = Test.TypeInfo?.Type;
+            Type? fixtureType = Test.TypeInfo?.Type;
             if (fixtureType == null)
                 return list;
 
@@ -463,7 +462,7 @@ namespace NUnit.Framework.Internal.Execution
 #region Private Methods
 
 #if PARALLEL
-        private Thread thread;
+        private Thread? thread;
 
 #if APARTMENT_STATE
         private void RunOnSeparateThread(ApartmentState apartment)
@@ -473,7 +472,7 @@ namespace NUnit.Framework.Internal.Execution
         {
             thread = new Thread(() =>
             {
-                thread.CurrentCulture = Context.CurrentCulture;
+                thread!.CurrentCulture = Context.CurrentCulture;
                 thread.CurrentUICulture = Context.CurrentUICulture;
 #if THREAD_ABORT
                 lock (threadLock)
@@ -570,9 +569,8 @@ namespace NUnit.Framework.Internal.Execution
         /// </summary>
         static ApartmentState GetTargetApartment(ITest test)
         {
-            var apartment = test.Properties.ContainsKey(PropertyNames.ApartmentState)
-                ? (ApartmentState)test.Properties.Get(PropertyNames.ApartmentState)
-                : ApartmentState.Unknown;
+            var apartment = test.Properties.Get(PropertyNames.ApartmentState) as ApartmentState?
+                ?? ApartmentState.Unknown;
 
             if (apartment == ApartmentState.Unknown && test.Parent != null)
                 return GetTargetApartment(test.Parent);

@@ -220,7 +220,7 @@ namespace NUnit.Framework.Internal.Execution
             } while (true);
 
             // Setting this to anything other than 0 causes NUnit to be sensitive
-            // to the windows timer resolution - see issue #2217 
+            // to the windows timer resolution - see issue #2217
             Thread.Sleep(0);  // give EventPump thread a chance to process the event
         }
 
@@ -244,7 +244,7 @@ namespace NUnit.Framework.Internal.Execution
         ///   </item>
         /// </list>
         /// </returns>
-        public Event Dequeue(bool blockWhenEmpty)
+        public Event? Dequeue(bool blockWhenEmpty)
         {
             SpinWait sw = new SpinWait();
 
@@ -290,7 +290,7 @@ namespace NUnit.Framework.Internal.Execution
 
 
                 // Dequeue our work item
-                Event e;
+                Event? e;
                 while (!_queue.TryDequeue (out e))
                 {
                     if (!blockWhenEmpty || _stopped != 0)

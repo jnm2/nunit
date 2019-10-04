@@ -72,7 +72,7 @@ namespace NUnitLite
         {
             Assembly executingAssembly = GetType().GetTypeInfo().Assembly;
             AssemblyName assemblyName = AssemblyHelper.GetAssemblyName(executingAssembly);
-            Version version = assemblyName.Version;
+            Version version = assemblyName.Version!;
             string copyright = "Copyright (C) 2019 Charlie Poole, Rob Prouse";
             string build = "";
 
@@ -479,7 +479,7 @@ namespace NUnitLite
             {
                 if (display)
                 {
-                    var suite = result.Test as TestSuite;
+                    var suite = (TestSuite)result.Test;
                     var site = result.ResultState.Site;
                     if (suite.TestType == "Theory" || site == FailureSite.SetUp || site == FailureSite.TearDown)
                         DisplayTestResult(result);
@@ -647,7 +647,7 @@ namespace NUnitLite
             Writer.WriteLine(ColorStyle.Help, text);
         }
 
-        private string _currentLabel;
+        private string? _currentLabel;
 
         private void WriteLabelLine(string label)
         {

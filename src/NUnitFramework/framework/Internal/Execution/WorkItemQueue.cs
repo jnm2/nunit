@@ -68,7 +68,7 @@ namespace NUnit.Framework.Internal.Execution
 
         private readonly Logger log = InternalTrace.GetLogger("WorkItemQueue");
 
-        private ConcurrentQueue<WorkItem>[] _innerQueues;
+        private ConcurrentQueue<WorkItem>[] _innerQueues = null!; // Initialized in a method called by the constructor
 
         private class SavedState
         {
@@ -239,7 +239,7 @@ namespace NUnit.Framework.Internal.Execution
         /// Dequeue a WorkItem for processing
         /// </summary>
         /// <returns>A WorkItem or null if the queue has stopped</returns>
-        public WorkItem Dequeue()
+        public WorkItem? Dequeue()
         {
             SpinWait sw = new SpinWait();
 
@@ -287,7 +287,7 @@ namespace NUnit.Framework.Internal.Execution
 
 
                 // Dequeue our work item
-                WorkItem work = null;
+                WorkItem? work = null;
                 while (work == null)
                     foreach (var q in _innerQueues)
                         if (q.TryDequeue(out work))

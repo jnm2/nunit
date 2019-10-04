@@ -45,7 +45,7 @@ namespace NUnit.Framework.Constraints
         /// <returns>A ConstraintResult</returns>
         public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
-            ConstraintUtils.RequireActual<Exception>(actual, nameof(actual), allowNull: true);
+            ConstraintUtils.RequireActualOrNull<Exception>(actual, nameof(actual));
 
             actualType = actual == null ? null : actual.GetType();
 

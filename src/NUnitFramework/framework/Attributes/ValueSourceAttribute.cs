@@ -112,7 +112,7 @@ namespace NUnit.Framework
             return dataSource;
         }
 
-        private static IEnumerable GetDataSourceValue(MemberInfo[] members)
+        private static IEnumerable? GetDataSourceValue(MemberInfo[] members)
         {
             if (members.Length != 1) return null;
 
@@ -122,7 +122,7 @@ namespace NUnit.Framework
             if (field != null)
             {
                 if (field.IsStatic)
-                    return (IEnumerable)field.GetValue(null);
+                    return (IEnumerable?)field.GetValue(null);
 
                 ThrowInvalidDataSourceException();
             }
@@ -130,8 +130,8 @@ namespace NUnit.Framework
             var property = member as PropertyInfo;
             if (property != null)
             {
-                if (property.GetGetMethod(true).IsStatic)
-                    return (IEnumerable)property.GetValue(null, null);
+                if (property.GetGetMethod(true)?.IsStatic ?? false)
+                    return (IEnumerable?)property.GetValue(null, null);
 
                 ThrowInvalidDataSourceException();
             }
@@ -140,7 +140,7 @@ namespace NUnit.Framework
             if (m != null)
             {
                 if (m.IsStatic)
-                    return (IEnumerable)m.Invoke(null, null);
+                    return (IEnumerable?)m.Invoke(null, null);
 
                 ThrowInvalidDataSourceException();
             }

@@ -80,7 +80,7 @@ namespace NUnit.Framework.Constraints.Comparers
                 if (@interface.GetTypeInfo().IsGenericType && @interface.GetGenericTypeDefinition().Equals(typeof(IEquatable<>)))
                 {
                     genericArgs.Add(new KeyValuePair<Type, MethodInfo>(
-                        @interface.GetGenericArguments()[0], @interface.GetMethod("Equals")));
+                        @interface.GetGenericArguments()[0], @interface.GetMethod("Equals")!));
                 }
             }
 

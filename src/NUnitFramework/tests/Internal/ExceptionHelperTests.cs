@@ -71,7 +71,7 @@ namespace NUnit.Framework.Internal
         [Test]
         public static void RecordExceptionThrowsProperExceptionForDelegatesThatHaveOneMoreParameterThanTheBoundMethod()
         {
-            var methodInfo = typeof(Foo).GetMethod(nameof(Foo.DummyInstanceMethod));
+            var methodInfo = typeof(Foo).GetMethod(nameof(Foo.DummyInstanceMethod))!;
             var delegateThatParameterizesTheInstance = (Action<Foo>)methodInfo.CreateDelegate(typeof(Action<Foo>));
 
             Assert.That(

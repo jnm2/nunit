@@ -69,7 +69,7 @@ namespace NUnit.TestUtilities.Collections
             Contents = new List<object>(source);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is IEnumerable<object>)
             {

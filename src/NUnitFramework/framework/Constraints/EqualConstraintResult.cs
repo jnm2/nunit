@@ -34,7 +34,7 @@ namespace NUnit.Framework.Constraints
     /// </summary>
     public class EqualConstraintResult : ConstraintResult
     {
-        private readonly object expectedValue;
+        private readonly object? expectedValue;
         private readonly Tolerance tolerance;
         private readonly bool caseInsensitive;
         private readonly bool clipStrings;
@@ -82,7 +82,7 @@ namespace NUnit.Framework.Constraints
             DisplayDifferences(writer, expectedValue, ActualValue, 0);
         }
 
-        private void DisplayDifferences(MessageWriter writer, object expected, object actual, int depth)
+        private void DisplayDifferences(MessageWriter writer, object? expected, object actual, int depth)
         {
             if (expected is string && actual is string)
                 DisplayStringDifferences(writer, (string)expected, (string)actual);

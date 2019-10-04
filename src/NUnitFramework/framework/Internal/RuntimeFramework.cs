@@ -56,8 +56,8 @@ namespace NUnit.Framework.Internal
 
         private static readonly Lazy<RuntimeFramework> currentFramework = new Lazy<RuntimeFramework>(() =>
         {
-            Type monoRuntimeType = null;
-            Type monoTouchType = null;
+            Type? monoRuntimeType = null;
+            Type? monoTouchType = null;
 
             try
             {
@@ -125,12 +125,13 @@ namespace NUnit.Framework.Internal
                 ClrVersion = Environment.Version
             };
 
-            if (isMono)
+            if (monoRuntimeType is { })
             {
-                MethodInfo getDisplayNameMethod = monoRuntimeType.GetMethod(
+                MethodInfo? getDisplayNameMethod = monoRuntimeType.GetMethod(
                     "GetDisplayName", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.DeclaredOnly | BindingFlags.ExactBinding);
-                if (getDisplayNameMethod != null)
-                    currentFramework.DisplayName = (string)getDisplayNameMethod.Invoke(null, new object[0]);
+
+                if (getDisplayNameMethod?.Invoke(null, null) is string displayName)
+                    currentFramework.DisplayName = displayName;
             }
             return currentFramework;
         });
@@ -248,12 +249,12 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// The framework version for this runtime framework
         /// </summary>
-        public Version FrameworkVersion { get; private set; }
+        public Version FrameworkVersion { get; private set; } = null!;
 
         /// <summary>
         /// The CLR version for this runtime framework
         /// </summary>
-        public Version ClrVersion { get; private set; }
+        public Version ClrVersion { get; private set; } = null!;
 
         /// <summary>
         /// Return true if any CLR version may be used in
@@ -367,7 +368,7 @@ namespace NUnit.Framework.Internal
 #if NETSTANDARD2_0
             // Mono versions will throw a TypeLoadException when attempting to run the internal method, so we wrap it in a try/catch
             // block to stop any inlining in release builds and check whether the type exists
-            Type runtimeInfoType = Type.GetType("System.Runtime.InteropServices.RuntimeInformation,System.Runtime.InteropServices.RuntimeInformation", false);
+            Type? runtimeInfoType = Type.GetType("System.Runtime.InteropServices.RuntimeInformation,System.Runtime.InteropServices.RuntimeInformation", false);
             if (runtimeInfoType != null)
             {
                 try

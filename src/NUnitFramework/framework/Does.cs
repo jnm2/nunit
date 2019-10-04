@@ -64,7 +64,7 @@ namespace NUnit.Framework
         /// Returns a new <see cref="SomeItemsConstraint"/> checking for the
         /// presence of a particular object in the collection.
         /// </summary>
-        public static SomeItemsConstraint Contain(object expected) =>
+        public static SomeItemsConstraint Contain(object? expected) =>
             new SomeItemsConstraint(new EqualConstraint(expected));
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace NUnit.Framework
         /// presence of a particular key in the Dictionary key collection.
         /// </summary>
         /// <param name="expected">The key to be matched in the Dictionary key collection</param>
-        public static DictionaryContainsKeyConstraint ContainKey(object expected)
+        public static DictionaryContainsKeyConstraint ContainKey(object? expected)
         {
             return Contains.Key(expected);
         }
@@ -96,7 +96,7 @@ namespace NUnit.Framework
         /// presence of a particular value in the Dictionary value collection.
         /// </summary>
         /// <param name="expected">The value to be matched in the Dictionary value collection</param>
-        public static DictionaryContainsValueConstraint ContainValue(object expected)
+        public static DictionaryContainsValueConstraint ContainValue(object? expected)
         {
             return Contains.Value(expected);
         }

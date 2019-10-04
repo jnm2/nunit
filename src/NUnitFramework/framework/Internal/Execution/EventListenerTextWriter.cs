@@ -55,7 +55,7 @@ namespace NUnit.Framework.Internal.Execution
         /// </summary>
         public override Encoding Encoding { get; } = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
-        private string FormatForListener(object value)
+        private string? FormatForListener(object? value)
         {
             return
                 value is null ? string.Empty :
@@ -63,7 +63,7 @@ namespace NUnit.Framework.Internal.Execution
                 value.ToString();
         }
 
-        private bool TrySendToListener(string text)
+        private bool TrySendToListener(string? text)
         {
             var context = TestExecutionContext.CurrentContext;
             if (context == null || context.Listener == null)
@@ -90,7 +90,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Write formatted string
         /// </summary>
-        public override void Write(string format, params object[] arg)
+        public override void Write(string format, params object?[] arg)
         {
             if (!TrySendToListener(String.Format(FormatProvider, format, arg)))
                 _defaultWriter.Write(format, arg);
@@ -99,7 +99,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Write formatted string
         /// </summary>
-        public override void Write(string format, object arg0, object arg1, object arg2)
+        public override void Write(string format, object? arg0, object? arg1, object? arg2)
         {
             if (!TrySendToListener(String.Format(FormatProvider, format, arg0, arg1, arg2)))
                 _defaultWriter.Write(format, arg0, arg1, arg2);
@@ -108,7 +108,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Write formatted string
         /// </summary>
-        public override void Write(string format, object arg0)
+        public override void Write(string format, object? arg0)
         {
             if (!TrySendToListener(String.Format(FormatProvider, format, arg0)))
                 _defaultWriter.Write(format, arg0);
@@ -117,7 +117,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Write an object
         /// </summary>
-        public override void Write(object value)
+        public override void Write(object? value)
         {
             if (value == null || !TrySendToListener(FormatForListener(value)))
                 _defaultWriter.Write(value);
@@ -126,7 +126,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Write a string
         /// </summary>
-        public override void Write(string value)
+        public override void Write(string? value)
         {
             if (!TrySendToListener(value))
                 _defaultWriter.Write(value);

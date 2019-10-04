@@ -33,7 +33,7 @@ namespace NUnit.Framework.Api
     // https://github.com/nunit/nunit/issues/2614
     class FrameworkControllerCallContextTests
     {
-        private object _origExecutionContext;
+        private object _origExecutionContext = null!;
         private const string MockAssemblyFile = "mock-assembly.dll";
 
         [SetUp]
@@ -45,7 +45,7 @@ namespace NUnit.Framework.Api
         [TestCaseSource(nameof(FrameworkActions))]
         public void CallContextIsRestoredAroundFrameworkActions(Action frameworkAction)
         {
-            //This test only has value if the CallContext of nunit.framework.tests is first cleared. 
+            //This test only has value if the CallContext of nunit.framework.tests is first cleared.
             //Otherwise no new call context will be created by the framework action
             CallContext.FreeNamedDataSlot(NUnitCallContext.TestExecutionContextKey);
             frameworkAction();

@@ -50,7 +50,7 @@ namespace NUnit.Framework.Constraints
         /// Construct a constraint with optional arguments
         /// </summary>
         /// <param name="args">Arguments to be saved</param>
-        protected Constraint(params object[] args)
+        protected Constraint(params object?[] args)
         {
             Arguments = args;
 
@@ -82,18 +82,18 @@ namespace NUnit.Framework.Constraints
         /// The Description of what this constraint tests, for
         /// use in messages and in the ConstraintResult.
         /// </summary>
-        public virtual string Description { get; protected set; }
+        public virtual string? Description { get; protected set; }
 
         /// <summary>
         /// Arguments provided to this Constraint, for use in
         /// formatting the description.
         /// </summary>
-        public object[] Arguments { get; }
+        public object?[] Arguments { get; }
 
         /// <summary>
         /// The ConstraintBuilder holding this constraint
         /// </summary>
-        public ConstraintBuilder Builder { get; set; }
+        public ConstraintBuilder? Builder { get; set; }
 
         #endregion
 
@@ -117,7 +117,13 @@ namespace NUnit.Framework.Constraints
         public virtual ConstraintResult ApplyTo<TActual>(ActualValueDelegate<TActual> del)
         {
             if (AsyncToSyncAdapter.IsAsyncOperation(del))
-                return ApplyTo(AsyncToSyncAdapter.Await(() => del.Invoke()));
+            {
+                return ApplyTo(AsyncToSyncAdapter.Await(() =>
+                {
+                    return del.Invoke()
+                        ?? throw new InvalidOperationException("The actual value delegate has an awaitable return type but returned a null value.");
+                }));
+            }
 
             return ApplyTo(GetTestObject(del));
         }
@@ -143,7 +149,7 @@ namespace NUnit.Framework.Constraints
         /// </summary>
         /// <param name="del">An ActualValueDelegate</param>
         /// <returns>Delegate evaluation result</returns>
-        protected virtual object GetTestObject<TActual>(ActualValueDelegate<TActual> del)
+        protected virtual object? GetTestObject<TActual>(ActualValueDelegate<TActual> del)
         {
             return del();
         }
@@ -174,7 +180,7 @@ namespace NUnit.Framework.Constraints
             sb.Append("<");
             sb.Append(DisplayName.ToLower());
 
-            foreach (object arg in Arguments)
+            foreach (object? arg in Arguments)
             {
                 sb.Append(" ");
                 sb.Append(_displayable(arg));
@@ -185,7 +191,7 @@ namespace NUnit.Framework.Constraints
             return sb.ToString();
         }
 
-        private static string _displayable(object o)
+        private static string _displayable(object? o)
         {
             if (o == null) return "null";
 
@@ -241,7 +247,7 @@ namespace NUnit.Framework.Constraints
         {
             get
             {
-                ConstraintBuilder builder = this.Builder;
+                ConstraintBuilder? builder = this.Builder;
                 if (builder == null)
                 {
                     builder = new ConstraintBuilder();
@@ -271,7 +277,7 @@ namespace NUnit.Framework.Constraints
         {
             get
             {
-                ConstraintBuilder builder = this.Builder;
+                ConstraintBuilder? builder = this.Builder;
                 if (builder == null)
                 {
                     builder = new ConstraintBuilder();

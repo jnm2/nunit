@@ -58,7 +58,7 @@ namespace NUnit.Compatibility
             if (interfaceType != null)
             {
                 var method = interfaceType.GetMethod("GetCustomAttributes", new[] { typeof(Type), typeof(bool) });
-                return (Attribute[])method.Invoke(actual, new object[] { attributeType, inherit });
+                return (Attribute[])method.Invoke(actual, new object[] { attributeType, inherit })!;
             }
 #else
             var attrProvider = actual as ICustomAttributeProvider;

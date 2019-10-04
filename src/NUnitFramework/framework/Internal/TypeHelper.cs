@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text;
 using NUnit.Compatibility;
@@ -51,7 +52,7 @@ namespace NUnit.Framework.Internal
 
             if (type.GetTypeInfo().IsGenericType)
             {
-                string name = type.FullName;
+                string name = type.FullName!;
                 int index = name.IndexOf('[');
                 if (index >= 0) name = name.Substring(0, index);
 
@@ -323,10 +324,11 @@ namespace NUnit.Framework.Internal
         {
             List<Type> interfaces = new List<Type>(type.GetInterfaces());
 
-            if (type.GetTypeInfo().BaseType == typeof(object))
+            var baseType = type.GetTypeInfo().BaseType;
+            if (baseType is null || baseType == typeof(object))
                 return interfaces.ToArray();
 
-            List<Type> baseInterfaces = new List<Type>(type.GetTypeInfo().BaseType.GetInterfaces());
+            List<Type> baseInterfaces = new List<Type>(baseType.GetInterfaces());
             List<Type> declaredInterfaces = new List<Type>();
 
             foreach (Type interfaceType in interfaces)
@@ -360,7 +362,7 @@ namespace NUnit.Framework.Internal
 
         private static bool IsTupleInternal(Type type, string tupleName)
         {
-            string typeName = type.FullName;
+            if (!(type.FullName is { } typeName)) return false;
 
             if (typeName.EndsWith("[]"))
                 return false;
@@ -381,9 +383,9 @@ namespace NUnit.Framework.Internal
         /// can be <see langword="null"/>, the cast succeeds just like the C# language feature.
         /// </summary>
         /// <param name="obj">The object to cast.</param>
-        internal static bool CanCast<T>(object obj)
+        internal static bool CanCast<T>(object? obj)
         {
-            return obj is T || (obj == null && default(T) == null);
+            return obj is T || (obj == null && default(T)! == null);
         }
 
         /// <summary>
@@ -393,7 +395,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="obj">The object to cast.</param>
         /// <param name="value">The value of the object, if the cast succeeded.</param>
-        internal static bool TryCast<T>(object obj, out T value)
+        internal static bool TryCast<T>(object? obj, [MaybeNull] out T value)
         {
             if (obj is T)
             {
@@ -401,8 +403,8 @@ namespace NUnit.Framework.Internal
                 return true;
             }
 
-            value = default(T);
-            return obj == null && default(T) == null;
+            value = default(T)!;
+            return obj == null && default(T)! == null;
         }
     }
 }

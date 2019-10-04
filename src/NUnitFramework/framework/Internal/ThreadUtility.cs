@@ -50,7 +50,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Pre-Task compatibility
         /// </summary>
-        public static void Delay(int milliseconds, WaitCallback threadPoolWork, object state = null)
+        public static void Delay(int milliseconds, WaitCallback threadPoolWork, object? state = null)
         {
             new DelayClosure(milliseconds, threadPoolWork, state);
         }
@@ -59,9 +59,9 @@ namespace NUnit.Framework.Internal
         {
             private readonly Timer _timer;
             private readonly WaitCallback _threadPoolWork;
-            private readonly object _state;
+            private readonly object? _state;
 
-            public DelayClosure(int milliseconds, WaitCallback threadPoolWork, object state)
+            public DelayClosure(int milliseconds, WaitCallback threadPoolWork, object? state)
             {
                 _threadPoolWork = threadPoolWork;
                 _state = state;
@@ -70,7 +70,7 @@ namespace NUnit.Framework.Internal
                 _timer.Change(milliseconds, Timeout.Infinite);
             }
 
-            private void Callback(object _)
+            private void Callback(object? _)
             {
                 _timer.Dispose();
                 _threadPoolWork.Invoke(_state);
@@ -114,7 +114,7 @@ namespace NUnit.Framework.Internal
         /// <param name="nativeId">The native thread id (if known), otherwise 0.
         /// If provided, allows the thread to be killed if it's in a message pump native blocking wait.
         /// This must have previously been captured by calling <see cref="GetCurrentThreadNativeId"/> from the running thread itself.</param>
-        public static void Kill(Thread thread, object stateInfo, int nativeId = 0)
+        public static void Kill(Thread thread, object? stateInfo, int nativeId = 0)
         {
             if (nativeId != 0)
                 DislodgeThreadInNativeMessageWait(thread, nativeId);
@@ -151,9 +151,9 @@ namespace NUnit.Framework.Internal
             Delay(ThreadAbortedCheckDelay, CheckOnAbortingThread, new CheckOnAbortingThreadState(thread, nativeId));
         }
 
-        private static void CheckOnAbortingThread(object state)
+        private static void CheckOnAbortingThread(object? state)
         {
-            var context = (CheckOnAbortingThreadState)state;
+            var context = (CheckOnAbortingThreadState)state!;
 
             switch (context.Thread.ThreadState)
             {

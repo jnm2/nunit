@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,7 +44,7 @@ namespace NUnit.Framework.Constraints
         /// </summary>
         /// <param name="actual">The actual argument</param>
         /// <returns>True if the constraint succeeds, otherwise false.</returns>
-        protected override bool Matches(object actual)
+        protected override bool Matches(object? actual)
         {
             return expectedType != null && actual != null && expectedType.IsInstanceOfType(actual);
         }

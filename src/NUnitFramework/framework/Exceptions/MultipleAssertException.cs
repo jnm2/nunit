@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,7 +23,7 @@
 
 using System;
 
-namespace NUnit.Framework 
+namespace NUnit.Framework
 {
     using Interfaces;
 
@@ -36,7 +36,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public MultipleAssertException(string message) : base(message) { }
+        public MultipleAssertException(string? message) : base(message) { }
 
         /// <summary>
         /// Construct based on the TestResult so far. This is the constructor
@@ -44,29 +44,29 @@ namespace NUnit.Framework
         /// Not used internally but provided to facilitate debugging.
         /// </summary>
         /// <param name="testResult">
-        /// The current result, up to this point. The result is not used 
+        /// The current result, up to this point. The result is not used
         /// internally by NUnit but is provided to facilitate debugging.
         /// </param>
-        public MultipleAssertException(ITestResult testResult)
+        public MultipleAssertException(ITestResult? testResult)
             : base(testResult?.Message)
         {
             Guard.ArgumentNotNull(testResult, "testResult");
             TestResult = testResult;
         }
 
-        /// <param name="message">The error message that explains 
+        /// <param name="message">The error message that explains
         /// the reason for the exception</param>
-        /// <param name="inner">The exception that caused the 
+        /// <param name="inner">The exception that caused the
         /// current exception</param>
-        public MultipleAssertException(string message, Exception inner) :
-            base(message, inner) 
+        public MultipleAssertException(string? message, Exception? inner) :
+            base(message, inner)
         {}
 
 #if SERIALIZATION
         /// <summary>
         /// Serialization Constructor
         /// </summary>
-        protected MultipleAssertException(System.Runtime.Serialization.SerializationInfo info, 
+        protected MultipleAssertException(System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context) : base(info,context)
         {}
 #endif
@@ -82,6 +82,6 @@ namespace NUnit.Framework
         /// <summary>
         /// Gets the <see cref="ITestResult"/> of this test at the point the exception was thrown,
         /// </summary>
-        public ITestResult TestResult { get; }
+        public ITestResult? TestResult { get; }
     }
 }

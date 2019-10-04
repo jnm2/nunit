@@ -92,7 +92,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="message">The message to initialize the <see cref="AssertionException"/> with.</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void Pass(string message, params object[] args)
+        static public void Pass(string? message, params object?[]? args)
         {
             if (message == null) message = string.Empty;
             else if (args != null && args.Length > 0)
@@ -136,7 +136,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="message">The message to initialize the <see cref="AssertionException"/> with.</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void Fail(string message, params object[] args)
+        static public void Fail(string? message, params object?[]? args)
         {
             if (message == null) message = string.Empty;
             else if (args != null && args.Length > 0)
@@ -173,7 +173,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="message">The message to display.</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void Warn(string message, params object[] args)
+        static public void Warn(string? message, params object?[]? args)
         {
             if (message == null) message = string.Empty;
             else if (args != null && args.Length > 0)
@@ -201,7 +201,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="message">The message to initialize the <see cref="AssertionException"/> with.</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void Ignore(string message, params object[] args)
+        static public void Ignore(string? message, params object?[]? args)
         {
             if (message == null) message = string.Empty;
             else if (args != null && args.Length > 0)
@@ -243,7 +243,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="message">The message to initialize the <see cref="InconclusiveException"/> with.</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void Inconclusive(string message, params object[] args)
+        static public void Inconclusive(string? message, params object?[]? args)
         {
             if (message == null) message = string.Empty;
             else if (args != null && args.Length > 0)
@@ -286,7 +286,7 @@ namespace NUnit.Framework
         /// <param name="actual">The collection to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Contains(object expected, ICollection actual, string message, params object[] args)
+        public static void Contains(object? expected, ICollection actual, string? message, params object?[]? args)
         {
             Assert.That(actual, new SomeItemsConstraint(new EqualConstraint(expected)) ,message, args);
         }
@@ -296,7 +296,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="expected">The expected object</param>
         /// <param name="actual">The collection to be examined</param>
-        public static void Contains(object expected, ICollection actual)
+        public static void Contains(object? expected, ICollection actual)
         {
             Assert.That(actual, new SomeItemsConstraint(new EqualConstraint(expected)) ,null, null);
         }
@@ -369,12 +369,12 @@ namespace NUnit.Framework
 
         #region Helper Methods
 
-        private static void ReportFailure(ConstraintResult result, string message)
+        private static void ReportFailure(ConstraintResult result, string? message)
         {
             ReportFailure(result, message, null);
         }
 
-        private static void ReportFailure(ConstraintResult result, string message, params object[] args)
+        private static void ReportFailure(ConstraintResult result, string? message, params object?[]? args)
         {
             MessageWriter writer = new TextMessageWriter(message, args);
             result.WriteMessageTo(writer);

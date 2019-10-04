@@ -73,7 +73,7 @@ namespace NUnit.Framework.Internal.Builders
         /// <param name="parameter">The parameter of a parameterized test</param>
         public IEnumerable GetDataFor(IParameterInfo parameter)
         {
-            var datapoints = new List<object>();
+            var datapoints = new List<object?>();
 
             Type parameterType = parameter.ParameterType;
             Type fixtureType = parameter.Method.TypeInfo.Type;
@@ -95,28 +95,28 @@ namespace NUnit.Framework.Internal.Builders
                 {
                     if (GetElementTypeFromMemberInfo(member) == parameterType)
                     {
-                        object instance;
+                        object? instance;
 
-                        FieldInfo field = member as FieldInfo;
-                        PropertyInfo property = member as PropertyInfo;
-                        MethodInfo method = member as MethodInfo;
+                        FieldInfo? field = member as FieldInfo;
+                        PropertyInfo? property = member as PropertyInfo;
+                        MethodInfo? method = member as MethodInfo;
                         if (field != null)
                         {
                             instance = field.IsStatic ? null : ProviderCache.GetInstanceOf(fixtureType);
-                            foreach (object data in (IEnumerable)field.GetValue(instance))
+                            foreach (object? data in (IEnumerable)field.GetValue(instance)!)
                                 datapoints.Add(data);
                         }
                         else if (property != null)
                         {
-                            MethodInfo getMethod = property.GetGetMethod(true);
+                            MethodInfo getMethod = property.GetGetMethod(true)!;
                             instance = getMethod.IsStatic ? null : ProviderCache.GetInstanceOf(fixtureType);
-                            foreach (object data in (IEnumerable)property.GetValue(instance, null))
+                            foreach (object? data in (IEnumerable)property.GetValue(instance, null)!)
                                 datapoints.Add(data);
                         }
                         else if (method != null)
                         {
                             instance = method.IsStatic ? null : ProviderCache.GetInstanceOf(fixtureType);
-                            foreach (object data in (IEnumerable)method.Invoke(instance, new Type[0]))
+                            foreach (object? data in (IEnumerable)method.Invoke(instance, new Type[0])!)
                                 datapoints.Add(data);
                         }
                     }
@@ -138,7 +138,7 @@ namespace NUnit.Framework.Internal.Builders
                 }
                 else if (parameterType.GetTypeInfo().IsEnum)
                 {
-                    foreach (object o in Enum.GetValues(parameterType))
+                    foreach (var o in Enum.GetValues(parameterType))
                     {
                         datapoints.Add(o);
                     }
@@ -153,7 +153,7 @@ namespace NUnit.Framework.Internal.Builders
             return datapoints;
         }
 
-        private Type GetTypeFromMemberInfo(MemberInfo member)
+        private Type? GetTypeFromMemberInfo(MemberInfo member)
         {
             var field = member as FieldInfo;
             if (field != null)
@@ -170,9 +170,9 @@ namespace NUnit.Framework.Internal.Builders
             return null;
         }
 
-        private Type GetElementTypeFromMemberInfo(MemberInfo member)
+        private Type? GetElementTypeFromMemberInfo(MemberInfo member)
         {
-            Type type = GetTypeFromMemberInfo(member);
+            Type? type = GetTypeFromMemberInfo(member);
 
             if (type == null)
                 return null;

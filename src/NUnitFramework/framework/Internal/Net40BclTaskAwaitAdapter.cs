@@ -42,7 +42,7 @@ namespace NUnit.Framework.Internal
                 var typeArgument = genericTaskType.GetGenericArguments()[0];
                 return (AwaitAdapter)typeof(GenericAdapter<>)
                      .MakeGenericType(typeArgument)
-                     .GetConstructor(new[] { typeof(Task<>).MakeGenericType(typeArgument) })
+                     .GetConstructor(new[] { typeof(Task<>).MakeGenericType(typeArgument) })!
                      .Invoke(new object[] { task });
             }
 
@@ -83,11 +83,11 @@ namespace NUnit.Framework.Internal
                 }
                 catch (AggregateException ex) when (ex.InnerExceptions.Count == 1) // Task.Wait wraps every exception
                 {
-                    ExceptionHelper.Rethrow(ex.InnerException);
+                    ExceptionHelper.Rethrow(ex.InnerExceptions.Single());
                 }
             }
 
-            public override object GetResult()
+            public override object? GetResult()
             {
                 BlockUntilCompleted(); // Throw exceptions, if any
                 return null;
@@ -128,11 +128,11 @@ namespace NUnit.Framework.Internal
                 }
                 catch (AggregateException ex) when (ex.InnerExceptions.Count == 1) // Task.Wait wraps every exception
                 {
-                    ExceptionHelper.Rethrow(ex.InnerException);
+                    ExceptionHelper.Rethrow(ex.InnerExceptions.Single());
                 }
             }
 
-            public override object GetResult()
+            public override object? GetResult()
             {
                 // Normally we would call TaskAwaiter.GetResult (https://source.dot.net/#System.Private.CoreLib/src/System/Runtime/CompilerServices/TaskAwaiter.cs)
                 // We will have to polyfill on top of the TPL API.
@@ -144,7 +144,7 @@ namespace NUnit.Framework.Internal
                 }
                 catch (AggregateException ex) when (ex.InnerExceptions.Count == 1) // Task.Wait wraps every exception
                 {
-                    ExceptionHelper.Rethrow(ex.InnerException);
+                    ExceptionHelper.Rethrow(ex.InnerExceptions.Single());
 
                     // If this line is reached, ExceptionHelper.Rethrow is very broken.
                     throw new InvalidOperationException("ExceptionHelper.Rethrow failed to throw an exception.");

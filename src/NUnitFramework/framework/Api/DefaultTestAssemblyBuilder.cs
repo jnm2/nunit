@@ -25,6 +25,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security;
 using NUnit.Framework.Interfaces;
@@ -48,7 +49,7 @@ namespace NUnit.Framework.Api
         /// </summary>
         readonly ISuiteBuilder _defaultSuiteBuilder;
 
-        private PreFilter _filter;
+        private PreFilter? _filter;
 
         #endregion
 
@@ -77,9 +78,14 @@ namespace NUnit.Framework.Api
         public ITest Build(Assembly assembly, IDictionary<string, object> options)
         {
 #if NETSTANDARD1_4
-            log.Debug("Loading {0}", assembly.FullName);
+            log.Debug(
+                "Loading {0}",
+                assembly.FullName ?? "assembly without name");
 #else
-            log.Debug("Loading {0} in AppDomain {1}", assembly.FullName, AppDomain.CurrentDomain.FriendlyName);
+            log.Debug(
+                "Loading {0} in AppDomain {1}",
+                assembly.FullName ?? "assembly without name",
+                AppDomain.CurrentDomain.FriendlyName);
 #endif
 
             string assemblyPath = AssemblyHelper.GetAssemblyPath(assembly);
@@ -106,7 +112,7 @@ namespace NUnit.Framework.Api
             log.Debug("Loading {0} in AppDomain {1}", assemblyNameOrPath, AppDomain.CurrentDomain.FriendlyName);
 #endif
 
-            TestSuite testAssembly = null;
+            TestSuite testAssembly;
 
             try
             {
@@ -124,15 +130,15 @@ namespace NUnit.Framework.Api
 
         private TestSuite Build(Assembly assembly, string assemblyNameOrPath, IDictionary<string, object> options)
         {
-            TestSuite testAssembly = null;
+            TestSuite testAssembly;
 
             try
             {
-                if (options.ContainsKey(FrameworkPackageSettings.DefaultTestNamePattern))
-                    TestNameGenerator.DefaultTestNamePattern = options[FrameworkPackageSettings.DefaultTestNamePattern] as string;
+                if (options.GetValueOrDefault(FrameworkPackageSettings.DefaultTestNamePattern) is string pattern)
+                    TestNameGenerator.DefaultTestNamePattern = pattern;
 
-                if (options.ContainsKey(FrameworkPackageSettings.WorkDirectory))
-                    TestContext.DefaultWorkDirectory = options[FrameworkPackageSettings.WorkDirectory] as string;
+                if (options.GetValueOrDefault(FrameworkPackageSettings.WorkDirectory) is string workDirectory)
+                    TestContext.DefaultWorkDirectory = workDirectory;
                 else
                     TestContext.DefaultWorkDirectory = Directory.GetCurrentDirectory();
 
@@ -152,7 +158,7 @@ namespace NUnit.Framework.Api
 
                     if (options.ContainsKey(FrameworkPackageSettings.TestParameters))
                     {
-                        string parameters = options[FrameworkPackageSettings.TestParameters] as string;
+                        string? parameters = options[FrameworkPackageSettings.TestParameters] as string;
                         if (!string.IsNullOrEmpty(parameters))
                             foreach (string param in parameters.Split(new[] { ';' }))
                             {
@@ -171,8 +177,13 @@ namespace NUnit.Framework.Api
 
                 _filter = new PreFilter();
                 if (options.ContainsKey(FrameworkPackageSettings.LOAD))
-                    foreach (string filterText in (IList)options[FrameworkPackageSettings.LOAD])
-                        _filter.Add(filterText);
+                {
+                    foreach (string? filterText in (IList)options[FrameworkPackageSettings.LOAD])
+                    {
+                        if (filterText is { })
+                            _filter.Add(filterText);
+                    }
+                }
 
                 var fixtures = GetFixtures(assembly);
 

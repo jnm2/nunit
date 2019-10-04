@@ -110,7 +110,7 @@ namespace NUnit.Framework.Internal
         [TestCaseSource(nameof(TypeArgData))]
         public void GetTypeArgumentsForMethodTests(string methodName, object[] args, Type[] typeArgs)
         {
-            MethodInfo method = GetType().GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic);
+            MethodInfo method = GetType().GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic)!;
 
             Assert.That(new GenericMethodHelper(method).TryGetTypeArguments(args, out var typeArguments) ? typeArguments : null, Is.EqualTo(typeArgs));
         }

@@ -21,13 +21,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace NUnit.Framework.Internal
 {
     partial class ValueGenerator
     {
         private sealed class SByteValueGenerator : ValueGenerator<sbyte>
         {
-            public override bool TryCreateStep(object value, out ValueGenerator.Step step)
+            public override bool TryCreateStep(object value, [NotNullWhen(true)] out ValueGenerator.Step? step)
             {
                 if (value is sbyte)
                 {

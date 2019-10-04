@@ -48,7 +48,7 @@ namespace NUnit.Framework.Constraints
         /// Construct a DictionaryContainsKeyConstraint
         /// </summary>
         /// <param name="expected"></param>
-        public DictionaryContainsKeyConstraint(object expected)
+        public DictionaryContainsKeyConstraint(object? expected)
             : base(expected)
         {
             Expected = expected;
@@ -74,7 +74,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Gets the expected object
         /// </summary>
-        protected object Expected { get; }
+        protected object? Expected { get; }
 
         /// <summary>
         /// Flag the constraint to ignore case and return self.
@@ -94,7 +94,7 @@ namespace NUnit.Framework.Constraints
             if (_isDeprecatedMode)
             {
                 var dictionary = ConstraintUtils.RequireActual<IDictionary>(actual, nameof(actual));
-                foreach (object obj in dictionary.Keys)
+                foreach (object? obj in dictionary.Keys)
                     if (ItemsEqual(obj, Expected))
                         return true;
 
@@ -103,7 +103,7 @@ namespace NUnit.Framework.Constraints
 
             var method = GetContainsKeyMethod(actual);
             if (method != null)
-                return (bool)method.Invoke(actual, new[] { Expected });
+                return (bool)method.Invoke(actual, new[] { Expected })!;
 
             throw new ArgumentException($"The {TypeHelper.GetDisplayName(actual.GetType())} value must have a ContainsKey or Contains(TKey) method.");
         }
@@ -226,7 +226,7 @@ namespace NUnit.Framework.Constraints
             return method;
         }
 
-        private static MethodInfo FindContainsKeyMethod(Type type)
+        private static MethodInfo? FindContainsKeyMethod(Type type)
         {
             var methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Public);
             var method = methods.FirstOrDefault(m =>

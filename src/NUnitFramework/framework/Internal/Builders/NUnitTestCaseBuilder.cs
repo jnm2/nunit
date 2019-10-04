@@ -50,7 +50,7 @@ namespace NUnit.Framework.Internal.Builders
         /// <param name="method">The MethodInfo from which to construct the TestMethod</param>
         /// <param name="parentSuite">The suite or fixture to which the new test will be added</param>
         /// <param name="parms">The ParameterSet to be used, or null</param>
-        public TestMethod BuildTestMethod(IMethodInfo method, Test parentSuite, TestCaseParameters parms)
+        public TestMethod BuildTestMethod(IMethodInfo method, Test? parentSuite, TestCaseParameters? parms)
         {
             var testMethod = new TestMethod(method, parentSuite)
             {
@@ -160,7 +160,7 @@ namespace NUnit.Framework.Internal.Builders
 
             int maxArgsNeeded = parameters.Length;
 
-            object[] arglist = null;
+            object?[]? arglist = null;
             int argsProvided = 0;
 
             if (parms != null)

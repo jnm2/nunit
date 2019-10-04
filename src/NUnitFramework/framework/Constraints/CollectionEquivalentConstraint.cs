@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,7 +36,7 @@ namespace NUnit.Framework.Constraints
 
         /// <summary>The result of the <see cref="CollectionTally"/> from the collections
         /// under comparison.</summary>
-        private CollectionTally.CollectionTallyResult _tallyResult;
+        private CollectionTally.CollectionTallyResult? _tallyResult;
 
         /// <summary>Construct a CollectionEquivalentConstraint</summary>
         /// <param name="expected">Expected collection.</param>
@@ -46,7 +46,7 @@ namespace NUnit.Framework.Constraints
             _expected = expected;
         }
 
-        /// <summary> 
+        /// <summary>
         /// The display name of this Constraint for use by ToString().
         /// The default value is the name of the constraint with
         /// trailing "Constraint" removed. Derived classes may set
@@ -99,7 +99,7 @@ namespace NUnit.Framework.Constraints
             bool matchesResult = Matches(enumerable);
 
             return new CollectionEquivalentConstraintResult(
-                this, _tallyResult, actual, matchesResult);
+                this, _tallyResult!, actual, matchesResult);
         }
 
         /// <summary>

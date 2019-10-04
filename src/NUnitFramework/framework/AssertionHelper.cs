@@ -47,7 +47,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display if the condition is false</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public void Expect(bool condition, string message, params object[] args)
+        public void Expect(bool condition, string? message, params object?[]? args)
         {
             Assert.That(condition, Is.True, message, args);
         }
@@ -84,7 +84,7 @@ namespace NUnit.Framework
         /// <param name="expr">A Constraint expression to be applied</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public void Expect<TActual>(ActualValueDelegate<TActual> del, IResolveConstraint expr, string message, params object[] args)
+        public void Expect<TActual>(ActualValueDelegate<TActual> del, IResolveConstraint expr, string? message, params object?[]? args)
         {
             Assert.That(del, expr, message, args);
         }
@@ -128,7 +128,7 @@ namespace NUnit.Framework
         /// <param name="actual">The actual value to test</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void Expect<TActual>(TActual actual, IResolveConstraint expression, string message, params object[] args)
+        static public void Expect<TActual>(TActual actual, IResolveConstraint expression, string? message, params object?[]? args)
         {
             Assert.That(actual, expression, message, args);
         }
@@ -447,7 +447,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Returns a constraint that tests two items for equality
         /// </summary>
-        public EqualConstraint EqualTo(object expected)
+        public EqualConstraint EqualTo(object? expected)
         {
             return new EqualConstraint(expected);
         }
@@ -459,7 +459,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Returns a constraint that tests that two references are the same object
         /// </summary>
-        public SameAsConstraint SameAs(object expected)
+        public SameAsConstraint SameAs(object? expected)
         {
             return new SameAsConstraint(expected);
         }
@@ -472,7 +472,7 @@ namespace NUnit.Framework
         /// Returns a constraint that tests whether the
         /// actual value is greater than the supplied argument
         /// </summary>
-        public GreaterThanConstraint GreaterThan(object expected)
+        public GreaterThanConstraint GreaterThan(object? expected)
         {
             return new GreaterThanConstraint(expected);
         }
@@ -485,7 +485,7 @@ namespace NUnit.Framework
         /// Returns a constraint that tests whether the
         /// actual value is greater than or equal to the supplied argument
         /// </summary>
-        public GreaterThanOrEqualConstraint GreaterThanOrEqualTo(object expected)
+        public GreaterThanOrEqualConstraint GreaterThanOrEqualTo(object? expected)
         {
             return new GreaterThanOrEqualConstraint(expected);
         }
@@ -494,7 +494,7 @@ namespace NUnit.Framework
         /// Returns a constraint that tests whether the
         /// actual value is greater than or equal to the supplied argument
         /// </summary>
-        public GreaterThanOrEqualConstraint AtLeast(object expected)
+        public GreaterThanOrEqualConstraint AtLeast(object? expected)
         {
             return new GreaterThanOrEqualConstraint(expected);
         }
@@ -507,7 +507,7 @@ namespace NUnit.Framework
         /// Returns a constraint that tests whether the
         /// actual value is less than the supplied argument
         /// </summary>
-        public LessThanConstraint LessThan(object expected)
+        public LessThanConstraint LessThan(object? expected)
         {
             return new LessThanConstraint(expected);
         }
@@ -520,7 +520,7 @@ namespace NUnit.Framework
         /// Returns a constraint that tests whether the
         /// actual value is less than or equal to the supplied argument
         /// </summary>
-        public LessThanOrEqualConstraint LessThanOrEqualTo(object expected)
+        public LessThanOrEqualConstraint LessThanOrEqualTo(object? expected)
         {
             return new LessThanOrEqualConstraint(expected);
         }
@@ -529,7 +529,7 @@ namespace NUnit.Framework
         /// Returns a constraint that tests whether the
         /// actual value is less than or equal to the supplied argument
         /// </summary>
-        public LessThanOrEqualConstraint AtMost(object expected)
+        public LessThanOrEqualConstraint AtMost(object? expected)
         {
             return new LessThanOrEqualConstraint(expected);
         }
@@ -682,7 +682,7 @@ namespace NUnit.Framework
         /// Returns a new <see cref="SomeItemsConstraint"/> checking for the
         /// presence of a particular object in the collection.
         /// </summary>
-        public SomeItemsConstraint Member(object expected)
+        public SomeItemsConstraint Member(object? expected)
         {
             return new SomeItemsConstraint(new EqualConstraint(expected));
         }
@@ -697,7 +697,7 @@ namespace NUnit.Framework
         /// <see cref="Contains(string)"/> overload.
         /// </para>
         /// </summary>
-        public SomeItemsConstraint Contains(object expected)
+        public SomeItemsConstraint Contains(object? expected)
         {
             return new SomeItemsConstraint(new EqualConstraint(expected));
         }

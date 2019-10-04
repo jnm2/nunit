@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,7 +42,7 @@ namespace NUnit.Framework.Constraints
             DescriptionPrefix = "all items";
         }
 
-        /// <summary> 
+        /// <summary>
         /// The display name of this Constraint for use by ToString().
         /// The default value is the name of the constraint with
         /// trailing "Constraint" removed. Derived classes may set
@@ -61,7 +61,7 @@ namespace NUnit.Framework.Constraints
             var enumerable = ConstraintUtils.RequireActual<IEnumerable>(actual, nameof(actual));
 
             int index = 0;
-            foreach (object item in enumerable)
+            foreach (object? item in enumerable)
             {
                 if (!BaseConstraint.ApplyTo(item).IsSuccess)
                 {

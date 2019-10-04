@@ -70,13 +70,13 @@ namespace NUnitLite
 
         #endregion
 
-        private Assembly _testAssembly;
-        private ITestAssemblyRunner _runner;
+        private Assembly? _testAssembly;
+        private ITestAssemblyRunner? _runner;
 
-        private NUnitLiteOptions _options;
-        private ITestListener _teamCity = null;
+        private NUnitLiteOptions? _options;
+        private ITestListener? _teamCity = null;
 
-        private TextUI _textUI;
+        private TextUI? _textUI;
 
         #region Constructors
 
@@ -102,7 +102,7 @@ namespace NUnitLite
 
         #region Properties
 
-        public ResultSummary Summary { get; private set; }
+        public ResultSummary? Summary { get; private set; }
 
         #endregion
 
@@ -112,7 +112,7 @@ namespace NUnitLite
         {
             _options = new NUnitLiteOptions(_testAssembly == null, args);
 
-            ExtendedTextWriter outWriter = null;
+            ExtendedTextWriter outWriter;
             if (_options.OutFile != null)
             {
                 var outFile = Path.Combine(_options.WorkDirectory, _options.OutFile);
@@ -131,7 +131,7 @@ namespace NUnitLite
 
             using (outWriter)
             {
-                TextWriter errWriter = null;
+                TextWriter? errWriter = null;
                 if (_options.ErrFile != null)
                 {
                     var errFile = Path.Combine(_options.WorkDirectory, _options.ErrFile);
@@ -161,9 +161,11 @@ namespace NUnitLite
             return Execute();
         }
 
-        // Internal Execute depends on _textUI and _options having been set already.
         private int Execute()
         {
+            if (_options is null || _textUI is null)
+                throw new InvalidOperationException("Internal Execute depends on _textUI and _options having been set already.");
+
             _runner = new NUnitTestAssemblyRunner(new DefaultTestAssemblyBuilder());
 
             InitializeInternalTrace();
@@ -415,7 +417,7 @@ namespace NUnitLite
             {
                 var logName = GetLogFileName();
 
-                StreamWriter streamWriter = null;
+                StreamWriter? streamWriter = null;
                 if (traceLevel > InternalTraceLevel.Off)
                 {
                     string logPath = Path.Combine(Directory.GetCurrentDirectory(), logName);
@@ -491,7 +493,7 @@ namespace NUnitLite
         /// <param name="message">A TestMessage object containing the text to send</param>
         public void SendMessage(TestMessage message)
         {
-            
+
         }
 
         #endregion

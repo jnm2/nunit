@@ -154,7 +154,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Compares two objects for equality within a tolerance.
         /// </summary>
-        public bool AreEqual(object x, object y, ref Tolerance tolerance, bool topLevelComparison = true)
+        public bool AreEqual(object? x, object? y, ref Tolerance tolerance, bool topLevelComparison = true)
         {
             this.failurePoints = new List<FailurePoint>();
 
@@ -212,12 +212,12 @@ namespace NUnit.Framework.Constraints
             /// <summary>
             /// The expected value
             /// </summary>
-            public object ExpectedValue;
+            public object? ExpectedValue;
 
             /// <summary>
             /// The actual value
             /// </summary>
-            public object ActualValue;
+            public object? ActualValue;
 
             /// <summary>
             /// Indicates whether the expected value is valid

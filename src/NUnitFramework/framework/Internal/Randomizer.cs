@@ -61,7 +61,7 @@ namespace NUnit.Framework.Internal
 
         // Static Random instance used exclusively for the generation
         // of seed values for new Randomizers.
-        private static Random _seedGenerator;
+        private static Random? _seedGenerator;
 
         /// <summary>
         /// Initial seed used to create randomizers for this run
@@ -119,7 +119,7 @@ namespace NUnit.Framework.Internal
         /// <returns></returns>
         public static Randomizer CreateRandomizer()
         {
-            return new Randomizer(_seedGenerator.Next());
+            return new Randomizer(_seedGenerator!.Next());
         }
 
         #endregion
@@ -488,7 +488,7 @@ namespace NUnit.Framework.Internal
         public object NextEnum(Type type)
         {
             Array enums = Enum.GetValues(type);
-            return enums.GetValue(Next(0, enums.Length));
+            return enums.GetValue(Next(0, enums.Length))!;
         }
 
         /// <summary>

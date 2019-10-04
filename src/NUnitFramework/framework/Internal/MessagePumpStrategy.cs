@@ -86,7 +86,7 @@ namespace NUnit.Framework.Internal
                 // shutting it down. Otherwise Application.Exit is a no-op and we would then proceed to do
                 // Application.Run and never return.
                 context.Post(
-                    state => ContinueOnSameSynchronizationContext((AwaitAdapter)state, Application.Exit),
+                    state => ContinueOnSameSynchronizationContext((AwaitAdapter)state!, Application.Exit),
                     state: awaiter);
 
                 try
@@ -119,7 +119,7 @@ namespace NUnit.Framework.Internal
                 // shutting it down. Otherwise Dispatcher.ExitAllFrames is a no-op and we would then proceed to do
                 // Dispatcher.Run and never return.
                 context.Post(
-                    state => ContinueOnSameSynchronizationContext((AwaitAdapter)state, Dispatcher.ExitAllFrames),
+                    state => ContinueOnSameSynchronizationContext((AwaitAdapter)state!, Dispatcher.ExitAllFrames),
                     state: awaiter);
 
                 Dispatcher.Run();
@@ -145,7 +145,7 @@ namespace NUnit.Framework.Internal
                 // and it completed after the IsCompleted check, it will wait until the message loop runs *before*
                 // shutting it down. Otherwise context.ShutDown will throw.
                 context.Post(
-                    state => ContinueOnSameSynchronizationContext((AwaitAdapter)state, context.ShutDown),
+                    state => ContinueOnSameSynchronizationContext((AwaitAdapter)state!, context.ShutDown),
                     state: awaiter);
 
                 context.Run();

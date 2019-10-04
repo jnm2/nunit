@@ -40,10 +40,10 @@ namespace NUnit.Framework.Internal
 
         public static bool IsAsyncOperation(Delegate @delegate)
         {
-            return IsAsyncOperation(@delegate.GetMethodInfo());
+            return IsAsyncOperation(@delegate.GetMethodInfo()!);
         }
 
-        public static object Await(Func<object> invoke)
+        public static object? Await(Func<object> invoke)
         {
             Guard.ArgumentNotNull(invoke, nameof(invoke));
 
@@ -61,7 +61,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private static IDisposable InitializeExecutionEnvironment()
+        private static IDisposable? InitializeExecutionEnvironment()
         {
 #if APARTMENT_STATE
             if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
@@ -76,7 +76,7 @@ namespace NUnit.Framework.Internal
 
                     return On.Dispose(() =>
                     {
-                        SetSynchronizationContext(context);
+                        SetSynchronizationContext(context!);
                         singleThreadedContext.Dispose();
                     });
                 }

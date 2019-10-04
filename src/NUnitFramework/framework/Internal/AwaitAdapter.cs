@@ -33,14 +33,14 @@ namespace NUnit.Framework.Internal
         public abstract bool IsCompleted { get; }
         public abstract void OnCompleted(Action action);
         public abstract void BlockUntilCompleted();
-        public abstract object GetResult();
+        public abstract object? GetResult();
 
         public static bool IsAwaitable(Type awaitableType)
         {
             return CSharpPatternBasedAwaitAdapter.IsAwaitable(awaitableType);
         }
 
-        public static Type GetResultType(Type awaitableType)
+        public static Type? GetResultType(Type awaitableType)
         {
             return CSharpPatternBasedAwaitAdapter.GetResultType(awaitableType);
         }

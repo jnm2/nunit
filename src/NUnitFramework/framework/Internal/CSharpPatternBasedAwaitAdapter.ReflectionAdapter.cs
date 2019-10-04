@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Copyright (c) 2018 Charlie Poole, Rob Prouse
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -48,7 +48,7 @@ namespace NUnit.Framework.Internal
 
             public override void OnCompleted(Action action) => _awaiterOnCompleted.Invoke(action);
 
-            public override object GetResult() => _getResultMethod.InvokeWithTransparentExceptions(_awaiter);
+            public override object? GetResult() => _getResultMethod.InvokeWithTransparentExceptions(_awaiter);
         }
     }
 }

@@ -56,7 +56,7 @@ namespace NUnit.Framework.Constraints
         /// Initializes a new instance of the <see cref="ComparisonConstraint"/> class.
         /// </summary>
         /// <param name="expected">The value against which to make a comparison.</param>
-        protected ComparisonConstraint(object expected) : base(expected)
+        protected ComparisonConstraint(object? expected) : base(expected)
         {
             Guard.ArgumentValid(expected != null, "Cannot compare using a null reference.", nameof(_expected));
             _expected = expected;
@@ -81,7 +81,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Protected function overridden by derived class to actually perform the comparison
         /// </summary>
-        protected abstract bool PerformComparison(ComparisonAdapter comparer, object actual, object expected, Tolerance tolerance);
+        protected abstract bool PerformComparison(ComparisonAdapter comparer, object actual, object? expected, Tolerance tolerance);
 
         #endregion
 

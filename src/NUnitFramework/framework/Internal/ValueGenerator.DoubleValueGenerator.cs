@@ -22,6 +22,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NUnit.Framework.Internal
 {
@@ -29,7 +30,7 @@ namespace NUnit.Framework.Internal
     {
         private sealed class DoubleValueGenerator : ValueGenerator<double>
         {
-            public override bool TryCreateStep(object value, out ValueGenerator.Step step)
+            public override bool TryCreateStep(object value, [NotNullWhen(true)] out ValueGenerator.Step? step)
             {
                 if (value is double)
                 {

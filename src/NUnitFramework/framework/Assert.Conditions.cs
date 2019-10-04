@@ -38,7 +38,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void True(bool? condition, string message, params object[] args)
+        public static void True(bool? condition, string? message, params object?[]? args)
         {
             Assert.That(condition, Is.True ,message, args);
         }
@@ -50,7 +50,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void True(bool condition, string message, params object[] args)
+        public static void True(bool condition, string? message, params object?[]? args)
         {
            Assert.That(condition, Is.True, message, args);
         }
@@ -82,7 +82,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsTrue(bool? condition, string message, params object[] args)
+        public static void IsTrue(bool? condition, string? message, params object?[]? args)
         {
             Assert.That(condition, Is.True ,message, args);
         }
@@ -94,7 +94,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsTrue(bool condition, string message, params object[] args)
+        public static void IsTrue(bool condition, string? message, params object?[]? args)
         {
             Assert.That(condition, Is.True ,message, args);
         }
@@ -130,7 +130,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void False(bool? condition, string message, params object[] args)
+        public static void False(bool? condition, string? message, params object?[]? args)
         {
             Assert.That(condition, Is.False ,message, args);
         }
@@ -142,7 +142,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void False(bool condition, string message, params object[] args)
+        public static void False(bool condition, string? message, params object?[]? args)
         {
             Assert.That(condition, Is.False ,message, args);
         }
@@ -174,7 +174,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsFalse(bool? condition, string message, params object[] args)
+        public static void IsFalse(bool? condition, string? message, params object?[]? args)
         {
             Assert.That(condition, Is.False ,message, args);
         }
@@ -186,7 +186,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsFalse(bool condition, string message, params object[] args)
+        public static void IsFalse(bool condition, string? message, params object?[]? args)
         {
             Assert.That(condition, Is.False ,message, args);
         }
@@ -223,7 +223,7 @@ namespace NUnit.Framework
         /// <param name="anObject">The object that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void NotNull(object anObject, string message, params object[] args)
+        public static void NotNull(object anObject, string? message, params object?[]? args)
         {
             Assert.That(anObject, Is.Not.Null ,message, args);
         }
@@ -247,7 +247,7 @@ namespace NUnit.Framework
         /// <param name="anObject">The object that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNotNull(object anObject, string message, params object[] args)
+        public static void IsNotNull(object anObject, string? message, params object?[]? args)
         {
             Assert.That(anObject, Is.Not.Null ,message, args);
         }
@@ -275,7 +275,7 @@ namespace NUnit.Framework
         /// <param name="anObject">The object that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Null(object anObject, string message, params object[] args)
+        public static void Null(object anObject, string? message, params object?[]? args)
         {
             Assert.That(anObject, Is.Null ,message, args);
         }
@@ -299,7 +299,7 @@ namespace NUnit.Framework
         /// <param name="anObject">The object that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNull(object anObject, string message, params object[] args)
+        public static void IsNull(object anObject, string? message, params object?[]? args)
         {
             Assert.That(anObject, Is.Null ,message, args);
         }
@@ -327,7 +327,7 @@ namespace NUnit.Framework
         /// <param name="aDouble">The value that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNaN(double aDouble, string message, params object[] args)
+        public static void IsNaN(double aDouble, string? message, params object?[]? args)
         {
             Assert.That(aDouble, Is.NaN ,message, args);
         }
@@ -351,7 +351,7 @@ namespace NUnit.Framework
         /// <param name="aDouble">The value that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNaN(double? aDouble, string message, params object[] args)
+        public static void IsNaN(double? aDouble, string? message, params object?[]? args)
         {
             Assert.That(aDouble, Is.NaN ,message, args);
         }
@@ -379,7 +379,7 @@ namespace NUnit.Framework
         /// <param name="aString">The string to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsEmpty(string aString, string message, params object[] args)
+        public static void IsEmpty(string aString, string? message, params object?[]? args)
         {
             Assert.That(aString, new EmptyStringConstraint() ,message, args);
         }
@@ -403,7 +403,7 @@ namespace NUnit.Framework
         /// <param name="collection">An array, list or other collection implementing ICollection</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsEmpty(IEnumerable collection, string message, params object[] args)
+        public static void IsEmpty(IEnumerable collection, string? message, params object?[]? args)
         {
             Assert.That(collection, new EmptyCollectionConstraint() ,message, args);
         }
@@ -431,7 +431,7 @@ namespace NUnit.Framework
         /// <param name="aString">The string to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNotEmpty(string aString, string message, params object[] args)
+        public static void IsNotEmpty(string aString, string? message, params object?[]? args)
         {
             Assert.That(aString, Is.Not.Empty ,message, args);
         }
@@ -455,7 +455,7 @@ namespace NUnit.Framework
         /// <param name="collection">An array, list or other collection implementing ICollection</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNotEmpty(IEnumerable collection, string message, params object[] args)
+        public static void IsNotEmpty(IEnumerable collection, string? message, params object?[]? args)
         {
             Assert.That(collection, Is.Not.Empty ,message, args);
         }
@@ -492,7 +492,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Zero(int actual, string message, params object[] args)
+        public static void Zero(int actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Zero, message, args);
         }
@@ -518,7 +518,7 @@ namespace NUnit.Framework
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
         [CLSCompliant(false)]
-        public static void Zero(uint actual, string message, params object[] args)
+        public static void Zero(uint actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Zero, message, args);
         }
@@ -542,7 +542,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Zero(long actual, string message, params object[] args)
+        public static void Zero(long actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Zero, message, args);
         }
@@ -568,7 +568,7 @@ namespace NUnit.Framework
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
         [CLSCompliant(false)]
-        public static void Zero(ulong actual, string message, params object[] args)
+        public static void Zero(ulong actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Zero, message, args);
         }
@@ -592,7 +592,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Zero(decimal actual, string message, params object[] args)
+        public static void Zero(decimal actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Zero, message, args);
         }
@@ -616,7 +616,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Zero(double actual, string message, params object[] args)
+        public static void Zero(double actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Zero, message, args);
         }
@@ -640,7 +640,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Zero(float actual, string message, params object[] args)
+        public static void Zero(float actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Zero, message, args);
         }
@@ -668,7 +668,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void NotZero(int actual, string message, params object[] args)
+        public static void NotZero(int actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.Zero, message, args);
         }
@@ -694,7 +694,7 @@ namespace NUnit.Framework
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
         [CLSCompliant(false)]
-        public static void NotZero(uint actual, string message, params object[] args)
+        public static void NotZero(uint actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.Zero, message, args);
         }
@@ -718,7 +718,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void NotZero(long actual, string message, params object[] args)
+        public static void NotZero(long actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.Zero, message, args);
         }
@@ -744,7 +744,7 @@ namespace NUnit.Framework
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
         [CLSCompliant(false)]
-        public static void NotZero(ulong actual, string message, params object[] args)
+        public static void NotZero(ulong actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.Zero, message, args);
         }
@@ -768,7 +768,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void NotZero(decimal actual, string message, params object[] args)
+        public static void NotZero(decimal actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.Zero, message, args);
         }
@@ -792,7 +792,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void NotZero(double actual, string message, params object[] args)
+        public static void NotZero(double actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.Zero, message, args);
         }
@@ -816,7 +816,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void NotZero(float actual, string message, params object[] args)
+        public static void NotZero(float actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.Zero, message, args);
         }
@@ -844,7 +844,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Positive(int actual, string message, params object[] args)
+        public static void Positive(int actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Positive, message, args);
         }
@@ -870,7 +870,7 @@ namespace NUnit.Framework
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
         [CLSCompliant(false)]
-        public static void Positive(uint actual, string message, params object[] args)
+        public static void Positive(uint actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Positive, message, args);
         }
@@ -894,7 +894,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Positive(long actual, string message, params object[] args)
+        public static void Positive(long actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Positive, message, args);
         }
@@ -920,7 +920,7 @@ namespace NUnit.Framework
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
         [CLSCompliant(false)]
-        public static void Positive(ulong actual, string message, params object[] args)
+        public static void Positive(ulong actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Positive, message, args);
         }
@@ -944,7 +944,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Positive(decimal actual, string message, params object[] args)
+        public static void Positive(decimal actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Positive, message, args);
         }
@@ -968,7 +968,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Positive(double actual, string message, params object[] args)
+        public static void Positive(double actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Positive, message, args);
         }
@@ -992,7 +992,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Positive(float actual, string message, params object[] args)
+        public static void Positive(float actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Positive, message, args);
         }
@@ -1020,7 +1020,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Negative(int actual, string message, params object[] args)
+        public static void Negative(int actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Negative, message, args);
         }
@@ -1046,7 +1046,7 @@ namespace NUnit.Framework
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
         [CLSCompliant(false)]
-        public static void Negative(uint actual, string message, params object[] args)
+        public static void Negative(uint actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Negative, message, args);
         }
@@ -1070,7 +1070,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Negative(long actual, string message, params object[] args)
+        public static void Negative(long actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Negative, message, args);
         }
@@ -1096,7 +1096,7 @@ namespace NUnit.Framework
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
         [CLSCompliant(false)]
-        public static void Negative(ulong actual, string message, params object[] args)
+        public static void Negative(ulong actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Negative, message, args);
         }
@@ -1120,7 +1120,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Negative(decimal actual, string message, params object[] args)
+        public static void Negative(decimal actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Negative, message, args);
         }
@@ -1144,7 +1144,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Negative(double actual, string message, params object[] args)
+        public static void Negative(double actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Negative, message, args);
         }
@@ -1168,7 +1168,7 @@ namespace NUnit.Framework
         /// <param name="actual">The number to be examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Negative(float actual, string message, params object[] args)
+        public static void Negative(float actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Negative, message, args);
         }

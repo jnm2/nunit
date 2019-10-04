@@ -38,7 +38,7 @@ namespace NUnit.Framework.Constraints
         /// <param name="expected"></param>
         [Obsolete("This constructor has been deprecated and will be removed in a future release. "
             + "Please use 'new SomeItemsConstraint(new EqualConstraint(expected))' or 'Has.Some.EqualTo(expected)' instead.")]
-        public CollectionContainsConstraint(object expected)
+        public CollectionContainsConstraint(object? expected)
             : base(expected)
         {
             Expected = expected;
@@ -64,7 +64,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Gets the expected object
         /// </summary>
-        protected object Expected { get; }
+        protected object? Expected { get; }
 
         /// <summary>
         /// Test whether the expected item is contained in the collection
@@ -73,7 +73,7 @@ namespace NUnit.Framework.Constraints
         /// <returns></returns>
         protected override bool Matches(IEnumerable actual)
         {
-            foreach (object obj in actual)
+            foreach (object? obj in actual)
                 if (ItemsEqual(obj, Expected))
                     return true;
 

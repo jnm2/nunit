@@ -338,9 +338,9 @@ namespace NUnit.Framework.Internal.Execution
 
         #region Helper Methods
 
-        private void OnWorkItemCompletion(object sender, EventArgs args)
+        private void OnWorkItemCompletion(object? sender, EventArgs args)
         {
-            var work = (CompositeWorkItem)sender;
+            var work = (CompositeWorkItem)sender!;
 
             lock (_activeWorkItems)
             {
@@ -353,7 +353,7 @@ namespace NUnit.Framework.Internal.Execution
         {
             ShiftFinished?.Invoke(endingShift);
 
-            WorkShift nextShift = null;
+            WorkShift? nextShift;
 
             while (true)
             {

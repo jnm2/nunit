@@ -55,9 +55,7 @@ namespace NUnit.Framework.Internal
 #if NETSTANDARD1_4
             return assembly.ManifestModule.FullyQualifiedName;
 #else
-            string codeBase = assembly.CodeBase;
-
-            if (IsFileUri(codeBase))
+            if (assembly.CodeBase is { } codeBase && IsFileUri(codeBase))
                 return GetAssemblyPathFromCodeBase(codeBase);
 
             return assembly.Location;
@@ -75,7 +73,7 @@ namespace NUnit.Framework.Internal
         /// <returns>The path.</returns>
         public static string GetDirectoryName(Assembly assembly)
         {
-            return Path.GetDirectoryName(GetAssemblyPath(assembly));
+            return Path.GetDirectoryName(GetAssemblyPath(assembly))!;
         }
 
         #endregion
@@ -99,7 +97,7 @@ namespace NUnit.Framework.Internal
 #if NETSTANDARD1_4 || NETSTANDARD2_0
         private sealed class ReflectionAssemblyLoader
         {
-            private static ReflectionAssemblyLoader instance;
+            private static ReflectionAssemblyLoader? instance;
             private static bool isInitialized;
 
             private readonly Func<string, Assembly> loadFromAssemblyPath;
@@ -111,7 +109,7 @@ namespace NUnit.Framework.Internal
                 this.loadFromAssemblyPath = loadFromAssemblyPath;
             }
 
-            public static ReflectionAssemblyLoader TryGet()
+            public static ReflectionAssemblyLoader? TryGet()
             {
                 if (isInitialized) return instance;
                 instance = TryInitialize();
@@ -119,19 +117,19 @@ namespace NUnit.Framework.Internal
                 return instance;
             }
 
-            private static ReflectionAssemblyLoader TryInitialize()
+            private static ReflectionAssemblyLoader? TryInitialize()
             {
                 var assemblyLoadContextType = Type.GetType("System.Runtime.Loader.AssemblyLoadContext", throwOnError: false);
                 if (assemblyLoadContextType == null) return null;
 
-                var defaultContext = assemblyLoadContextType.GetRuntimeProperty("Default").GetValue(null);
+                var defaultContext = assemblyLoadContextType.GetRuntimeProperty("Default")!.GetValue(null);
 
                 var loadFromAssemblyPath = (Func<string, Assembly>)assemblyLoadContextType
-                        .GetRuntimeMethod("LoadFromAssemblyPath", new[] { typeof(string) })
+                        .GetRuntimeMethod("LoadFromAssemblyPath", new[] { typeof(string) })!
                         .CreateDelegate(typeof(Func<string, Assembly>), defaultContext);
 
-                assemblyLoadContextType.GetRuntimeEvent("Resolving").AddEventHandler(defaultContext,
-                    new Func<object, AssemblyName, Assembly>((context, assemblyName) =>
+                assemblyLoadContextType.GetRuntimeEvent("Resolving")!.AddEventHandler(defaultContext,
+                    new Func<object, AssemblyName, Assembly?>((context, assemblyName) =>
                     {
                         var dllPath = Path.Combine(AppContext.BaseDirectory, assemblyName.Name + ".dll");
                         if (File.Exists(dllPath)) return loadFromAssemblyPath.Invoke(dllPath);

@@ -42,9 +42,9 @@ namespace NUnit.Framework.Constraints.Comparers
             return TypeHelper.IsTuple(type);
         }
 
-        protected override object GetValue(Type type, string propertyName, object obj)
+        protected override object? GetValue(Type type, string propertyName, object obj)
         {
-            return type.GetProperty(propertyName).GetValue(obj, null);
+            return type.GetProperty(propertyName)!.GetValue(obj, null);
         }
     }
 }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -57,7 +57,7 @@ namespace NUnit.Common
 
         #region Equality Overrides
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is Token && this == (Token)obj;
         }
@@ -74,21 +74,15 @@ namespace NUnit.Common
                 : Kind.ToString();
         }
 
-        public static bool operator ==(Token t1, Token t2)
+        public static bool operator ==(Token? t1, Token? t2)
         {
-            bool t1Null = ReferenceEquals(t1, null);
-            bool t2Null = ReferenceEquals(t2, null);
-
-            if (t1Null && t2Null)
-                return true;
-
-            if (t1Null || t2Null)
-                return false;
+            if (ReferenceEquals(t1, t2)) return true;
+            if (t1 is null || t2 is null) return false;
 
             return t1.Kind == t2.Kind && t1.Text == t2.Text;
         }
 
-        public static bool operator !=(Token t1, Token t2)
+        public static bool operator !=(Token? t1, Token? t2)
         {
             return !(t1 == t2);
         }
@@ -111,7 +105,7 @@ namespace NUnit.Common
         private const string WORD_BREAK_CHARS = "=!()&|";
         private static readonly string[] DOUBLE_CHAR_SYMBOLS = new string[] { "==", "=~", "!=", "!~", "&&", "||" };
 
-        private Token _lookahead;
+        private Token? _lookahead;
 
         public Tokenizer(string input)
         {

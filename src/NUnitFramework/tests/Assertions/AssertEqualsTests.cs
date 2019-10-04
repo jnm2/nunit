@@ -601,7 +601,7 @@ namespace NUnit.Framework.Assertions
             _x = x;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj == null)
                 return false;

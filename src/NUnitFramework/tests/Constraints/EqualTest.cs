@@ -140,7 +140,7 @@ namespace NUnit.Framework.Constraints
         //    {
         //        public bool HasSucceeded { get; set; }
         //        public object Actual { get; set; }
-        //        public object Expected { get; set; }
+        //        public object? expected { get; set; }
         //        public string Name { get; set; }
         //        public string Description { get; set; }
         //        public string Predicate { get; set; }

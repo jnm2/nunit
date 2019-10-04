@@ -70,14 +70,14 @@ namespace NUnit.Framework.Constraints
         [TestCase(198, 200, 5)]
         [TestCase(202, 200, 5)]
         [TestCase(205, 200, 5)] // upper range bound
-        public void SimpleTolerance(object actual, object expected, object tolerance)
+        public void SimpleTolerance(object actual, object? expected, object tolerance)
         {
             Assert.That(actual, Is.LessThanOrEqualTo(expected).Within(tolerance));
         }
 
         [TestCase(6.0, 5.0, 0.05)]
         [TestCase(210, 200, 5)]
-        public void SimpleTolerance_Failure(object actual, object expected, object tolerance)
+        public void SimpleTolerance_Failure(object actual, object? expected, object tolerance)
         {
             var ex = Assert.Throws<AssertionException>(
                 () => Assert.That(actual, Is.LessThanOrEqualTo(expected).Within(tolerance)),
@@ -98,14 +98,14 @@ namespace NUnit.Framework.Constraints
         [TestCase(198, 200, 2.5)]
         [TestCase(202, 200, 2.5)]
         [TestCase(205, 200, 2.5)] // upper range bound
-        public void PercentTolerance(object actual, object expected, object tolerance)
+        public void PercentTolerance(object actual, object? expected, object tolerance)
         {
             Assert.That(actual, Is.LessThanOrEqualTo(expected).Within(tolerance).Percent);
         }
 
         [TestCase(6.0, 5.0, 1)]
         [TestCase(210, 200, 2.5)]
-        public void PercentTolerance_Failure(object actual, object expected, object tolerance)
+        public void PercentTolerance_Failure(object actual, object? expected, object tolerance)
         {
             var ex = Assert.Throws<AssertionException>(
                 () => Assert.That(actual, Is.LessThanOrEqualTo(expected).Within(tolerance).Percent),

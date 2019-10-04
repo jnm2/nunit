@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,13 +37,13 @@ namespace NUnit.Framework.Constraints
         /// Construct a DictionaryContainsValueConstraint
         /// </summary>
         /// <param name="expected"></param>
-        public DictionaryContainsValueConstraint(object expected)
+        public DictionaryContainsValueConstraint(object? expected)
             : base(expected)
         {
             Expected = expected;
         }
 
-        /// <summary> 
+        /// <summary>
         /// The display name of this Constraint for use by ToString().
         /// The default value is the name of the constraint with
         /// trailing "Constraint" removed. Derived classes may set
@@ -63,7 +63,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Gets the expected object
         /// </summary>
-        protected object Expected { get; }
+        protected object? Expected { get; }
 
         /// <summary>
         /// Test whether the expected value is contained in the dictionary
@@ -72,7 +72,7 @@ namespace NUnit.Framework.Constraints
         {
             var dictionary = ConstraintUtils.RequireActual<IDictionary>(actual, nameof(actual));
 
-            foreach (object obj in dictionary.Values)
+            foreach (object? obj in dictionary.Values)
                 if (ItemsEqual(obj, Expected))
                     return true;
 

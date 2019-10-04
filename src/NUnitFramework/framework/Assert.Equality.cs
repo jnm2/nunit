@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@ namespace NUnit.Framework
 
         /// <summary>
         /// Verifies that two doubles are equal considering a delta. If the
-        /// expected value is infinity then the delta value is ignored. If 
+        /// expected value is infinity then the delta value is ignored. If
         /// they are not equal then an <see cref="AssertionException"/> is
         /// thrown.
         /// </summary>
@@ -44,14 +44,14 @@ namespace NUnit.Framework
         /// the expected and the actual</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void AreEqual(double expected, double actual, double delta, string message, params object[] args)
+        public static void AreEqual(double expected, double actual, double delta, string? message, params object?[]? args)
         {
             AssertDoublesAreEqual(expected, actual, delta, message, args);
         }
 
         /// <summary>
         /// Verifies that two doubles are equal considering a delta. If the
-        /// expected value is infinity then the delta value is ignored. If 
+        /// expected value is infinity then the delta value is ignored. If
         /// they are not equal then an <see cref="AssertionException"/> is
         /// thrown.
         /// </summary>
@@ -66,7 +66,7 @@ namespace NUnit.Framework
 
         /// <summary>
         /// Verifies that two doubles are equal considering a delta. If the
-        /// expected value is infinity then the delta value is ignored. If 
+        /// expected value is infinity then the delta value is ignored. If
         /// they are not equal then an <see cref="AssertionException"/> is
         /// thrown.
         /// </summary>
@@ -76,14 +76,14 @@ namespace NUnit.Framework
         /// the expected and the actual</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void AreEqual(double expected, double? actual, double delta, string message, params object[] args)
+        public static void AreEqual(double expected, double? actual, double delta, string? message, params object?[]? args)
         {
-            AssertDoublesAreEqual(expected, (double)actual, delta, message, args);
+            AssertDoublesAreEqual(expected, actual!.Value /* REVIEW */, delta, message, args);
         }
 
         /// <summary>
         /// Verifies that two doubles are equal considering a delta. If the
-        /// expected value is infinity then the delta value is ignored. If 
+        /// expected value is infinity then the delta value is ignored. If
         /// they are not equal then an <see cref="AssertionException"/> is
         /// thrown.
         /// </summary>
@@ -93,7 +93,7 @@ namespace NUnit.Framework
         /// the expected and the actual</param>
         public static void AreEqual(double expected, double? actual, double delta)
         {
-            AssertDoublesAreEqual(expected, (double)actual, delta, null, null);
+            AssertDoublesAreEqual(expected, actual!.Value /* REVIEW */, delta, null, null);
         }
 
         #endregion
@@ -110,7 +110,7 @@ namespace NUnit.Framework
         /// <param name="actual">The actual value</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void AreEqual(object expected, object actual, string message, params object[] args)
+        public static void AreEqual(object? expected, object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.EqualTo(expected), message, args);
         }
@@ -123,7 +123,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="expected">The value that is expected</param>
         /// <param name="actual">The actual value</param>
-        public static void AreEqual(object expected, object actual)
+        public static void AreEqual(object? expected, object? actual)
         {
             Assert.That(actual, Is.EqualTo(expected), null, null);
         }
@@ -146,7 +146,7 @@ namespace NUnit.Framework
         /// <param name="actual">The actual value</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void AreNotEqual(object expected, object actual, string message, params object[] args)
+        public static void AreNotEqual(object? expected, object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.EqualTo(expected), message, args);
         }
@@ -159,7 +159,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="expected">The value that is expected</param>
         /// <param name="actual">The actual value</param>
-        public static void AreNotEqual(object expected, object actual)
+        public static void AreNotEqual(object? expected, object? actual)
         {
             Assert.That(actual, Is.Not.EqualTo(expected), null, null);
         }
@@ -178,7 +178,7 @@ namespace NUnit.Framework
         /// <param name="actual">The actual object</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void AreSame(object expected, object actual, string message, params object[] args)
+        public static void AreSame(object? expected, object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.SameAs(expected), message, args);
         }
@@ -189,7 +189,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="expected">The expected object</param>
         /// <param name="actual">The actual object</param>
-        public static void AreSame(object expected, object actual)
+        public static void AreSame(object? expected, object? actual)
         {
             Assert.That(actual, Is.SameAs(expected), null, null);
         }
@@ -206,7 +206,7 @@ namespace NUnit.Framework
         /// <param name="actual">The actual object</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void AreNotSame(object expected, object actual, string message, params object[] args)
+        public static void AreNotSame(object? expected, object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.SameAs(expected), message, args);
         }
@@ -217,7 +217,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="expected">The expected object</param>
         /// <param name="actual">The actual object</param>
-        public static void AreNotSame(object expected, object actual)
+        public static void AreNotSame(object? expected, object? actual)
         {
             Assert.That(actual, Is.Not.SameAs(expected), null, null);
         }
@@ -236,7 +236,7 @@ namespace NUnit.Framework
         /// the expected and the actual</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        protected static void AssertDoublesAreEqual(double expected, double actual, double delta, string message, object[] args)
+        protected static void AssertDoublesAreEqual(double expected, double actual, double delta, string? message, object?[]? args)
         {
             if (double.IsNaN(expected) || double.IsInfinity(expected))
                 Assert.That(actual, Is.EqualTo(expected), message, args);

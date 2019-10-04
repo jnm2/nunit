@@ -38,7 +38,7 @@ namespace NUnit.Framework
         /// Returns a new <see cref="SomeItemsConstraint"/> checking for the
         /// presence of a particular object in the collection.
         /// </summary>
-        public static SomeItemsConstraint Item(object expected) =>
+        public static SomeItemsConstraint Item(object? expected) =>
             new SomeItemsConstraint(new EqualConstraint(expected));
 
         #endregion
@@ -49,7 +49,7 @@ namespace NUnit.Framework
         /// Returns a new DictionaryContainsKeyConstraint checking for the
         /// presence of a particular key in the dictionary.
         /// </summary>
-        public static DictionaryContainsKeyConstraint Key(object expected)
+        public static DictionaryContainsKeyConstraint Key(object? expected)
         {
             return new DictionaryContainsKeyConstraint(expected);
         }
@@ -62,7 +62,7 @@ namespace NUnit.Framework
         /// Returns a new DictionaryContainsValueConstraint checking for the
         /// presence of a particular value in the dictionary.
         /// </summary>
-        public static DictionaryContainsValueConstraint Value(object expected)
+        public static DictionaryContainsValueConstraint Value(object? expected)
         {
             return new DictionaryContainsValueConstraint(expected);
         }

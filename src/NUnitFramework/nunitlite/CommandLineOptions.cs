@@ -28,6 +28,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Options;
 using System.Text;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NUnit.Common
 {
@@ -124,7 +125,7 @@ namespace NUnit.Common
         // Get args from a string of args
         internal static IEnumerable<string> GetArgs(string commandLine)
         {
-            foreach (Match m in ArgsRegex.Matches(commandLine))
+            foreach (var m in ArgsRegex.Matches(commandLine).Cast<Match>())
                 yield return Regex.Replace(m.Groups[2].Success ? m.Groups[2].Value : m.Groups[4].Value, @"""""", @"""");
         }
 
@@ -303,7 +304,8 @@ namespace NUnit.Common
             return -1;
         }
 
-        private string ExpandToFullPath(string path)
+        [return: NotNullIfNotNull("path")]
+        private string? ExpandToFullPath(string path)
         {
             if (path == null) return null;
 
@@ -337,11 +339,11 @@ namespace NUnit.Common
                             using (var str = new FileStream(fullTestListPath, FileMode.Open))
                             using (var rdr = new StreamReader(str))
                             {
-                                while (!rdr.EndOfStream)
+                                while (rdr.ReadLine() is { } line)
                                 {
-                                    var line = rdr.ReadLine().Trim();
+                                    line = line.Trim();
 
-                                    if (!string.IsNullOrEmpty(line) && line[0] != '#')
+                                    if (line.Length != 0 && line[0] != '#')
                                         ((List<string>)TestList).Add(line);
                                 }
                             }

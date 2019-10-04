@@ -36,7 +36,7 @@ namespace NUnit.Framework.Internal.Execution
     {
         private static readonly Logger log = InternalTrace.GetLogger("TestWorker");
 
-        private Thread _workerThread;
+        private Thread? _workerThread;
 
         private int _workItemCount = 0;
 
@@ -54,12 +54,12 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Event signaled immediately before executing a WorkItem
         /// </summary>
-        public event TestWorkerEventHandler Busy;
+        public event TestWorkerEventHandler? Busy;
 
         /// <summary>
         /// Event signaled immediately after executing a WorkItem
         /// </summary>
-        public event TestWorkerEventHandler Idle;
+        public event TestWorkerEventHandler? Idle;
 
         #endregion
 
@@ -95,20 +95,22 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Indicates whether the worker thread is running
         /// </summary>
-        public bool IsAlive
-        {
-            get { return _workerThread.IsAlive; }
-        }
+        public bool IsAlive => _workerThread is null
+            ? throw new InvalidOperationException($"The {nameof(Start)} method must be called first.")
+            : _workerThread.IsAlive;
 
         #endregion
 
         /// <summary>
         /// Our ThreadProc, which pulls and runs tests in a loop
         /// </summary>
-        private WorkItem _currentWorkItem;
+        private WorkItem? _currentWorkItem;
 
         private void TestWorkerThreadProc()
         {
+            if (_workerThread is null)
+                throw new InvalidOperationException($"The {nameof(Start)} method must be called first.");
+
             _running = true;
 
             try
@@ -130,7 +132,7 @@ namespace NUnit.Framework.Internal.Execution
                     // TODO: If we had a separate NonParallelTestWorker, it
                     // could simply create the isolated queue without any
                     // worrying about competing workers.
-                    Busy(this, _currentWorkItem);
+                    Busy!(this, _currentWorkItem);
 
                     // Because we execute the current item AFTER the queue state
                     // is saved, its children end up in the new queue set.
@@ -139,7 +141,7 @@ namespace NUnit.Framework.Internal.Execution
                     // This call may result in the queues being restored. There
                     // is a potential race condition here. We should not restore
                     // the queues unless all child items have finished.
-                    Idle(this, _currentWorkItem);
+                    Idle!(this, _currentWorkItem);
 
                     ++_workItemCount;
                 }

@@ -35,17 +35,17 @@ namespace NUnit.Framework.Internal
         public CultureInfo Culture { get; }
         public CultureInfo UICulture { get; }
 #if !NETSTANDARD1_4
-        public System.Security.Principal.IPrincipal Principal { get; }
+        public System.Security.Principal.IPrincipal? Principal { get; }
 #endif
-        private readonly SynchronizationContext _synchronizationContext;
+        private readonly SynchronizationContext? _synchronizationContext;
 
         private SandboxedThreadState(
             CultureInfo culture,
             CultureInfo uiCulture,
 #if !NETSTANDARD1_4
-            System.Security.Principal.IPrincipal principal,
+            System.Security.Principal.IPrincipal? principal,
 #endif
-            SynchronizationContext synchronizationContext)
+            SynchronizationContext? synchronizationContext)
         {
             Culture = culture;
             UICulture = uiCulture;
@@ -119,7 +119,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Returns a copy with the specified principal.
         /// </summary>
-        public SandboxedThreadState WithPrincipal(System.Security.Principal.IPrincipal principal)
+        public SandboxedThreadState WithPrincipal(System.Security.Principal.IPrincipal? principal)
         {
             return new SandboxedThreadState(
                 Culture,

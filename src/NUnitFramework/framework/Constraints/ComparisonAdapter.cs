@@ -74,7 +74,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Compares two objects
         /// </summary>
-        public abstract int Compare(object expected, object actual);
+        public abstract int Compare(object? expected, object? actual);
 
         class DefaultComparisonAdapter : ComparerAdapter
         {
@@ -102,7 +102,7 @@ namespace NUnit.Framework.Constraints
             /// <param name="expected"></param>
             /// <param name="actual"></param>
             /// <returns></returns>
-            public override int Compare(object expected, object actual)
+            public override int Compare(object? expected, object? actual)
             {
                 return comparer.Compare(expected, actual);
             }
@@ -128,7 +128,7 @@ namespace NUnit.Framework.Constraints
             /// <summary>
             /// Compare a Type T to an object
             /// </summary>
-            public override int Compare(object expected, object actual)
+            public override int Compare(object? expected, object? actual)
             {
                 if (!TypeHelper.TryCast(expected, out T expectedCast))
                     throw new ArgumentException($"Cannot compare {expected?.ToString() ?? "null"}");
@@ -155,7 +155,7 @@ namespace NUnit.Framework.Constraints
             /// <summary>
             /// Compare a Type T to an object
             /// </summary>
-            public override int Compare(object expected, object actual)
+            public override int Compare(object? expected, object? actual)
             {
                 if (!TypeHelper.TryCast(expected, out T expectedCast))
                     throw new ArgumentException($"Cannot compare {expected?.ToString() ?? "null"}");

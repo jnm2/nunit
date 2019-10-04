@@ -93,7 +93,7 @@ namespace NUnit.Framework.Constraints
         /// <param name="actual">The actual value</param>
         /// <param name="tolerance">A reference to the tolerance in effect</param>
         /// <returns>True if the values are equal</returns>
-        public static bool AreEqual(object expected, object actual, ref Tolerance tolerance)
+        public static bool AreEqual(object? expected, object actual, ref Tolerance tolerance)
         {
             if (expected is double || actual is double)
                 return AreEqual(Convert.ToDouble(expected), Convert.ToDouble(actual), ref tolerance);
@@ -361,7 +361,7 @@ namespace NUnit.Framework.Constraints
         /// <param name="expected">The expected value</param>
         /// <param name="actual">The actual value</param>
         /// <returns>The relationship of the values to each other</returns>
-        public static int Compare(object expected, object actual)
+        public static int Compare(object? expected, object actual)
         {
             if (!IsNumericType(expected) || !IsNumericType(actual))
                 throw new ArgumentException("Both arguments must be numeric");

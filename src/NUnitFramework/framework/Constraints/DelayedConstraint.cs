@@ -347,7 +347,7 @@ namespace NUnit.Framework.Constraints
             return new ConstraintResult(this, actual, BaseConstraint.ApplyTo(actual).IsSuccess);
         }
 
-        private static object InvokeDelegate<T>(ActualValueDelegate<T> del)
+        private static object? InvokeDelegate<T>(ActualValueDelegate<T> del)
         {
             if (AsyncToSyncAdapter.IsAsyncOperation(del))
                 return AsyncToSyncAdapter.Await(() => del.Invoke());

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@ namespace NUnit.Framework.Constraints
     public class AttributeConstraint : PrefixConstraint
     {
         private readonly Type expectedType;
-        private Attribute attrFound;
+        private Attribute? attrFound;
 
         /// <summary>
         /// Constructs an AttributeConstraint for a specified attribute
@@ -54,14 +54,14 @@ namespace NUnit.Framework.Constraints
         }
 
         /// <summary>
-        /// Determines whether the Type or other provider has the 
+        /// Determines whether the Type or other provider has the
         /// expected attribute and if its value matches the
         /// additional constraint specified.
         /// </summary>
         public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
             Guard.ArgumentNotNull(actual, nameof(actual));
-            Attribute[] attrs = AttributeHelper.GetCustomAttributes(actual, expectedType, true);
+            Attribute[] attrs = AttributeHelper.GetCustomAttributes(actual!, expectedType, true);
             if (attrs.Length == 0)
                 throw new ArgumentException(string.Format("Attribute {0} was not found", expectedType), nameof(actual));
 

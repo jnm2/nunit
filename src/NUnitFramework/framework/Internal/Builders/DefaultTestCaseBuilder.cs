@@ -99,7 +99,7 @@ namespace NUnit.Framework.Internal.Builders
         /// </summary>
         /// <param name="method">The method for which a test is to be built</param>
         /// <param name="parentSuite">The test fixture being populated, or null</param>
-        public Test BuildFrom(IMethodInfo method, Test parentSuite)
+        public Test BuildFrom(IMethodInfo method, Test? parentSuite)
         {
             var tests = new List<TestMethod>();
 

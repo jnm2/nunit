@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -48,7 +48,7 @@ namespace NUnit.Framework.Constraints
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public int Compare(object x, object y)
+        public int Compare(object? x, object? y)
         {
             if (x == null)
                 return y == null ? 0 : -1;
@@ -67,13 +67,15 @@ namespace NUnit.Framework.Constraints
             Type xType = x.GetType();
             Type yType = y.GetType();
 
-            MethodInfo method = xType.GetMethod("CompareTo", new Type[] { yType });
+            // TODO: Use the interface CompareTo rather than duck typing
+            MethodInfo? method = xType.GetMethod("CompareTo", new Type[] { yType });
             if (method != null)
-                return (int)method.Invoke(x, new object[] { y });
+                return (int)method.Invoke(x, new object[] { y })!;
 
+            // TODO: Use the interface CompareTo rather than duck typing
             method = yType.GetMethod("CompareTo", new Type[] { xType });
             if (method != null)
-                return -(int)method.Invoke(y, new object[] { x });
+                return -(int)method.Invoke(y, new object[] { x })!;
 
             throw new ArgumentException("Neither value implements IComparable or IComparable<T>");
         }

@@ -518,10 +518,10 @@ namespace NUnit.Framework.Internal.Execution
         public class TestEvent
         {
             public TestAction Action;
-            public string TestName;
-            public string ThreadName;
-            public string ShiftName;
-            public string Result;
+            public string? TestName;
+            public string? ThreadName;
+            public string? ShiftName;
+            public string? Result;
 
             public override string ToString()
             {

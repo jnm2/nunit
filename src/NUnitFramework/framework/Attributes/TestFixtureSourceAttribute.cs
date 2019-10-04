@@ -177,7 +177,7 @@ namespace NUnit.Framework
             return data;
         }
 
-        private IEnumerable GetTestFixtureSource(Type sourceType)
+        private IEnumerable? GetTestFixtureSource(Type sourceType)
         {
             // Handle Type implementing IEnumerable separately
             if (SourceName == null)
@@ -193,32 +193,42 @@ namespace NUnit.Framework
                 var field = member as FieldInfo;
                 if (field != null)
                     return field.IsStatic
-                        ? (IEnumerable)field.GetValue(null)
-                        : SourceMustBeStaticError();
+                        ? (IEnumerable?)field.GetValue(null)
+                        : ReturnErrorAsParameter(SourceMustBeStatic);
 
                 var property = member as PropertyInfo;
                 if (property != null)
-                    return property.GetGetMethod(true).IsStatic
-                        ? (IEnumerable)property.GetValue(null, null)
-                        : SourceMustBeStaticError();
+                {
+                    return property.GetGetMethod(true) switch
+                    {
+                        null => ReturnErrorAsParameter(),
+
+                        { IsStatic: false } => ReturnErrorAsParameter(SourceMustBeStatic),
+
+                        _ => (IEnumerable?)property.GetValue(null, null)
+                    };
+                }
 
                 var m = member as MethodInfo;
                 if (m != null)
                     return m.IsStatic
-                        ? (IEnumerable)m.Invoke(null, null)
-                        : SourceMustBeStaticError();
+                        ? (IEnumerable?)m.Invoke(null, null)
+                        : ReturnErrorAsParameter(SourceMustBeStatic);
             }
 
             return null;
         }
 
-        private static IEnumerable SourceMustBeStaticError()
+        private static IEnumerable ReturnErrorAsParameter(string errorMessage)
         {
-            var parms = new TestFixtureParameters();
+            var parms = new TestCaseParameters();
             parms.RunState = RunState.NotRunnable;
-            parms.Properties.Set(PropertyNames.SkipReason, MUST_BE_STATIC);
-            return new TestFixtureParameters[] { parms };
+            parms.Properties.Set(PropertyNames.SkipReason, errorMessage);
+            return new TestCaseParameters[] { parms };
         }
+
+        private const string SourceMustBeStatic =
+            "The sourceName specified on a TestCaseSourceAttribute must refer to a static field, property or method.";
 
         #endregion
     }

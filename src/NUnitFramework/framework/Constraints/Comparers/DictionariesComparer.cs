@@ -53,8 +53,8 @@ namespace NUnit.Framework.Constraints.Comparers
             if ((tally.Result.MissingItems.Count > 0) || (tally.Result.ExtraItems.Count > 0))
                 return false;
 
-            foreach (object key in xDictionary.Keys)
-                if (!_equalityComparer.AreEqual(xDictionary[key], yDictionary[key], ref tolerance, topLevelComparison: false))
+            foreach (var key in xDictionary.Keys)
+                if (!_equalityComparer.AreEqual(xDictionary[key!], yDictionary[key!], ref tolerance, topLevelComparison: false))
                     return false;
 
             return true;

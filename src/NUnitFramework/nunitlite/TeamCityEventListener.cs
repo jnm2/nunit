@@ -144,7 +144,7 @@ namespace NUnitLite
             _outWriter.WriteLine("##teamcity[testFailed name='{0}' message='{1}' details='{2}']", Escape(name), Escape(message), Escape(details));
         }
 
-        private static string Escape(string input)
+        private static string? Escape(string? input)
         {
             return input != null
                 ? input.Replace("|", "||")

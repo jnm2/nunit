@@ -35,7 +35,7 @@ namespace NUnit.Framework.Internal.Builders
             return GetInstanceOf(providerType, null);
         }
 
-        public object GetInstanceOf(Type providerType, object[] providerArgs)
+        public object GetInstanceOf(Type providerType, object[]? providerArgs)
         {
             if (!_instances.TryGetValue(providerType, out var instance))
                 _instances.Add(providerType, instance = Reflect.Construct(providerType, providerArgs));

@@ -91,7 +91,7 @@ namespace NUnit.Framework
         /// <param name="expr">A Constraint expression to be applied</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void That<TActual>(ActualValueDelegate<TActual> del, IResolveConstraint expr, string message, params object[] args)
+        public static void That<TActual>(ActualValueDelegate<TActual> del, IResolveConstraint expr, string? message, params object?[]? args)
         {
             CheckMultipleAssertLevel();
 
@@ -102,7 +102,7 @@ namespace NUnit.Framework
                 ReportFailure(result, message, args);
         }
 
-        private static void ReportFailure(ConstraintResult result, string message, object[] args)
+        private static void ReportFailure(ConstraintResult result, string? message, object?[]? args)
         {
             MessageWriter writer = new TextMessageWriter(message, args);
             result.WriteMessageTo(writer);
@@ -144,7 +144,7 @@ namespace NUnit.Framework
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display if the condition is false</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void That(bool condition, string message, params object[] args)
+        public static void That(bool condition, string? message, params object?[]? args)
         {
             Assume.That(condition, Is.True, message, args);
         }
@@ -181,7 +181,7 @@ namespace NUnit.Framework
         /// <param name="condition">A lambda that returns a Boolean</param>
         /// <param name="message">The message to display if the condition is false</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void That(Func<bool> condition, string message, params object[] args)
+        public static void That(Func<bool> condition, string? message, params object?[]? args)
         {
             Assume.That(condition.Invoke(), Is.True, message, args);
         }
@@ -249,7 +249,7 @@ namespace NUnit.Framework
         /// <param name="expression">A Constraint expression to be applied</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void That<TActual>(TActual actual, IResolveConstraint expression, string message, params object[] args)
+        public static void That<TActual>(TActual actual, IResolveConstraint expression, string? message, params object?[]? args)
         {
             CheckMultipleAssertLevel();
 

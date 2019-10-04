@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,7 +37,7 @@ namespace NUnit.Framework.Internal
         private readonly string name;
         private readonly string fullname;
         private readonly InternalTraceLevel maxLevel;
-        private readonly TextWriter writer;
+        private readonly TextWriter? writer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class.
@@ -45,7 +45,7 @@ namespace NUnit.Framework.Internal
         /// <param name="name">The name.</param>
         /// <param name="level">The log level.</param>
         /// <param name="writer">The writer where logs are sent.</param>
-        public Logger(string name, InternalTraceLevel level, TextWriter writer)
+        public Logger(string name, InternalTraceLevel level, TextWriter? writer)
         {
             this.maxLevel = level;
             this.writer = writer;
@@ -70,7 +70,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The message arguments.</param>
-        public void Error(string message, params object[] args)
+        public void Error(string? message, params object?[]? args)
         {
             Log(InternalTraceLevel.Error, message, args);
         }
@@ -99,7 +99,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The message arguments.</param>
-        public void Warning(string message, params object[] args)
+        public void Warning(string? message, params object?[]? args)
         {
             Log(InternalTraceLevel.Warning, message, args);
         }
@@ -120,7 +120,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The message arguments.</param>
-        public void Info(string message, params object[] args)
+        public void Info(string? message, params object?[]? args)
         {
             Log(InternalTraceLevel.Info, message, args);
         }
@@ -141,7 +141,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="args">The message arguments.</param>
-        public void Debug(string message, params object[] args)
+        public void Debug(string? message, params object?[]? args)
         {
             Log(InternalTraceLevel.Verbose, message, args);
         }

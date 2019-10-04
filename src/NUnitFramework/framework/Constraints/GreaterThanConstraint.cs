@@ -34,7 +34,7 @@ namespace NUnit.Framework.Constraints
         /// Initializes a new instance of the <see cref="GreaterThanConstraint"/> class.
         /// </summary>
         /// <param name="expected">The expected value.</param>
-        public GreaterThanConstraint(object expected) : base(expected) {}
+        public GreaterThanConstraint(object? expected) : base(expected) {}
 
         /// <summary>
         /// The Description of what this constraint tests, for
@@ -54,7 +54,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Perform the comparison
         /// </summary>
-        protected override bool PerformComparison(ComparisonAdapter comparer, object actual, object expected, Tolerance tolerance)
+        protected override bool PerformComparison(ComparisonAdapter comparer, object actual, object? expected, Tolerance tolerance)
         {
             return comparer.Compare(actual, tolerance.ApplyToValue(expected).LowerBound) > 0;
         }

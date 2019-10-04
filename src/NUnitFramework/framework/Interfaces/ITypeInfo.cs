@@ -42,7 +42,7 @@ namespace NUnit.Framework.Interfaces
         /// <summary>
         /// Gets the base type of this type as an ITypeInfo
         /// </summary>
-        ITypeInfo BaseType { get; }
+        ITypeInfo? BaseType { get; }
 
         /// <summary>
         /// Returns true if the Type wrapped is equal to the argument
@@ -137,7 +137,7 @@ namespace NUnit.Framework.Interfaces
         /// <summary>
         /// Gets the public constructor taking the specified argument Types
         /// </summary>
-        ConstructorInfo GetConstructor(Type[] argTypes);
+        ConstructorInfo? GetConstructor(Type[] argTypes);
 
         /// <summary>
         /// Returns a value indicating whether this Type has a public constructor taking the specified argument Types.

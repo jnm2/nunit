@@ -39,7 +39,7 @@ namespace NUnit.Framework.Constraints
     {
         #region Static and Instance Fields
 
-        private readonly object _expected;
+        private readonly object? _expected;
 
         private Tolerance _tolerance = Tolerance.Default;
 
@@ -55,7 +55,7 @@ namespace NUnit.Framework.Constraints
         /// Initializes a new instance of the <see cref="EqualConstraint"/> class.
         /// </summary>
         /// <param name="expected">The expected value.</param>
-        public EqualConstraint(object expected)
+        public EqualConstraint(object? expected)
             : base(expected)
         {
             AdjustArgumentIfNeeded(ref expected);

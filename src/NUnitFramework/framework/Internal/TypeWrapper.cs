@@ -52,7 +52,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Gets the base type of this type as an ITypeInfo
         /// </summary>
-        public ITypeInfo BaseType
+        public ITypeInfo? BaseType
         {
             get
             {
@@ -228,7 +228,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Gets the public constructor taking the specified argument Types
         /// </summary>
-        public ConstructorInfo GetConstructor(Type[] argTypes)
+        public ConstructorInfo? GetConstructor(Type[] argTypes)
         {
             return Type.GetConstructor(argTypes);
         }

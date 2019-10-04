@@ -104,7 +104,7 @@ namespace NUnit.Framework.Constraints
         /// <returns>True for success, false for failure</returns>
         public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
-            var stringValue = ConstraintUtils.RequireActual<string>(actual, nameof(actual), allowNull: true);
+            var stringValue = ConstraintUtils.RequireActualOrNull<string?>(actual, nameof(actual));
 
             return new ConstraintResult(this, actual, Matches(stringValue));
         }

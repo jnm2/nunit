@@ -44,7 +44,7 @@ namespace NUnit.Framework.Internal
     public static class InternalTrace
     {
         private static InternalTraceLevel traceLevel;
-        private static InternalTraceWriter traceWriter;
+        private static InternalTraceWriter? traceWriter;
 
         /// <summary>
         /// Gets a flag indicating whether the InternalTrace is initialized
@@ -72,7 +72,7 @@ namespace NUnit.Framework.Internal
                 Initialized = true;
             }
             else
-                traceWriter.WriteLine("InternalTrace: Ignoring attempted re-initialization at level {0}", level);
+                traceWriter!.WriteLine("InternalTrace: Ignoring attempted re-initialization at level {0}", level);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="writer">A TextWriter</param>
         /// <param name="level">The InternalTraceLevel</param>
-        public static void Initialize(TextWriter writer, InternalTraceLevel level)
+        public static void Initialize(TextWriter? writer, InternalTraceLevel level)
         {
             if (!Initialized)
             {
@@ -88,7 +88,7 @@ namespace NUnit.Framework.Internal
 
                 if (traceWriter == null && traceLevel > InternalTraceLevel.Off)
                 {
-                    traceWriter = new InternalTraceWriter(writer);
+                    traceWriter = new InternalTraceWriter(writer!);
                     traceWriter.WriteLine("InternalTrace: Initializing at level " + traceLevel.ToString());
                 }
 
@@ -110,7 +110,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         public static Logger GetLogger(Type type)
         {
-            return GetLogger(type.FullName);
+            return GetLogger(type.FullName!);
         }
     }
 }

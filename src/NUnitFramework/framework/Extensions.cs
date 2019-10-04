@@ -23,6 +23,8 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using NUnit.Compatibility;
@@ -34,6 +36,13 @@ namespace NUnit.Framework
     /// </summary>
     internal static class Extensions
     {
+        [return: MaybeNull]
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+            where TKey : notnull
+        {
+            return dictionary.TryGetValue(key, out var value) ? value : default;
+        }
+
         public static bool IsStatic(this Type type)
         {
             return type.GetTypeInfo().IsAbstract && type.GetTypeInfo().IsSealed;

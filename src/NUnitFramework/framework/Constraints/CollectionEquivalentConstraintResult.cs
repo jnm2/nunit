@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>Maximum amount of elements to write to the <see cref="MessageWriter"/> if there are
         /// extra/missing elements from the collection.</summary>
         private const int MaxDifferingElemsToWrite = 10;
-        
+
         /// <summary>Construct a <see cref="CollectionEquivalentConstraintResult"/> using a <see cref="CollectionTally.CollectionTallyResult"/>.</summary>
         /// <param name="constraint">Source <see cref="CollectionEquivalentConstraint"/>.</param>
         /// <param name="tallyResult">Result of the collection comparison.</param>
@@ -42,7 +42,7 @@ namespace NUnit.Framework.Constraints
         public CollectionEquivalentConstraintResult(
             CollectionEquivalentConstraint constraint,
             CollectionTally.CollectionTallyResult tallyResult,
-            object actual,
+            object? actual,
             bool isSuccess)
             : base(constraint, actual, isSuccess)
         {
@@ -54,7 +54,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>Write any additional lines (following <c>Expected:</c> and <c>But was:</c>) for a failing constraint.</summary>
         /// <param name="writer">The <see cref="MessageWriter"/> to write the failure message to.</param>
         public override void WriteAdditionalLinesTo(MessageWriter writer)
-        { 
+        {
             if (_tallyResult.MissingItems.Count > 0)
             {
                 int missingItemsCount = _tallyResult.MissingItems.Count;

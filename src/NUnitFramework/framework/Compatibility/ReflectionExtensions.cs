@@ -23,6 +23,7 @@
 
 #if NET35 || NET40
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace NUnit.Compatibility
@@ -70,7 +71,7 @@ namespace NUnit.Compatibility
         /// <typeparam name="T">The attribute Type</typeparam>
         /// <param name="assembly">The assembly</param>
         /// <returns>An attribute of Type T</returns>
-        public static T GetCustomAttribute<T>(this Assembly assembly) where T : Attribute
+        public static T? GetCustomAttribute<T>(this Assembly assembly) where T : Attribute
         {
             T[] attrs = (T[])assembly.GetCustomAttributes(typeof(T), false);
             return attrs.Length > 0 ? attrs[0] : null;

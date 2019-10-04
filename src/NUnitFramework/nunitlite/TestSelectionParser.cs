@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,7 +32,7 @@ namespace NUnit.Common
 {
     public class TestSelectionParser
     {
-        private Tokenizer _tokenizer;
+        private Tokenizer? _tokenizer;
 
         private static readonly Token LPAREN = new Token(TokenKind.Symbol, "(");
         private static readonly Token RPAREN = new Token(TokenKind.Symbol, ")");
@@ -164,7 +164,7 @@ namespace NUnit.Common
 
         private static string EmitFilterElement(Token lhs, Token op, Token rhs)
         {
-            string fmt = null;
+            string fmt;
 
             if (op == EQ_OP1 || op == EQ_OP2)
                 fmt = "<{0}>{1}</{0}>";
@@ -182,7 +182,7 @@ namespace NUnit.Common
 
         private static string EmitPropertyElement(Token lhs, Token op, Token rhs)
         {
-            string fmt = null;
+            string fmt;
 
             if (op == EQ_OP1 || op == EQ_OP2)
                 fmt = "<prop name='{0}'>{1}</prop>";
@@ -251,7 +251,7 @@ namespace NUnit.Common
 
         private Token LookAhead
         {
-            get { return _tokenizer.LookAhead; }
+            get { return _tokenizer!.LookAhead; }
         }
 
         private bool LookingAt(params Token[] tokens)
@@ -265,7 +265,7 @@ namespace NUnit.Common
 
         private Token NextToken()
         {
-            return _tokenizer.NextToken();
+            return _tokenizer!.NextToken();
         }
 
         private static string XmlEscape(string text)

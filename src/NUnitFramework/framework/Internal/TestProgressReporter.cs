@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -81,7 +81,7 @@ namespace NUnit.Framework.Internal
 
         /// <summary>
         /// Called when a test has finished. Sends a result summary to the callback.
-        /// to 
+        /// to
         /// </summary>
         /// <param name="result">The result of the test</param>
         public void TestFinished(ITestResult result)
@@ -91,7 +91,7 @@ namespace NUnit.Framework.Internal
                 var node = result.ToXml(false);
                 var parent = GetParent(result.Test);
                 node.Attributes.Add("parentId", parent != null ? parent.Id : string.Empty);
-                handler.RaiseCallbackEvent(node.OuterXml);                
+                handler.RaiseCallbackEvent(node.OuterXml);
             }
             catch (Exception ex)
             {
@@ -140,7 +140,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="test"></param>
         /// <returns>parent test item</returns>
-        private static ITest GetParent(ITest test)
+        private static ITest? GetParent(ITest test)
         {
             if (test == null || test.Parent == null)
             {

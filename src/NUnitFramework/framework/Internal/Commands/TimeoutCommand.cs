@@ -39,7 +39,7 @@ namespace NUnit.Framework.Internal.Commands
     {
         private readonly int _timeout;
 #if THREAD_ABORT
-        Timer _commandTimer;
+        Timer? _commandTimer;
         private bool _commandTimedOut;
 #endif
 
@@ -75,7 +75,7 @@ namespace NUnit.Framework.Internal.Commands
 
             AfterTest = (context) =>
             {
-                _commandTimer.Dispose();
+                _commandTimer?.Dispose();
 
                 // If the timer cancelled the current thread, change the result
                 if (_commandTimedOut)

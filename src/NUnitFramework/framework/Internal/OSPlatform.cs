@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,8 +33,8 @@ namespace NUnit.Framework.Internal
     /// <summary>
     /// OSPlatform represents a particular operating system platform
     /// </summary>
-    // This class invokes security critical P/Invoke and 'System.Runtime.InteropServices.Marshal' methods. 
-    // Callers of this method have no influence on how these methods are used so we define a 'SecuritySafeCriticalAttribute' 
+    // This class invokes security critical P/Invoke and 'System.Runtime.InteropServices.Marshal' methods.
+    // Callers of this method have no influence on how these methods are used so we define a 'SecuritySafeCriticalAttribute'
     // rather than a 'SecurityCriticalAttribute' to enable use by security transparent callers.
     [SecuritySafeCritical]
     public class OSPlatform
@@ -104,7 +104,7 @@ namespace NUnit.Framework.Internal
         }
 
         /// <summary>
-        /// Gets the actual OS Version, not the incorrect value that might be 
+        /// Gets the actual OS Version, not the incorrect value that might be
         /// returned for Win 8.1 and Win 10
         /// </summary>
         /// <remarks>
@@ -236,7 +236,7 @@ namespace NUnit.Framework.Internal
         public override string ToString()
         {
             var sb = new StringBuilder();
-            
+
             switch (Platform)
             {
                 case PlatformID.Win32NT:
@@ -333,7 +333,7 @@ namespace NUnit.Framework.Internal
         {
             get { return _platform == PlatformID.WinCE; }
         }
-        
+
         /// <summary>
         /// Return true if the platform is Xbox
         /// </summary>
@@ -345,7 +345,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Return true if the platform is MacOSX
         /// </summary>
-        public bool IsMacOSX 
+        public bool IsMacOSX
         {
             get { return _platform == MacOSXPlatformID; }
         }
@@ -367,7 +367,7 @@ namespace NUnit.Framework.Internal
             bool isMacOSX = false;
             if (uname(buf) == 0)
             {
-                string os = Marshal.PtrToStringAnsi(buf);
+                string os = Marshal.PtrToStringAnsi(buf)!;
                 isMacOSX = os.Equals("Darwin");
             }
             Marshal.FreeHGlobal(buf);

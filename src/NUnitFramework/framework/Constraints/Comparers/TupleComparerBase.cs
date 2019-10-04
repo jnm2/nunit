@@ -41,7 +41,7 @@ namespace NUnit.Framework.Constraints.Comparers
 
         protected abstract bool IsCorrectType(Type type);
 
-        protected abstract object GetValue(Type type, string propertyName, object obj);
+        protected abstract object? GetValue(Type type, string propertyName, object obj);
 
         public bool? Equal(object x, object y, ref Tolerance tolerance, bool topLevelComparison = true)
         {
@@ -59,8 +59,8 @@ namespace NUnit.Framework.Constraints.Comparers
             for (int i = 0; i < numberOfGenericArgs; i++)
             {
                 string propertyName = i < 7 ? "Item" + (i + 1) : "Rest";
-                object xItem = GetValue(xType, propertyName, x);
-                object yItem = GetValue(yType, propertyName, y);
+                object? xItem = GetValue(xType, propertyName, x);
+                object? yItem = GetValue(yType, propertyName, y);
 
                 bool comparison = _equalityComparer.AreEqual(xItem, yItem, ref tolerance, false);
                 if (!comparison)

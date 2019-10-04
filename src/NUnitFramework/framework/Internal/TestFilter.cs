@@ -120,7 +120,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Create a TestFilter instance from an XML representation.
         /// </summary>
-        public static TestFilter FromXml(string xmlText)
+        public static TestFilter FromXml(string? xmlText)
         {
             if (string.IsNullOrEmpty(xmlText))
                 xmlText = "<filter />";
@@ -135,7 +135,7 @@ namespace NUnit.Framework.Internal
             TestFilter filter = count == 0
                 ? TestFilter.Empty
                 : count == 1
-                    ? FromXml(topNode.FirstChild)
+                    ? FromXml(topNode.FirstChild!)
                     : FromXml(topNode);
 
             filter.TopLevel = true;

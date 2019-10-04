@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -64,13 +64,13 @@ namespace NUnit.Framework.Attributes
         [Test]
         public void ShouldPassAfter3RetriesAndTimeoutIsResetEachTime()
         {
-            // Rather than testing with sleeps, this tests that the execution will occur in the correct 
+            // Rather than testing with sleeps, this tests that the execution will occur in the correct
             // order by checking which commands are run when. As the retry command comes first, the
             // timeout will be reset each time it runs
             var test = TestBuilder.MakeTestFromMethod(typeof(HelperMethodForTimeoutsClass), nameof(HelperMethodForTimeoutsClass.ShouldPassAfter3RetriesAndTimeoutIsResetEachTime));
-            SimpleWorkItem work = TestBuilder.CreateWorkItem(test) as SimpleWorkItem;
-            var method = typeof(SimpleWorkItem).GetMethod("MakeTestCommand", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-            TestCommand command = (TestCommand)method.Invoke(work, null);
+            SimpleWorkItem work = (SimpleWorkItem)TestBuilder.CreateWorkItem(test);
+            var method = typeof(SimpleWorkItem).GetMethod("MakeTestCommand", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)!;
+            TestCommand command = (TestCommand)method.Invoke(work, null)!;
 
             Assert.That(command, Is.TypeOf(typeof(RetryAttribute.RetryCommand)));
             RetryAttribute.RetryCommand retryCommand = (RetryAttribute.RetryCommand)command;
@@ -93,7 +93,7 @@ namespace NUnit.Framework.Attributes
         [Test]
         public void ShouldPassAfter2RepeatsAndTimeoutIsResetEachTime()
         {
-            // Rather than testing with sleeps, this tests that the execution will occur in the correct 
+            // Rather than testing with sleeps, this tests that the execution will occur in the correct
             // order by checking which commands are run when. As the repeat command comes first, the
             // timeout will be reset each time it runs
             var test = TestBuilder.MakeTestFromMethod(typeof(HelperMethodForTimeoutsClass), nameof(HelperMethodForTimeoutsClass.ShouldPassAfter2RepeatsAndTimeoutIsResetEachTime));
@@ -121,7 +121,7 @@ namespace NUnit.Framework.Attributes
 
         private TestCommand GetInnerCommand(DelegatingTestCommand command)
         {
-            return (TestCommand)command.GetType().GetField("innerCommand", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(command);
+            return (TestCommand)command.GetType().GetField("innerCommand", BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(command)!;
         }
 
         [Test]
@@ -130,7 +130,7 @@ namespace NUnit.Framework.Attributes
             var testCase = TestBuilder.MakeTestCase(GetType(), nameof(TestMethodForRepeatAndRetryExpectedFail));
             var workItem = TestBuilder.CreateWorkItem(testCase);
             var result = TestBuilder.ExecuteWorkItem(workItem);
-            
+
             Assert.AreEqual(TestStatus.Failed, result.ResultState.Status);
             Assert.AreEqual(FailureSite.Test, result.ResultState.Site);
             Assert.AreEqual("Invalid", result.ResultState.Label);

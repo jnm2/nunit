@@ -189,7 +189,7 @@ namespace NUnit.Framework.Internal
         {
             Assert.That(
                 typeof(ReflectTests)
-                    .GetMethod(nameof(MethodReturning42), BindingFlags.Static | BindingFlags.NonPublic)
+                    .GetMethod(nameof(MethodReturning42), BindingFlags.Static | BindingFlags.NonPublic)!
                     .InvokeWithTransparentExceptions(instance: null),
                 Is.EqualTo(42));
         }
@@ -207,7 +207,7 @@ namespace NUnit.Framework.Internal
         {
             Assert.That(
                 () => typeof(ReflectTests)
-                    .GetMethod(nameof(MethodThrowingException), BindingFlags.Static | BindingFlags.NonPublic)
+                    .GetMethod(nameof(MethodThrowingException), BindingFlags.Static | BindingFlags.NonPublic)!
                     .InvokeWithTransparentExceptions(instance: null),
                 Throws.TypeOf<Exception>());
         }
@@ -225,7 +225,7 @@ namespace NUnit.Framework.Internal
         {
             Assert.That(
                 () => typeof(ReflectTests)
-                    .GetMethod(nameof(MethodThrowingTargetInvocationException), BindingFlags.Static | BindingFlags.NonPublic)
+                    .GetMethod(nameof(MethodThrowingTargetInvocationException), BindingFlags.Static | BindingFlags.NonPublic)!
                     .InvokeWithTransparentExceptions(instance: null),
                 Throws.TypeOf<TargetInvocationException>());
         }
@@ -245,7 +245,7 @@ namespace NUnit.Framework.Internal
             {
                 Assert.That(
                     () => typeof(ReflectTests)
-                        .GetMethod(nameof(MethodThrowingTargetInvocationException), BindingFlags.Static | BindingFlags.NonPublic)
+                        .GetMethod(nameof(MethodThrowingTargetInvocationException), BindingFlags.Static | BindingFlags.NonPublic)!
                         .InvokeWithTransparentExceptions(instance: null),
                     Throws.Exception
                         .With.Property(nameof(Exception.StackTrace))

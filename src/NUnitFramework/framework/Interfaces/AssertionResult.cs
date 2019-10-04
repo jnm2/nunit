@@ -30,9 +30,9 @@ namespace NUnit.Framework.Interfaces
 
         /// <summary>Determines whether the specified object is equal to the current object.</summary>
         /// <param name="obj">The object to compare with the current object.</param>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return Equals(obj as AssertionResult);
+            return obj is AssertionResult other && Equals(other);
         }
 
         /// <summary>Indicates whether the current object is equal to another object of the same type.</summary>

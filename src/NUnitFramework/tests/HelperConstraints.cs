@@ -54,7 +54,7 @@ namespace NUnit.Framework
             {
                 var @delegate = ConstraintUtils.RequireActual<Delegate>(actual, nameof(actual));
 
-                var invokeMethod = @delegate.GetType().GetTypeInfo().GetMethod("Invoke");
+                var invokeMethod = @delegate.GetType().GetTypeInfo().GetMethod("Invoke")!;
                 if (invokeMethod.GetParameters().Length != 0)
                     throw new ArgumentException("Delegate must be parameterless.", nameof(actual));
 

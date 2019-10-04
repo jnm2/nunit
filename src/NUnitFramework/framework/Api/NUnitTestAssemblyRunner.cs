@@ -54,7 +54,7 @@ namespace NUnit.Framework.Api
 
 #if PARALLEL
         // Event Pump
-        private EventPump _pump;
+        private EventPump? _pump;
 #endif
 
 #region Constructors
@@ -90,7 +90,7 @@ namespace NUnit.Framework.Api
         /// <summary>
         /// The test result, if a run has completed
         /// </summary>
-        public ITestResult Result
+        public ITestResult? Result
         {
             get { return TopLevelWorkItem == null ? null : TopLevelWorkItem.Result; }
         }
@@ -127,7 +127,7 @@ namespace NUnit.Framework.Api
         /// <summary>
         /// The top level WorkItem created for the assembly as a whole
         /// </summary>
-        private WorkItem TopLevelWorkItem { get; set; }
+        private WorkItem? TopLevelWorkItem { get; set; }
 
         /// <summary>
         /// The TestExecutionContext for the top level WorkItem
@@ -391,11 +391,9 @@ namespace NUnit.Framework.Api
 #if PARALLEL
         private int GetLevelOfParallelism()
         {
-            return Settings.ContainsKey(FrameworkPackageSettings.NumberOfTestWorkers)
-                ? (int)Settings[FrameworkPackageSettings.NumberOfTestWorkers]
-                : (LoadedTest.Properties.ContainsKey(PropertyNames.LevelOfParallelism)
-                   ? (int)LoadedTest.Properties.Get(PropertyNames.LevelOfParallelism)
-                   : NUnitTestAssemblyRunner.DefaultLevelOfParallelism);
+            return Settings.GetValueOrDefault(FrameworkPackageSettings.NumberOfTestWorkers) as int?
+                ?? LoadedTest.Properties.Get(PropertyNames.LevelOfParallelism) as int?
+                ?? DefaultLevelOfParallelism;
         }
 #endif
 

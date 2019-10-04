@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal
     /// </summary>
     internal abstract class DefaultBlockingAwaitAdapter : AwaitAdapter
     {
-        private volatile ManualResetEventSlim _completedEvent;
+        private volatile ManualResetEventSlim? _completedEvent;
 
         public sealed override void BlockUntilCompleted()
         {

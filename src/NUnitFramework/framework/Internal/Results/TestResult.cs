@@ -78,8 +78,8 @@ namespace NUnit.Framework.Internal
         protected int InternalAssertCount;
 
         private ResultState _resultState;
-        private string _message;
-        private string _stackTrace;
+        private string? _message;
+        private string? _stackTrace;
 
         private readonly List<AssertionResult> _assertionResults = new List<AssertionResult>();
         private readonly List<TestAttachment> _testAttachments = new List<TestAttachment>();
@@ -198,7 +198,7 @@ namespace NUnit.Framework.Internal
         /// Gets the message associated with a test
         /// failure or with not running the test
         /// </summary>
-        public string Message
+        public string? Message
         {
             get
             {
@@ -227,7 +227,7 @@ namespace NUnit.Framework.Internal
         /// Gets any stack trace associated with an
         /// error or failure.
         /// </summary>
-        public virtual string StackTrace
+        public virtual string? StackTrace
         {
             get
             {
@@ -485,7 +485,7 @@ namespace NUnit.Framework.Internal
         /// <param name="resultState">The ResultState to use in the result</param>
         /// <param name="message">A message associated with the result state</param>
         /// <param name="stackTrace">Stack trace giving the location of the command</param>
-        public void SetResult(ResultState resultState, string message, string stackTrace)
+        public void SetResult(ResultState resultState, string? message, string? stackTrace)
         {
 #if PARALLEL
             RwLock.EnterWriteLock();

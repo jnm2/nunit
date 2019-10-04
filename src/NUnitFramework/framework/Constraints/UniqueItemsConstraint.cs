@@ -78,7 +78,7 @@ namespace NUnit.Framework.Constraints
 
             // If IEnumerable<T> is not implemented exit,
             // Otherwise return value is the Type of T
-            Type memberType = GetGenericTypeArgument(actual);
+            Type? memberType = GetGenericTypeArgument(actual);
             if (memberType == null || !IsSealed(memberType) || IsHandledSpeciallyByNUnit(memberType))
                 return null;
 
@@ -91,7 +91,7 @@ namespace NUnit.Framework.Constraints
                     return CharsUniqueIgnoringCase((IEnumerable<char>)actual);
             }
 
-            return (bool)ItemsUniqueMethod.MakeGenericMethod(memberType).Invoke(null, new object[] { actual });
+            return (bool)ItemsUniqueMethod.MakeGenericMethod(memberType).Invoke(null, new object[] { actual })!;
         }
 
         private bool IsSealed(Type type)
@@ -100,7 +100,7 @@ namespace NUnit.Framework.Constraints
         }
 
         private static readonly MethodInfo ItemsUniqueMethod =
-            typeof(UniqueItemsConstraint).GetMethod(nameof(ItemsUnique), BindingFlags.Static | BindingFlags.NonPublic);
+            typeof(UniqueItemsConstraint).GetMethod(nameof(ItemsUnique), BindingFlags.Static | BindingFlags.NonPublic)!;
 
         private static bool ItemsUnique<T>(IEnumerable<T> actual)
         {
@@ -158,11 +158,11 @@ namespace NUnit.Framework.Constraints
                 || type.FullName == "System.ValueTuple";
         }
 
-        private Type GetGenericTypeArgument(IEnumerable actual)
+        private Type? GetGenericTypeArgument(IEnumerable actual)
         {
             foreach (var type in actual.GetType().GetInterfaces())
             {
-                if (type.FullName.StartsWith("System.Collections.Generic.IEnumerable`1"))
+                if (type.FullName?.StartsWith("System.Collections.Generic.IEnumerable`1") ?? false)
                 {
 #if NET35 || NET40
                     return type.GetGenericArguments()[0];

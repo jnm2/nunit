@@ -30,7 +30,7 @@ namespace NUnit.Framework.Internal
     /// </summary>
     public class InternalTraceWriter : TextWriter
     {
-        TextWriter writer;
+        TextWriter? writer;
         readonly object myLock = new object();
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace NUnit.Framework.Internal
         /// <returns>The character encoding in which the output is written.</returns>
         public override System.Text.Encoding Encoding
         {
-            get { return writer.Encoding; }
+            get { return writer!.Encoding; }
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace NUnit.Framework.Internal
         {
             lock (myLock)
             {
-                writer.Write(value);
+                writer!.Write(value);
             }
         }
 
@@ -79,7 +79,7 @@ namespace NUnit.Framework.Internal
         /// Writes a string to the text string or stream.
         /// </summary>
         /// <param name="value">The string to write.</param>
-        public override void Write(string value)
+        public override void Write(string? value)
         {
             lock (myLock)
             {
@@ -91,11 +91,11 @@ namespace NUnit.Framework.Internal
         /// Writes a string followed by a line terminator to the text string or stream.
         /// </summary>
         /// <param name="value">The string to write. If <paramref name="value" /> is null, only the line terminator is written.</param>
-        public override void WriteLine(string value)
+        public override void WriteLine(string? value)
         {
             lock (myLock)
             {
-                writer.WriteLine(value);
+                writer!.WriteLine(value);
             }
         }
 

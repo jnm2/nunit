@@ -70,8 +70,8 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Event that fires when the shift has ended
         /// </summary>
-        public event ShiftChangeEventHandler EndOfShift;
-        
+        public event ShiftChangeEventHandler? EndOfShift;
+
         /// <summary>
         /// The Name of this shift
         /// </summary>
@@ -161,7 +161,7 @@ namespace NUnit.Framework.Internal.Execution
 
             _firstStart = false;
         }
-    
+
         private void StartWorkers()
         {
             foreach (var worker in Workers)

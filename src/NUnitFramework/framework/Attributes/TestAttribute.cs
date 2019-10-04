@@ -49,7 +49,7 @@ namespace NUnit.Framework
     [AttributeUsage(AttributeTargets.Method, AllowMultiple=false, Inherited=true)]
     public class TestAttribute : NUnitAttribute, ISimpleTestBuilder, IApplyToTest, IImplyFixture
     {
-        private object _expectedResult;
+        private object? _expectedResult;
         private bool _hasExpectedResult = false; // needed in case result is set to null
 
         private readonly NUnitTestCaseBuilder _builder = new NUnitTestCaseBuilder();
@@ -57,24 +57,24 @@ namespace NUnit.Framework
         /// <summary>
         /// Descriptive text for this test
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The author of this test
         /// </summary>
-        public string Author { get; set; }
+        public string? Author { get; set; }
 
         /// <summary>
         /// The type that this test is testing
         /// </summary>
-        public Type TestOf { get; set; }
+        public Type? TestOf { get; set; }
 
         /// <summary>
         /// Gets or sets the expected result. Not valid if the test
         /// method has parameters.
         /// </summary>
         /// <value>The result.</value>
-        public object ExpectedResult
+        public object? ExpectedResult
         {
             get { return _expectedResult; }
             set
@@ -117,7 +117,7 @@ namespace NUnit.Framework
         /// <param name="suite">The suite to which the test will be added.</param>
         public TestMethod BuildFrom(IMethodInfo method, Test suite)
         {
-            TestCaseParameters parms = null;
+            TestCaseParameters? parms = null;
 
             if (_hasExpectedResult)
             {

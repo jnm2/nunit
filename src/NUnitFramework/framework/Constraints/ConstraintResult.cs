@@ -64,7 +64,7 @@ namespace NUnit.Framework.Constraints
         /// </summary>
         /// <param name="constraint">The Constraint to which this result applies.</param>
         /// <param name="actualValue">The actual value to which the Constraint was applied.</param>
-        public ConstraintResult(IConstraint constraint, object actualValue)
+        public ConstraintResult(IConstraint constraint, object? actualValue)
         {
             _constraint = constraint;
             ActualValue = actualValue;
@@ -76,7 +76,7 @@ namespace NUnit.Framework.Constraints
         /// <param name="constraint">The Constraint to which this result applies.</param>
         /// <param name="actualValue">The actual value to which the Constraint was applied.</param>
         /// <param name="status">The status of the new ConstraintResult.</param>
-        public ConstraintResult(IConstraint constraint, object actualValue, ConstraintStatus status)
+        public ConstraintResult(IConstraint constraint, object? actualValue, ConstraintStatus status)
             : this(constraint, actualValue)
         {
             Status = status;
@@ -88,7 +88,7 @@ namespace NUnit.Framework.Constraints
         /// <param name="constraint">The Constraint to which this result applies.</param>
         /// <param name="actualValue">The actual value to which the Constraint was applied.</param>
         /// <param name="isSuccess">If true, applies a status of Success to the result, otherwise Failure.</param>
-        public ConstraintResult(IConstraint constraint, object actualValue, bool isSuccess)
+        public ConstraintResult(IConstraint constraint, object? actualValue, bool isSuccess)
             : this(constraint, actualValue)
         {
             Status = isSuccess ? ConstraintStatus.Success : ConstraintStatus.Failure;
@@ -101,7 +101,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// The actual value that was passed to the <see cref="Constraint.ApplyTo{TActual}(TActual)"/> method.
         /// </summary>
-        public object ActualValue { get; }
+        public object? ActualValue { get; }
 
         /// <summary>
         /// Gets and sets the ResultStatus for this result.
@@ -125,7 +125,7 @@ namespace NUnit.Framework.Constraints
         /// Description of the constraint may be affected by the state the constraint had
         /// when <see cref="Constraint.ApplyTo{TActual}(TActual)"/> was performed against the actual value.
         /// </summary>
-        public string Description { get { return _constraint.Description; } }
+        public string? Description { get { return _constraint.Description; } }
 
         #endregion
 
@@ -152,7 +152,7 @@ namespace NUnit.Framework.Constraints
         /// <param name="writer">The MessageWriter on which to display the message</param>
         public virtual void WriteAdditionalLinesTo(MessageWriter writer)
         {
-            //By default it does not write anything to writer but can be overriden in classes where needed. 
+            //By default it does not write anything to writer but can be overriden in classes where needed.
         }
 
         /// <summary>

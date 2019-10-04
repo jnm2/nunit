@@ -65,7 +65,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Link to a prior saved context
         /// </summary>
-        private readonly TestExecutionContext _priorContext;
+        private readonly TestExecutionContext? _priorContext;
 
         /// <summary>
         /// Indicates that a stop has been requested
@@ -82,7 +82,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         private int _assertCount;
 
-        private Randomizer _randomGenerator;
+        private Randomizer? _randomGenerator;
 
         /// <summary>
         /// The current test result
@@ -302,7 +302,7 @@ namespace NUnit.Framework.Internal
         /// The worker that spawned the context.
         /// For builds without the parallel feature, it is null.
         /// </summary>
-        public TestWorker TestWorker {get; internal set;}
+        public TestWorker? TestWorker {get; internal set;}
 #endif
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Gets or sets the current <see cref="IPrincipal"/> for the Thread.
         /// </summary>
-        public IPrincipal CurrentPrincipal
+        public IPrincipal? CurrentPrincipal
         {
             get { return _sandboxedThreadState.Principal; }
             set
@@ -494,22 +494,6 @@ namespace NUnit.Framework.Internal
 
         #endregion
 
-        #region InitializeLifetimeService
-
-#if !NETSTANDARD1_4
-        /// <summary>
-        /// Obtain lifetime service object
-        /// </summary>
-        /// <returns></returns>
-        [SecurityCritical]  // Override of security critical method must be security critical itself
-        public override object InitializeLifetimeService()
-        {
-            return null;
-        }
-#endif
-
-#endregion
-
 #region Nested IsolatedContext Class
 
         /// <summary>
@@ -568,7 +552,7 @@ namespace NUnit.Framework.Internal
             public AdhocContext()
             {
                 var type = GetType();
-                var method = type.GetMethod(nameof(AdhocTestMethod), BindingFlags.NonPublic | BindingFlags.Instance);
+                var method = type.GetMethod(nameof(AdhocTestMethod), BindingFlags.NonPublic | BindingFlags.Instance)!;
 
                 CurrentTest = new TestMethod(new MethodWrapper(type, method));
                 CurrentResult = CurrentTest.MakeTestResult();

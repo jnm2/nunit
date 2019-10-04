@@ -24,6 +24,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using NUnit.Compatibility;
@@ -123,8 +124,8 @@ namespace NUnit.Framework.Internal
                 _apply = apply;
             }
 
-            public override bool IsPositive => Comparer<TStep>.Default.Compare(default(TStep), _step) < 0;
-            public override bool IsNegative => Comparer<TStep>.Default.Compare(_step, default(TStep)) < 0;
+            public override bool IsPositive => Comparer<TStep>.Default.Compare(default(TStep)!, _step) < 0;
+            public override bool IsNegative => Comparer<TStep>.Default.Compare(_step, default(TStep)!) < 0;
 
             /// <summary>
             /// Increments the given value and returns the result.
@@ -171,7 +172,7 @@ namespace NUnit.Framework.Internal
         /// use it to increment values of type <typeparamref name="T"/>. A return value indicates
         /// whether the creation succeeded.
         /// </summary>
-        public override bool TryCreateStep(object value, out ValueGenerator.Step step)
+        public override bool TryCreateStep(object value, [NotNullWhen(true)] out ValueGenerator.Step? step)
         {
             Guard.ArgumentNotNull(value, nameof(value));
             step = null;
@@ -247,6 +248,6 @@ namespace NUnit.Framework.Internal
         /// use it to increment values on which it operates. A return value indicates
         /// whether the creation succeeded.
         /// </summary>
-        public abstract bool TryCreateStep(object value, out Step step);
+        public abstract bool TryCreateStep(object value, [NotNullWhen(true)] out Step? step);
     }
 }

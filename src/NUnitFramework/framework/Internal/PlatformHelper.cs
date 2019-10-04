@@ -111,13 +111,13 @@ namespace NUnit.Framework.Internal
         /// <returns></returns>
         public bool IsPlatformSupported(TestCaseAttribute testCaseAttribute)
         {
-            string include = testCaseAttribute.IncludePlatform;
-            string exclude = testCaseAttribute.ExcludePlatform;
+            string? include = testCaseAttribute.IncludePlatform;
+            string? exclude = testCaseAttribute.ExcludePlatform;
 
             return IsPlatformSupported(include, exclude);
         }
 
-        private bool IsPlatformSupported(string include, string exclude)
+        private bool IsPlatformSupported(string? include, string? exclude)
         {
             if (include != null && !IsPlatformSupported(include))
             {
@@ -281,7 +281,7 @@ namespace NUnit.Framework.Internal
 
         private bool IsRuntimeSupported(string platformName)
         {
-            string versionSpecification = null;
+            string? versionSpecification = null;
             string[] parts = platformName.Split('-');
             if (parts.Length == 2)
             {
@@ -312,7 +312,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private bool IsRuntimeSupported(RuntimeType runtime, string versionSpecification)
+        private bool IsRuntimeSupported(RuntimeType runtime, string? versionSpecification)
         {
             Version version = versionSpecification == null
                 ? RuntimeFramework.DefaultVersion
@@ -323,7 +323,7 @@ namespace NUnit.Framework.Internal
             return _rt.Supports(target);
         }
 
-        private bool IsNetCoreRuntimeSupported(RuntimeType runtime, string versionSpecification)
+        private bool IsNetCoreRuntimeSupported(RuntimeType runtime, string? versionSpecification)
         {
             if (versionSpecification != null)
             {

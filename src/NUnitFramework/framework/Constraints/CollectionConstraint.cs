@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,7 +42,7 @@ namespace NUnit.Framework.Constraints
         /// Construct a CollectionConstraint
         /// </summary>
         /// <param name="arg"></param>
-        protected CollectionConstraint(object arg) : base(arg) { }
+        protected CollectionConstraint(object? arg) : base(arg) { }
 
         /// <summary>
         /// Determines whether the specified enumerable is empty.
@@ -53,11 +53,11 @@ namespace NUnit.Framework.Constraints
         /// </returns>
         protected static bool IsEmpty(IEnumerable enumerable)
         {
-            ICollection collection = enumerable as ICollection;
+            ICollection? collection = enumerable as ICollection;
             if (collection != null)
                 return collection.Count == 0;
 
-            foreach (object o in enumerable)
+            foreach (object? o in enumerable)
                 return false;
 
             return true;

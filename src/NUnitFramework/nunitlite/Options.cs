@@ -139,6 +139,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using NUnit.Compatibility;
+using System.Diagnostics.CodeAnalysis;
 
 // Missing XML Docs
 #pragma warning disable 1591
@@ -184,14 +185,14 @@ namespace NUnit.Options
         #endregion
 
         #region IList
-        int IList.Add (object value)                {return (values as IList).Add (value);}
-        bool IList.Contains (object value)          {return (values as IList).Contains (value);}
-        int IList.IndexOf (object value)            {return (values as IList).IndexOf (value);}
-        void IList.Insert (int index, object value) {(values as IList).Insert (index, value);}
-        void IList.Remove (object value)            {(values as IList).Remove (value);}
+        int IList.Add (object? value)                {return (values as IList).Add (value);}
+        bool IList.Contains (object? value)          {return (values as IList).Contains (value);}
+        int IList.IndexOf (object? value)            {return (values as IList).IndexOf (value);}
+        void IList.Insert (int index, object? value) {(values as IList).Insert (index, value);}
+        void IList.Remove (object? value)            {(values as IList).Remove (value);}
         void IList.RemoveAt (int index)             {(values as IList).RemoveAt (index);}
         bool IList.IsFixedSize                      {get {return false;}}
-        object IList.this [int index]               {get {return this [index];} set {(values as IList)[index] = value;}}
+        object? IList.this [int index]               {get {return this [index];} set {(values as IList)[index] = value;}}
         #endregion
 
         #region IList<T>
@@ -240,8 +241,8 @@ namespace NUnit.Options
     }
 
     public class OptionContext {
-        private Option                option;
-        private string                name;
+        private Option?                option;
+        private string?                name;
         private int                   index;
         private readonly OptionSet             set;
         private readonly OptionValueCollection c;
@@ -252,12 +253,12 @@ namespace NUnit.Options
             this.c   = new OptionValueCollection (this);
         }
 
-        public Option Option {
+        public Option? Option {
             get {return option;}
             set {option = value;}
         }
 
-        public string OptionName {
+        public string? OptionName {
             get {return name;}
             set {name = value;}
         }
@@ -711,7 +712,7 @@ namespace NUnit.Options
             c.OptionIndex = -1;
             bool process = true;
             List<string> unprocessed = new List<string> ();
-            Option def = Contains ("<>") ? this ["<>"] : null;
+            Option? def = Contains ("<>") ? this ["<>"] : null;
             foreach (string argument in arguments) {
                 ++c.OptionIndex;
                 if (argument == "--") {
@@ -730,7 +731,7 @@ namespace NUnit.Options
             return unprocessed;
         }
 
-        private static bool Unprocessed (ICollection<string> extra, Option def, OptionContext c, string argument)
+        private static bool Unprocessed (ICollection<string> extra, Option? def, OptionContext c, string argument)
         {
             if (def == null) {
                 extra.Add (argument);
@@ -745,7 +746,7 @@ namespace NUnit.Options
         private readonly static Regex ValueOption = new Regex(
             @"^(?<flag>--|-|/)(?<name>[^:=]+)((?<sep>[:=])(?<value>.*))?$");
 
-        protected bool GetOptionParts (string argument, out string flag, out string name, out string sep, out string value)
+        protected bool GetOptionParts (string argument, [NotNullWhen(true)] out string? flag, [NotNullWhen(true)] out string? name, out string? sep, out string? value)
         {
             if (argument == null)
                 throw new ArgumentNullException (nameof(argument));
@@ -828,7 +829,7 @@ namespace NUnit.Options
             if (n.Length >= 1 && (n [n.Length-1] == '+' || n [n.Length-1] == '-') &&
                     Contains ((rn = n.Substring (0, n.Length-1)))) {
                 p = this [rn];
-                string v = n [n.Length-1] == '+' ? option : null;
+                string? v = n [n.Length-1] == '+' ? option : null;
                 c.OptionName  = option;
                 c.Option      = p;
                 c.OptionValues.Add (v);

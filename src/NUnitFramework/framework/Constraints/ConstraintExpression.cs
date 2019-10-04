@@ -83,9 +83,9 @@ namespace NUnit.Framework.Constraints
         /// since it has the side-effect of resolving the expression.
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override string? ToString()
         {
-            return builder.Resolve().ToString();
+            return builder!.Resolve().ToString();
         }
 
         #endregion
@@ -484,7 +484,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Returns a constraint that tests two items for equality
         /// </summary>
-        public EqualConstraint EqualTo(object expected)
+        public EqualConstraint EqualTo(object? expected)
         {
             return (EqualConstraint)this.Append(new EqualConstraint(expected));
         }
@@ -496,7 +496,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Returns a constraint that tests that two references are the same object
         /// </summary>
-        public SameAsConstraint SameAs(object expected)
+        public SameAsConstraint SameAs(object? expected)
         {
             return (SameAsConstraint)this.Append(new SameAsConstraint(expected));
         }
@@ -509,7 +509,7 @@ namespace NUnit.Framework.Constraints
         /// Returns a constraint that tests whether the
         /// actual value is greater than the supplied argument
         /// </summary>
-        public GreaterThanConstraint GreaterThan(object expected)
+        public GreaterThanConstraint GreaterThan(object? expected)
         {
             return (GreaterThanConstraint)this.Append(new GreaterThanConstraint(expected));
         }
@@ -522,7 +522,7 @@ namespace NUnit.Framework.Constraints
         /// Returns a constraint that tests whether the
         /// actual value is greater than or equal to the supplied argument
         /// </summary>
-        public GreaterThanOrEqualConstraint GreaterThanOrEqualTo(object expected)
+        public GreaterThanOrEqualConstraint GreaterThanOrEqualTo(object? expected)
         {
             return (GreaterThanOrEqualConstraint)this.Append(new GreaterThanOrEqualConstraint(expected));
         }
@@ -531,7 +531,7 @@ namespace NUnit.Framework.Constraints
         /// Returns a constraint that tests whether the
         /// actual value is greater than or equal to the supplied argument
         /// </summary>
-        public GreaterThanOrEqualConstraint AtLeast(object expected)
+        public GreaterThanOrEqualConstraint AtLeast(object? expected)
         {
             return (GreaterThanOrEqualConstraint)this.Append(new GreaterThanOrEqualConstraint(expected));
         }
@@ -544,7 +544,7 @@ namespace NUnit.Framework.Constraints
         /// Returns a constraint that tests whether the
         /// actual value is less than the supplied argument
         /// </summary>
-        public LessThanConstraint LessThan(object expected)
+        public LessThanConstraint LessThan(object? expected)
         {
             return (LessThanConstraint)this.Append(new LessThanConstraint(expected));
         }
@@ -557,7 +557,7 @@ namespace NUnit.Framework.Constraints
         /// Returns a constraint that tests whether the
         /// actual value is less than or equal to the supplied argument
         /// </summary>
-        public LessThanOrEqualConstraint LessThanOrEqualTo(object expected)
+        public LessThanOrEqualConstraint LessThanOrEqualTo(object? expected)
         {
             return (LessThanOrEqualConstraint)this.Append(new LessThanOrEqualConstraint(expected));
         }
@@ -566,7 +566,7 @@ namespace NUnit.Framework.Constraints
         /// Returns a constraint that tests whether the
         /// actual value is less than or equal to the supplied argument
         /// </summary>
-        public LessThanOrEqualConstraint AtMost(object expected)
+        public LessThanOrEqualConstraint AtMost(object? expected)
         {
             return (LessThanOrEqualConstraint)this.Append(new LessThanOrEqualConstraint(expected));
         }
@@ -719,7 +719,7 @@ namespace NUnit.Framework.Constraints
         /// Returns a new <see cref="SomeItemsConstraint"/> checking for the
         /// presence of a particular object in the collection.
         /// </summary>
-        public SomeItemsConstraint Member(object expected)
+        public SomeItemsConstraint Member(object? expected)
         {
             return (SomeItemsConstraint)this.Append(new SomeItemsConstraint(new EqualConstraint(expected)));
         }
@@ -738,7 +738,7 @@ namespace NUnit.Framework.Constraints
         /// <see cref="Contains(string)"/> overload.
         /// </para>
         /// </summary>
-        public SomeItemsConstraint Contains(object expected)
+        public SomeItemsConstraint Contains(object? expected)
         {
             return (SomeItemsConstraint)this.Append(new SomeItemsConstraint(new EqualConstraint(expected)));
         }
@@ -763,7 +763,7 @@ namespace NUnit.Framework.Constraints
         /// Returns a new <see cref="SomeItemsConstraint"/> checking for the
         /// presence of a particular object in the collection.
         /// </summary>
-        public SomeItemsConstraint Contain(object expected)
+        public SomeItemsConstraint Contain(object? expected)
         {
             return Contains(expected);
         }
@@ -789,7 +789,7 @@ namespace NUnit.Framework.Constraints
         /// presence of a particular key in the Dictionary key collection.
         /// </summary>
         /// <param name="expected">The key to be matched in the Dictionary key collection</param>
-        public DictionaryContainsKeyConstraint ContainKey(object expected)
+        public DictionaryContainsKeyConstraint ContainKey(object? expected)
         {
             return (DictionaryContainsKeyConstraint)this.Append(new DictionaryContainsKeyConstraint(expected));
         }
@@ -799,7 +799,7 @@ namespace NUnit.Framework.Constraints
         /// presence of a particular value in the Dictionary value collection.
         /// </summary>
         /// <param name="expected">The value to be matched in the Dictionary value collection</param>
-        public DictionaryContainsValueConstraint ContainValue(object expected)
+        public DictionaryContainsValueConstraint ContainValue(object? expected)
         {
             return (DictionaryContainsValueConstraint)this.Append(new DictionaryContainsValueConstraint(expected));
         }
@@ -997,11 +997,11 @@ namespace NUnit.Framework.Constraints
         /// Returns a constraint that tests if an item is equal to any of parameters
         /// </summary>
         /// <param name="expected">Expected values</param>
-        public AnyOfConstraint AnyOf(params object[] expected)
+        public AnyOfConstraint AnyOf(params object?[]? expected)
         {
             if (expected == null)
             {
-                expected = new object[] { null };
+                expected = new object?[] { null };
             }
 
             return (AnyOfConstraint)this.Append(new AnyOfConstraint(expected));

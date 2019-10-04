@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,12 +24,12 @@
 namespace NUnit.Framework.Constraints
 {
     /// <summary>
-    /// Provides a <see cref="ConstraintResult"/> for the constraints 
+    /// Provides a <see cref="ConstraintResult"/> for the constraints
     /// that are applied to each item in the collection
     /// </summary>
     internal sealed class EachItemConstraintResult : ConstraintResult
     {
-        private readonly object _nonMatchingItem;
+        private readonly object? _nonMatchingItem;
         private readonly int _nonMatchingItemIndex;
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace NUnit.Framework.Constraints
         /// <param name="actualValue">The actual value to which the Constraint was applied</param>
         /// <param name="nonMatchingItem">Actual item that does not match expected condition</param>
         /// <param name="nonMatchingIndex">Non matching item index</param>
-        public EachItemConstraintResult(IConstraint constraint, object actualValue, object nonMatchingItem, int nonMatchingIndex)
+        public EachItemConstraintResult(IConstraint constraint, object? actualValue, object? nonMatchingItem, int nonMatchingIndex)
             : base(constraint, actualValue, false)
         {
             _nonMatchingItem = nonMatchingItem;

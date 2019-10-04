@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using NUnit.Framework.Interfaces;
 
 namespace NUnit.Framework.Internal.Builders
@@ -113,8 +114,8 @@ namespace NUnit.Framework.Internal.Builders
             catch (Exception ex)
             {
                 var fixture = new TestFixture(typeInfo);
-                if (ex is System.Reflection.TargetInvocationException)
-                    ex = ex.InnerException;
+                if (ex is TargetInvocationException { InnerException: { } inner })
+                    ex = inner;
 
                 fixture.MakeInvalid("An exception was thrown while loading the test." + Environment.NewLine + ex.ToString());
 
@@ -143,7 +144,7 @@ namespace NUnit.Framework.Internal.Builders
         /// class. This is by design.
         /// </summary>
         /// <param name="typeInfo">The type being examined for attributes</param>
-        private IFixtureBuilder[] GetFixtureBuilderAttributes(ITypeInfo typeInfo)
+        private IFixtureBuilder[] GetFixtureBuilderAttributes(ITypeInfo? typeInfo)
         {
             IFixtureBuilder[] attrs = new IFixtureBuilder[0];
 

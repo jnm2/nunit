@@ -29,6 +29,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using NUnit.Compatibility;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NUnit.Framework.Internal
 {
@@ -61,6 +62,7 @@ namespace NUnit.Framework.Internal
         /// Rethrows an exception, preserving its stack trace
         /// </summary>
         /// <param name="exception">The exception to rethrow</param>
+        [DoesNotReturn]
         public static void Rethrow(Exception exception)
         {
 #if NET35 || NET40
@@ -153,7 +155,7 @@ namespace NUnit.Framework.Internal
             {
                 sb.AppendLine();
                 sb.AppendLine("Data:");
-                foreach (DictionaryEntry kvp in data.Value)
+                foreach (var kvp in data.Value.Cast<DictionaryEntry>())
                 {
                     sb.AppendFormat("  {0}: {1}", kvp.Key, kvp.Value?.ToString() ?? "<null>");
                     sb.AppendLine();
@@ -165,18 +167,23 @@ namespace NUnit.Framework.Internal
         {
             var result = new List<Exception>();
 
-            if (exception is ReflectionTypeLoadException)
+            if (exception is ReflectionTypeLoadException { LoaderExceptions: { } possiblyNullExceptions })
             {
-                var reflectionException = exception as ReflectionTypeLoadException;
-                result.AddRange(reflectionException.LoaderExceptions);
+                foreach (var innerException in possiblyNullExceptions)
+                {
+                    if (innerException is null) continue;
+                    result.Add(innerException);
+                }
 
-                foreach (var innerException in reflectionException.LoaderExceptions)
+                foreach (var innerException in possiblyNullExceptions)
+                {
+                    if (innerException is null) continue;
                     result.AddRange(FlattenExceptionHierarchy(innerException));
+                }
             }
 #if TASK_PARALLEL_LIBRARY_API
-            if (exception is AggregateException)
+            if (exception is AggregateException aggregateException)
             {
-                var aggregateException = (exception as AggregateException);
                 result.AddRange(aggregateException.InnerExceptions);
 
                 foreach (var innerException in aggregateException.InnerExceptions)
@@ -196,12 +203,12 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Executes a parameterless synchronous or async delegate and returns the exception it throws, if any.
         /// </summary>
-        internal static Exception RecordException(Delegate parameterlessDelegate, string parameterName)
+        internal static Exception? RecordException(Delegate parameterlessDelegate, string parameterName)
         {
             Guard.ArgumentNotNull(parameterlessDelegate, parameterName);
 
             Guard.ArgumentValid(
-                parameterlessDelegate.GetType().GetMethod("Invoke").GetParameters().Length == 0,
+                parameterlessDelegate.GetType().GetMethod("Invoke")!.GetParameters().Length == 0,
                 $"The actual value must be a parameterless delegate but was {parameterlessDelegate.GetType().Name}.",
                 parameterName);
 

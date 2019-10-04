@@ -50,7 +50,7 @@ namespace NUnit.TestData.UnexpectedExceptionFixture
             set => throw this;
         }
 
-        public override bool Equals(object obj) => throw this;
+        public override bool Equals(object? obj) => throw this;
 
         public override Exception GetBaseException() => throw this;
 

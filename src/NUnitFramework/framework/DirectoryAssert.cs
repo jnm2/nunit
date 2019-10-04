@@ -75,7 +75,7 @@ namespace NUnit.Framework
         /// <param name="actual">A directory containing the actual value</param>
         /// <param name="message">The message to display if the directories are not equal</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void AreEqual(DirectoryInfo expected, DirectoryInfo actual, string message, params object[] args)
+        static public void AreEqual(DirectoryInfo expected, DirectoryInfo actual, string? message, params object?[]? args)
         {
             Assert.AreEqual(expected, actual, message, args);
         }
@@ -107,7 +107,7 @@ namespace NUnit.Framework
         /// <param name="actual">A directory containing the actual value</param>
         /// <param name="message">The message to display if directories are not equal</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void AreNotEqual(DirectoryInfo expected, DirectoryInfo actual, string message, params object[] args)
+        static public void AreNotEqual(DirectoryInfo expected, DirectoryInfo actual, string? message, params object?[]? args)
         {
             Assert.AreNotEqual(expected, actual, message, args);
         }
@@ -137,7 +137,7 @@ namespace NUnit.Framework
         /// <param name="actual">A directory containing the actual value</param>
         /// <param name="message">The message to display if directories are not equal</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void Exists(DirectoryInfo actual, string message, params object[] args)
+        static public void Exists(DirectoryInfo actual, string? message, params object?[]? args)
         {
             Assert.That(actual, new FileOrDirectoryExistsConstraint().IgnoreFiles, message, args);
         }
@@ -162,7 +162,7 @@ namespace NUnit.Framework
         /// <param name="actual">The path to a directory containing the actual value</param>
         /// <param name="message">The message to display if directories are not equal</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void Exists(string actual, string message, params object[] args)
+        static public void Exists(string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, new FileOrDirectoryExistsConstraint().IgnoreFiles, message, args);
         }
@@ -191,7 +191,7 @@ namespace NUnit.Framework
         /// <param name="actual">A directory containing the actual value</param>
         /// <param name="message">The message to display if directories are not equal</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void DoesNotExist(DirectoryInfo actual, string message, params object[] args)
+        static public void DoesNotExist(DirectoryInfo actual, string? message, params object?[]? args)
         {
             Assert.That(actual, new NotConstraint(new FileOrDirectoryExistsConstraint().IgnoreFiles), message, args);
         }
@@ -216,7 +216,7 @@ namespace NUnit.Framework
         /// <param name="actual">The path to a directory containing the actual value</param>
         /// <param name="message">The message to display if directories are not equal</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        static public void DoesNotExist(string actual, string message, params object[] args)
+        static public void DoesNotExist(string actual, string? message, params object?[]? args)
         {
             Assert.That(actual, new NotConstraint(new FileOrDirectoryExistsConstraint().IgnoreFiles), message, args);
         }

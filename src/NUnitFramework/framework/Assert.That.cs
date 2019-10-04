@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,11 +40,11 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is true. If the condition is false the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display if the condition is false</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void That(bool condition, string message, params object[] args)
+        public static void That(bool condition, string? message, params object?[]? args)
         {
             Assert.That(condition, Is.True, message, args);
         }
@@ -62,7 +62,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is true. If the condition is false the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         /// <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         public static void That(bool condition, Func<string> getExceptionMessage)
@@ -77,11 +77,11 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is true. If the condition is false the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">A lambda that returns a Boolean</param>
         /// <param name="message">The message to display if the condition is false</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void That(Func<bool> condition, string message, params object[] args)
+        public static void That(Func<bool> condition, string? message, params object?[]? args)
         {
             Assert.That(condition.Invoke(), Is.True, message, args);
         }
@@ -99,7 +99,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is true. If the condition is false the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">A lambda that returns a Boolean</param>
         /// <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         public static void That(Func<bool> condition, Func<string> getExceptionMessage)
@@ -132,7 +132,7 @@ namespace NUnit.Framework
         /// <param name="expr">A Constraint expression to be applied</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void That<TActual>(ActualValueDelegate<TActual> del, IResolveConstraint expr, string message, params object[] args)
+        public static void That<TActual>(ActualValueDelegate<TActual> del, IResolveConstraint expr, string? message, params object?[]? args)
         {
             var constraint = expr.Resolve();
 
@@ -186,7 +186,7 @@ namespace NUnit.Framework
         /// <param name="constraint">A Constraint expression to be applied</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void That(TestDelegate code, IResolveConstraint constraint, string message, params object[] args)
+        public static void That(TestDelegate code, IResolveConstraint constraint, string? message, params object?[]? args)
         {
             Assert.That((object)code, constraint, message, args);
         }
@@ -230,7 +230,7 @@ namespace NUnit.Framework
         /// <param name="expression">A Constraint expression to be applied</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void That<TActual>(TActual actual, IResolveConstraint expression, string message, params object[] args)
+        public static void That<TActual>(TActual actual, IResolveConstraint expression, string? message, params object?[]? args)
         {
             var constraint = expression.Resolve();
 
@@ -268,7 +268,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Apply a constraint to an actual value, succeeding if the constraint
         /// is satisfied and throwing an assertion exception on failure.
-        /// Used as a synonym for That in rare cases where a private setter 
+        /// Used as a synonym for That in rare cases where a private setter
         /// causes a Visual Basic compilation error.
         /// </summary>
         /// <param name="actual">The actual value to test</param>
@@ -280,8 +280,8 @@ namespace NUnit.Framework
 
         /// <summary>
         /// Apply a constraint to an actual value, succeeding if the constraint
-        /// is satisfied and throwing an assertion exception on failure. 
-        /// Used as a synonym for That in rare cases where a private setter 
+        /// is satisfied and throwing an assertion exception on failure.
+        /// Used as a synonym for That in rare cases where a private setter
         /// causes a Visual Basic compilation error.
         /// </summary>
         /// <remarks>
@@ -292,7 +292,7 @@ namespace NUnit.Framework
         /// <param name="expression">A Constraint expression to be applied</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void ByVal(object actual, IResolveConstraint expression, string message, params object[] args)
+        public static void ByVal(object actual, IResolveConstraint expression, string? message, params object?[]? args)
         {
             Assert.That(actual, expression, message, args);
         }

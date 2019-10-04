@@ -22,6 +22,8 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -60,7 +62,7 @@ namespace NUnit.Framework.Interfaces
         /// </summary>
         /// <param name="name">The name of the node</param>
         /// <param name="value">The text content of the node</param>
-        public TNode(string name, string value) : this(name, value, false) { }
+        public TNode(string name, string? value) : this(name, value, false) { }
 
         /// <summary>
         /// Constructs a new instance of TNode with a value
@@ -68,7 +70,7 @@ namespace NUnit.Framework.Interfaces
         /// <param name="name">The name of the node</param>
         /// <param name="value">The text content of the node</param>
         /// <param name="valueIsCDATA">Flag indicating whether to use CDATA when writing the text</param>
-        public TNode(string name, string value, bool valueIsCDATA)
+        public TNode(string name, string? value, bool valueIsCDATA)
             : this(name)
         {
             Value = value;
@@ -87,7 +89,7 @@ namespace NUnit.Framework.Interfaces
         /// <summary>
         /// Gets the value of the node
         /// </summary>
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
         /// <summary>
         /// Gets a flag indicating whether the value should be output using CDATA.
@@ -107,7 +109,7 @@ namespace NUnit.Framework.Interfaces
         /// <summary>
         /// Gets the first ChildNode
         /// </summary>
-        public TNode FirstChild
+        public TNode? FirstChild
         {
             get { return ChildNodes.Count == 0 ? null : ChildNodes[0]; }
         }
@@ -174,7 +176,7 @@ namespace NUnit.Framework.Interfaces
         /// <param name="name">The element name</param>
         /// <param name="value">The text content of the new element</param>
         /// <returns>The newly created child element</returns>
-        public TNode AddElement(string name, string value)
+        public TNode AddElement(string name, string? value)
         {
             TNode childResult = new TNode(name, EscapeInvalidXmlCharacters(value));
             ChildNodes.Add(childResult);
@@ -188,7 +190,7 @@ namespace NUnit.Framework.Interfaces
         /// <param name="name">The element name</param>
         /// <param name="value">The text content of the new element</param>
         /// <returns>The newly created child element</returns>
-        public TNode AddElementWithCDATA(string name, string value)
+        public TNode AddElementWithCDATA(string name, string? value)
         {
             TNode childResult = new TNode(name, EscapeInvalidXmlCharacters(value), true);
             ChildNodes.Add(childResult);
@@ -212,7 +214,7 @@ namespace NUnit.Framework.Interfaces
         /// </summary>
         /// <param name="xpath"></param>
         /// <returns></returns>
-        public TNode SelectSingleNode(string xpath)
+        public TNode? SelectSingleNode(string xpath)
         {
             NodeList nodes = SelectNodes(xpath);
 
@@ -247,7 +249,7 @@ namespace NUnit.Framework.Interfaces
 
             if (Value != null)
                 if (ValueIsCDATA)
-                    WriteCDataTo(writer);
+                    WriteCDataTo(Value, writer);
                 else
                     writer.WriteString(Value);
 
@@ -279,10 +281,10 @@ namespace NUnit.Framework.Interfaces
         {
             TNode tNode = new TNode(xmlNode.Name, xmlNode.InnerText);
 
-            foreach (XmlAttribute attr in xmlNode.Attributes)
+            foreach (var attr in xmlNode.Attributes.Cast<XmlAttribute>())
                 tNode.AddAttribute(attr.Name, attr.Value);
 
-            foreach (XmlNode child in xmlNode.ChildNodes)
+            foreach (var child in xmlNode.ChildNodes.Cast<XmlNode>())
                 if (child.NodeType == XmlNodeType.Element)
                     tNode.ChildNodes.Add(FromXml(child));
 
@@ -299,7 +301,7 @@ namespace NUnit.Framework.Interfaces
                 throw new ArgumentException("XPath expressions with '//' are not supported", nameof(xpath));
 
             string head = xpath;
-            string tail = null;
+            string? tail = null;
 
             int slash = xpath.IndexOf('/');
             if (slash >= 0)
@@ -321,11 +323,12 @@ namespace NUnit.Framework.Interfaces
                 : resultNodes;
         }
 
-        private static string EscapeInvalidXmlCharacters(string str)
+        [return: NotNullIfNotNull("str")]
+        private static string? EscapeInvalidXmlCharacters(string? str)
         {
             if (str == null) return null;
 
-            StringBuilder builder = null;
+            StringBuilder? builder = null;
             for (int i = 0; i < str.Length; i++)
             {
                 char c = str[i];
@@ -391,10 +394,9 @@ namespace NUnit.Framework.Interfaces
             return string.Format("\\u{0}", ((int)symbol).ToString("x4"));
         }
 
-        private void WriteCDataTo(XmlWriter writer)
+        private static void WriteCDataTo(string text, XmlWriter writer)
         {
             int start = 0;
-            string text = Value;
 
             while (true)
             {
@@ -478,7 +480,7 @@ namespace NUnit.Framework.Interfaces
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>Value of the attribute or null</returns>
-        public new string this[string key]
+        public new string? this[string key]
         {
             get
             {

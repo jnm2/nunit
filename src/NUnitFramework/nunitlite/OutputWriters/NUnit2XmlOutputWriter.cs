@@ -30,6 +30,7 @@ using System.IO;
 using NUnit.Compatibility;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
+using System.Linq;
 
 namespace NUnitLite
 {
@@ -39,7 +40,7 @@ namespace NUnitLite
     /// </summary>
     public class NUnit2XmlOutputWriter : OutputWriter
     {
-        private XmlWriter xmlWriter;
+        private XmlWriter? xmlWriter;
 
         /// <summary>
         /// Write info about a test
@@ -80,7 +81,7 @@ namespace NUnitLite
         {
             ResultSummary summary = new ResultSummary(result);
 
-            xmlWriter.WriteStartDocument(false);
+            xmlWriter!.WriteStartDocument(false);
             xmlWriter.WriteComment("This file represents the results of running a test suite");
 
             xmlWriter.WriteStartElement("test-results");
@@ -104,7 +105,7 @@ namespace NUnitLite
 
         private void WriteCultureInfo()
         {
-            xmlWriter.WriteStartElement("culture-info");
+            xmlWriter!.WriteStartElement("culture-info");
             xmlWriter.WriteAttributeString("current-culture",
                                            CultureInfo.CurrentCulture.ToString());
             xmlWriter.WriteAttributeString("current-uiculture",
@@ -114,10 +115,10 @@ namespace NUnitLite
 
         private void WriteEnvironment()
         {
-            xmlWriter.WriteStartElement("environment");
+            xmlWriter!.WriteStartElement("environment");
             var assemblyName = AssemblyHelper.GetAssemblyName(typeof(NUnit2XmlOutputWriter).GetTypeInfo().Assembly);
             xmlWriter.WriteAttributeString("nunit-version",
-                                           assemblyName.Version.ToString());
+                                           assemblyName.Version!.ToString());
 #if NETSTANDARD1_4
             xmlWriter.WriteAttributeString("clr-version",
                                            System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
@@ -172,12 +173,12 @@ namespace NUnitLite
             if (result.Test is TestSuite)
                 WriteChildResults(result);
 
-            xmlWriter.WriteEndElement(); // test element
+            xmlWriter!.WriteEndElement(); // test element
         }
 
         private void TerminateXmlFile()
         {
-            xmlWriter.WriteEndElement(); // test-results
+            xmlWriter!.WriteEndElement(); // test-results
             xmlWriter.WriteEndDocument();
             xmlWriter.Flush();
             ((IDisposable)xmlWriter).Dispose();
@@ -189,11 +190,11 @@ namespace NUnitLite
         private void StartTestElement(ITestResult result)
         {
             ITest test = result.Test;
-            TestSuite suite = test as TestSuite;
+            TestSuite? suite = test as TestSuite;
 
             if (suite != null)
             {
-                xmlWriter.WriteStartElement("test-suite");
+                xmlWriter!.WriteStartElement("test-suite");
                 xmlWriter.WriteAttributeString("type", suite.TestType == "ParameterizedMethod" ? "ParameterizedTest" : suite.TestType);
                 xmlWriter.WriteAttributeString("name", suite.TestType == "Assembly" || suite.TestType == "Project"
                     ? result.Test.FullName
@@ -201,14 +202,13 @@ namespace NUnitLite
             }
             else
             {
-                xmlWriter.WriteStartElement("test-case");
+                xmlWriter!.WriteStartElement("test-case");
                 xmlWriter.WriteAttributeString("name", result.Name);
             }
 
-            if (test.Properties.ContainsKey(PropertyNames.Description))
+            if (test.Properties.Get(PropertyNames.Description) is { } description)
             {
-                string description = (string)test.Properties.Get(PropertyNames.Description);
-                xmlWriter.WriteAttributeString("description", description);
+                xmlWriter.WriteAttributeString("description", (string)description);
             }
 
             TestStatus status = result.ResultState.Status;
@@ -266,12 +266,12 @@ namespace NUnitLite
 
             if (properties.ContainsKey(PropertyNames.Category))
             {
-                xmlWriter.WriteStartElement("categories");
+                xmlWriter!.WriteStartElement("categories");
 
-                foreach (string category in properties[PropertyNames.Category])
+                foreach (var category in properties[PropertyNames.Category])
                 {
                     xmlWriter.WriteStartElement("category");
-                    xmlWriter.WriteAttributeString("name", category);
+                    xmlWriter.WriteAttributeString("name", (string)category!);
                     xmlWriter.WriteEndElement();
                 }
 
@@ -289,11 +289,11 @@ namespace NUnitLite
                 if (key != PropertyNames.Category)
                 {
                     if (nprops++ == 0)
-                        xmlWriter.WriteStartElement("properties");
+                        xmlWriter!.WriteStartElement("properties");
 
-                    foreach (object prop in properties[key])
+                    foreach (var prop in properties[key].Cast<object>())
                     {
-                        xmlWriter.WriteStartElement("property");
+                        xmlWriter!.WriteStartElement("property");
                         xmlWriter.WriteAttributeString("name", key);
                         xmlWriter.WriteAttributeString("value", prop.ToString());
                         xmlWriter.WriteEndElement();
@@ -302,12 +302,12 @@ namespace NUnitLite
             }
 
             if (nprops > 0)
-                xmlWriter.WriteEndElement();
+                xmlWriter!.WriteEndElement();
         }
 
         private void WriteReasonElement(string message)
         {
-            xmlWriter.WriteStartElement("reason");
+            xmlWriter!.WriteStartElement("reason");
             xmlWriter.WriteStartElement("message");
             WriteCData(message);
             xmlWriter.WriteEndElement();
@@ -316,7 +316,7 @@ namespace NUnitLite
 
         private void WriteFailureElement(string message, string stackTrace)
         {
-            xmlWriter.WriteStartElement("failure");
+            xmlWriter!.WriteStartElement("failure");
             xmlWriter.WriteStartElement("message");
             WriteCData(message);
             xmlWriter.WriteEndElement();
@@ -329,7 +329,7 @@ namespace NUnitLite
 
         private void WriteChildResults(ITestResult result)
         {
-            xmlWriter.WriteStartElement("results");
+            xmlWriter!.WriteStartElement("results");
 
             foreach (ITestResult childResult in result.Children)
                 WriteResultElement(childResult);
@@ -381,16 +381,16 @@ namespace NUnitLite
                 int illegal = text.IndexOf("]]>", start);
                 if (illegal < 0)
                     break;
-                xmlWriter.WriteCData(text.Substring(start, illegal - start + 2));
+                xmlWriter!.WriteCData(text.Substring(start, illegal - start + 2));
                 start = illegal + 2;
                 if (start >= text.Length)
                     return;
             }
 
             if (start > 0)
-                xmlWriter.WriteCData(text.Substring(start));
+                xmlWriter!.WriteCData(text.Substring(start));
             else
-                xmlWriter.WriteCData(text);
+                xmlWriter!.WriteCData(text);
         }
 
 #endregion

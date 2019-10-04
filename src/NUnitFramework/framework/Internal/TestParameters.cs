@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,7 +45,7 @@ namespace NUnit.Framework.Internal
         /// Construct a parameter set with a list of arguments
         /// </summary>
         /// <param name="args"></param>
-        public TestParameters(object[] args)
+        public TestParameters(object?[] args)
         {
             RunState = RunState.Runnable;
             InitializeArguments(args);
@@ -82,13 +82,13 @@ namespace NUnit.Framework.Internal
                 this.Properties[key] = data.Properties[key];
         }
 
-        private void InitializeArguments(object[] args)
+        private void InitializeArguments(object?[] args)
         {
             OriginalArguments = args;
 
             // We need to copy args, since we may change them
             var numArgs = args.Length;
-            Arguments = new object[numArgs];
+            Arguments = new object?[numArgs];
             Array.Copy(args, Arguments, numArgs);
         }
 
@@ -101,16 +101,16 @@ namespace NUnit.Framework.Internal
         /// The arguments to be used in running the test,
         /// which must match the method signature.
         /// </summary>
-        public object[] Arguments { get; internal set; }
+        public object?[]? Arguments { get; internal set; }
 
-        private string _testName;
+        private string? _testName;
 
         /// <summary>
         /// A name to be used for this test case in lieu
         /// of the standard generated name containing
         /// the argument list.
         /// </summary>
-        public string TestName
+        public string? TestName
         {
             get
             {
@@ -138,22 +138,22 @@ namespace NUnit.Framework.Internal
                 test.RunState = this.RunState;
 
             foreach (string key in Properties.Keys)
-                foreach (object value in Properties[key])
-                    test.Properties.Add(key, value);
+                foreach (var value in Properties[key])
+                    test.Properties.Add(key, value!);
         }
 
         /// <summary>
         /// The original arguments provided by the user,
         /// used for display purposes.
         /// </summary>
-        public object[] OriginalArguments { get; private set; }
+        public object?[]? OriginalArguments { get; private set; }
 
-        private string[] _argDisplayNames;
+        private string[]? _argDisplayNames;
 
         /// <summary>
         /// The list of display names to use as the parameters in the test name.
         /// </summary>
-        internal string[] ArgDisplayNames
+        internal string[]? ArgDisplayNames
         {
             get
             {

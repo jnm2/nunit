@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,9 +40,9 @@ namespace NUnit.Framework
         /// <param name="code">A TestSnippet delegate</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static Exception ThrowsAsync(IResolveConstraint expression, AsyncTestDelegate code, string message, params object[] args)
+        public static Exception ThrowsAsync(IResolveConstraint expression, AsyncTestDelegate code, string? message, params object?[]? args)
         {
-            Exception caughtException = null;
+            Exception? caughtException = null;
             try
             {
                 AsyncToSyncAdapter.Await(code.Invoke);
@@ -54,7 +54,7 @@ namespace NUnit.Framework
 
             Assert.That(caughtException, expression, message, args);
 
-            return caughtException;
+            return caughtException!;
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace NUnit.Framework
         /// <param name="code">A TestDelegate</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static Exception ThrowsAsync(Type expectedExceptionType, AsyncTestDelegate code, string message, params object[] args)
+        public static Exception ThrowsAsync(Type expectedExceptionType, AsyncTestDelegate code, string? message, params object?[]? args)
         {
             return ThrowsAsync(new ExceptionTypeConstraint(expectedExceptionType), code, message, args);
         }
@@ -100,7 +100,7 @@ namespace NUnit.Framework
         /// <param name="code">A TestDelegate</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static TActual ThrowsAsync<TActual>(AsyncTestDelegate code, string message, params object[] args) where TActual : Exception
+        public static TActual ThrowsAsync<TActual>(AsyncTestDelegate code, string? message, params object?[]? args) where TActual : Exception
         {
             return (TActual)ThrowsAsync(typeof (TActual), code, message, args);
         }
@@ -126,7 +126,7 @@ namespace NUnit.Framework
         /// <param name="code">A TestDelegate</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static Exception CatchAsync(AsyncTestDelegate code, string message, params object[] args)
+        public static Exception CatchAsync(AsyncTestDelegate code, string? message, params object?[]? args)
         {
             return ThrowsAsync(new InstanceOfTypeConstraint(typeof(Exception)), code, message, args);
         }
@@ -149,7 +149,7 @@ namespace NUnit.Framework
         /// <param name="code">A TestDelegate</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static Exception CatchAsync(Type expectedExceptionType, AsyncTestDelegate code, string message, params object[] args)
+        public static Exception CatchAsync(Type expectedExceptionType, AsyncTestDelegate code, string? message, params object?[]? args)
         {
             return ThrowsAsync(new InstanceOfTypeConstraint(expectedExceptionType), code, message, args);
         }
@@ -176,7 +176,7 @@ namespace NUnit.Framework
         /// <param name="code">A TestDelegate</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static TActual CatchAsync<TActual>(AsyncTestDelegate code, string message, params object[] args) where TActual : Exception
+        public static TActual CatchAsync<TActual>(AsyncTestDelegate code, string? message, params object?[]? args) where TActual : Exception
         {
             return (TActual)ThrowsAsync(new InstanceOfTypeConstraint(typeof (TActual)), code, message, args);
         }
@@ -201,7 +201,7 @@ namespace NUnit.Framework
         /// <param name="code">A TestDelegate</param>
         /// <param name="message">The message that will be displayed on failure</param>
         /// <param name="args">Arguments to be used in formatting the message</param>
-        public static void DoesNotThrowAsync(AsyncTestDelegate code, string message, params object[] args)
+        public static void DoesNotThrowAsync(AsyncTestDelegate code, string? message, params object?[]? args)
         {
             Assert.That(code, new ThrowsNothingConstraint(), message, args);
         }

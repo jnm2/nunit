@@ -43,7 +43,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <returns></returns>
         static public WorkItem CreateWorkItem(ITest test, ITestFilter filter, bool recursive = false)
         {
-            TestSuite suite = test as TestSuite;
+            TestSuite? suite = test as TestSuite;
             if (suite == null)
                 return new SimpleWorkItem((TestMethod)test, filter);
 
@@ -98,10 +98,10 @@ namespace NUnit.Framework.Internal.Execution
                 var yKey = int.MaxValue;
 
                 if (x.Test.Properties.ContainsKey(PropertyNames.Order))
-                    xKey = (int)x.Test.Properties[PropertyNames.Order][0];
+                    xKey = (int)x.Test.Properties[PropertyNames.Order][0]!;
 
                 if (y.Test.Properties.ContainsKey(PropertyNames.Order))
-                    yKey = (int)y.Test.Properties[PropertyNames.Order][0];
+                    yKey = (int)y.Test.Properties[PropertyNames.Order][0]!;
 
                 return xKey.CompareTo(yKey);
             }

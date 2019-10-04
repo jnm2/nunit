@@ -129,7 +129,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="method">The IMethod for which tests are to be constructed.</param>
         /// <param name="suite">The suite to which the tests will be added.</param>
-        public IEnumerable<TestMethod> BuildFrom(IMethodInfo method, Test suite)
+        public IEnumerable<TestMethod> BuildFrom(IMethodInfo method, Test? suite)
         {
             int count = 0;
 
@@ -162,7 +162,7 @@ namespace NUnit.Framework
 
             try
             {
-                IEnumerable source;
+                IEnumerable? source;
 
                 var previousState = SandboxedThreadState.Capture();
                 try
@@ -176,7 +176,7 @@ namespace NUnit.Framework
 
                 if (source != null)
                 {
-                    foreach (object item in source)
+                    foreach (object? item in source)
                     {
                         // First handle two easy cases:
                         // 1. Source is null. This is really an error but if we
@@ -185,13 +185,13 @@ namespace NUnit.Framework
                         //    single null argument will cause an error to be
                         //    reported at the test level, in most cases.
                         // 2. User provided an ITestCaseData and we just use it.
-                        ITestCaseData parms = item == null
-                            ? new TestCaseParameters(new object[] { null })
+                        ITestCaseData? parms = item == null
+                            ? new TestCaseParameters(new object?[] { null })
                             : item as ITestCaseData;
 
                         if (parms == null)
                         {
-                            object[] args = null;
+                            object?[]? args = null;
 
                             // 3. An array was passed, it may be an object[]
                             //    or possibly some other kind of array, which
@@ -215,7 +215,7 @@ namespace NUnit.Framework
 
                             if (args == null)
                             {
-                                args = new object[] { item };
+                                args = new object?[] { item };
                             }
 
                             parms = new TestCaseParameters(args);
@@ -243,7 +243,7 @@ namespace NUnit.Framework
             return data;
         }
 
-        private IEnumerable GetTestCaseSource(IMethodInfo method)
+        private IEnumerable? GetTestCaseSource(IMethodInfo method)
         {
             Type sourceType = SourceType ?? method.TypeInfo.Type;
 
@@ -261,22 +261,30 @@ namespace NUnit.Framework
                 var field = member as FieldInfo;
                 if (field != null)
                     return field.IsStatic
-                        ? (MethodParams == null ? (IEnumerable)field.GetValue(null)
+                        ? (MethodParams == null ? (IEnumerable?)field.GetValue(null)
                                                 : ReturnErrorAsParameter(ParamGivenToField))
                         : ReturnErrorAsParameter(SourceMustBeStatic);
 
                 var property = member as PropertyInfo;
                 if (property != null)
-                    return property.GetGetMethod(true).IsStatic
-                        ? (MethodParams == null ? (IEnumerable)property.GetValue(null, null)
-                                                : ReturnErrorAsParameter(ParamGivenToProperty))
-                        : ReturnErrorAsParameter(SourceMustBeStatic);
+                {
+                    return property.GetGetMethod(true) switch
+                    {
+                        null => ReturnErrorAsParameter("The property specified by a TestCaseSourceAttribute must have a get accessor."),
+
+                        { IsStatic: false } => ReturnErrorAsParameter(SourceMustBeStatic),
+
+                        _ => MethodParams == null
+                            ? (IEnumerable?)property.GetValue(null, null)
+                            : ReturnErrorAsParameter(ParamGivenToProperty)
+                    };
+                }
 
                 var m = member as MethodInfo;
                 if (m != null)
                     return m.IsStatic
                         ? (MethodParams == null || m.GetParameters().Length == MethodParams.Length
-                            ? (IEnumerable)m.Invoke(null, MethodParams)
+                            ? (IEnumerable?)m.Invoke(null, MethodParams)
                             : ReturnErrorAsParameter(NumberOfArgsDoesNotMatch))
                         : ReturnErrorAsParameter(SourceMustBeStatic);
             }

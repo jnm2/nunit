@@ -54,7 +54,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="method">The method to be used as a test.</param>
         /// <param name="parentSuite">The suite or fixture to which the new test will be added</param>
-        public TestMethod(IMethodInfo method, Test parentSuite) : base(method)
+        public TestMethod(IMethodInfo method, Test? parentSuite) : base(method)
         {
             // Needed to give proper fullname to test in a parameterized fixture.
             // Without this, the arguments to the fixture are not included.
@@ -71,7 +71,7 @@ namespace NUnit.Framework.Internal
             get { return parms != null && parms.HasExpectedResult; }
         }
 
-        internal object ExpectedResult
+        internal object? ExpectedResult
         {
             get { return parms != null ? parms.ExpectedResult : null; }
         }

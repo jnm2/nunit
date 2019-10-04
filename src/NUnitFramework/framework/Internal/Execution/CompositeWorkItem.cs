@@ -43,8 +43,8 @@ namespace NUnit.Framework.Internal.Execution
 
         private readonly TestSuite _suite;
         private readonly TestSuiteResult _suiteResult;
-        private TestCommand _setupCommand;
-        private TestCommand _teardownCommand;
+        private TestCommand? _setupCommand;
+        private TestCommand? _teardownCommand;
 
         /// <summary>
         /// List of Child WorkItems
@@ -61,7 +61,7 @@ namespace NUnit.Framework.Internal.Execution
         }
 #endif
 
-        private CountdownEvent _childTestCountdown;
+        private CountdownEvent? _childTestCountdown;
 
         /// <summary>
         /// Construct a CompositeWorkItem for executing a test suite
@@ -73,7 +73,7 @@ namespace NUnit.Framework.Internal.Execution
             : base(suite, childFilter)
         {
             _suite = suite;
-            _suiteResult = Result as TestSuiteResult;
+            _suiteResult = (TestSuiteResult)Result;
         }
 
         /// <summary>
@@ -255,14 +255,14 @@ namespace NUnit.Framework.Internal.Execution
         {
             try
             {
-                _setupCommand.Execute(Context);
+                _setupCommand!.Execute(Context);
 
                 // SetUp may have changed some things in the environment
                 Context.UpdateContextFromEnvironment();
             }
             catch (Exception ex)
             {
-                if (ex is NUnitException || ex is TargetInvocationException)
+                if ((ex is NUnitException || ex is TargetInvocationException) && ex.InnerException is { })
                     ex = ex.InnerException;
 
                 Result.RecordException(ex, FailureSite.SetUp);
@@ -308,7 +308,7 @@ namespace NUnit.Framework.Internal.Execution
                 }
         }
 
-        private void SkipFixture(ResultState resultState, string message, string stackTrace)
+        private void SkipFixture(ResultState resultState, string? message, string? stackTrace)
         {
             Result.SetResult(resultState.WithSite(FailureSite.SetUp), message, StackFilter.DefaultFilter.Filter(stackTrace));
             SkipChildren(this, resultState.WithSite(FailureSite.Parent), "OneTimeSetUp: " + message);
@@ -338,22 +338,22 @@ namespace NUnit.Framework.Internal.Execution
             // the proper execution environment
             this.Context.EstablishExecutionEnvironment();
 
-            _teardownCommand.Execute(this.Context);
+            _teardownCommand!.Execute(this.Context);
         }
 
-        private string GetSkipReason()
+        private string? GetSkipReason()
         {
-            return (string)Test.Properties.Get(PropertyNames.SkipReason);
+            return (string?)Test.Properties.Get(PropertyNames.SkipReason);
         }
 
-        private string GetProviderStackTrace()
+        private string? GetProviderStackTrace()
         {
-            return (string)Test.Properties.Get(PropertyNames.ProviderStackTrace);
+            return (string?)Test.Properties.Get(PropertyNames.ProviderStackTrace);
         }
 
         private readonly object _childCompletionLock = new object();
 
-        private void OnChildItemCompleted(object sender, EventArgs e)
+        private void OnChildItemCompleted(object? sender, EventArgs e)
         {
             // Since child tests may be run on various threads, this
             // method may be called simultaneously by different children.
@@ -361,7 +361,7 @@ namespace NUnit.Framework.Internal.Execution
             // only blocks its own children.
             lock (_childCompletionLock)
             {
-                WorkItem childTask = sender as WorkItem;
+                WorkItem? childTask = sender as WorkItem;
                 if (childTask != null)
                 {
                     childTask.Completed -= new EventHandler(OnChildItemCompleted);
@@ -371,7 +371,7 @@ namespace NUnit.Framework.Internal.Execution
                         Context.ExecutionStatus = TestExecutionStatus.StopRequested;
 
                     // Check to see if all children completed
-                    _childTestCountdown.Signal();
+                    _childTestCountdown!.Signal();
                     if (_childTestCountdown.CurrentCount == 0)
                         OnAllChildItemsCompleted();
                 }

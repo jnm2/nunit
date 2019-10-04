@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,7 +26,7 @@ using System.Collections.Generic;
 
 namespace NUnit.Framework.Constraints
 {
-    /// <summary><see cref="CollectionTally"/> counts (tallies) the number of occurrences 
+    /// <summary><see cref="CollectionTally"/> counts (tallies) the number of occurrences
     /// of each object in one or more enumerations.</summary>
     public sealed class CollectionTally
     {
@@ -34,13 +34,13 @@ namespace NUnit.Framework.Constraints
         public sealed class CollectionTallyResult
         {
             /// <summary>Items that were not in the expected collection.</summary>
-            public List<object> ExtraItems { get; }
+            public List<object?> ExtraItems { get; }
 
             /// <summary>Items that were not accounted for in the expected collection.</summary>
-            public List<object> MissingItems { get; }
+            public List<object?> MissingItems { get; }
 
             /// <summary>Initializes a new instance of the <see cref="CollectionTallyResult"/> class with the given fields.</summary>
-            public CollectionTallyResult(List<object> missingItems, List<object> extraItems)
+            public CollectionTallyResult(List<object?> missingItems, List<object?> extraItems)
             {
                 MissingItems = missingItems;
                 ExtraItems = extraItems;
@@ -55,14 +55,14 @@ namespace NUnit.Framework.Constraints
             get
             {
                 return new CollectionTallyResult(
-                    new List<object>(_missingItems),
-                    new List<object>(_extraItems));
+                    new List<object?>(_missingItems),
+                    new List<object?>(_extraItems));
             }
         }
 
-        private readonly List<object> _missingItems = new List<object>();
+        private readonly List<object?> _missingItems = new List<object?>();
 
-        private readonly List<object> _extraItems = new List<object>();
+        private readonly List<object?> _extraItems = new List<object?>();
 
         /// <summary>Construct a CollectionTally object from a comparer and a collection.</summary>
         /// <param name="comparer">The comparer to use for equality.</param>
@@ -71,11 +71,11 @@ namespace NUnit.Framework.Constraints
         {
             this.comparer = comparer;
 
-            foreach (object o in c)
+            foreach (object? o in c)
                 _missingItems.Add(o);
         }
 
-        private bool ItemsEqual(object expected, object actual)
+        private bool ItemsEqual(object? expected, object? actual)
         {
             Tolerance tolerance = Tolerance.Default;
             return comparer.AreEqual(expected, actual, ref tolerance);
@@ -83,7 +83,7 @@ namespace NUnit.Framework.Constraints
 
         /// <summary>Try to remove an object from the tally.</summary>
         /// <param name="o">The object to remove.</param>
-        public void TryRemove(object o)
+        public void TryRemove(object? o)
         {
             for (int index = _missingItems.Count - 1; index >= 0; index--)
             {
@@ -101,7 +101,7 @@ namespace NUnit.Framework.Constraints
         /// <param name="c">The objects to remove.</param>
         public void TryRemove(IEnumerable c)
         {
-            foreach (object o in c)
+            foreach (object? o in c)
                 TryRemove(o);
         }
     }

@@ -1,7 +1,8 @@
 <Project>
 
   <PropertyGroup>
-    <LangVersion>7</LangVersion>
+    <LangVersion>8</LangVersion>
+    <Nullable>enable</Nullable>
     <Features>strict</Features>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\nunit.snk</AssemblyOriginatorKeyFile>
@@ -37,6 +38,23 @@
   <ItemGroup>
     <Compile Include="..\..\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
     <Compile Include="..\FrameworkVersion.cs" Link="Properties\FrameworkVersion.cs" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AnnotatedReferenceAssemblyVersion>3.0.0</AnnotatedReferenceAssemblyVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="TunnelVisionLabs.ReferenceAssemblyAnnotator" Version="1.0.0-alpha.77" PrivateAssets="all" />
+    <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[$(AnnotatedReferenceAssemblyVersion)]" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net35'">
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net35'">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
 
 </Project>

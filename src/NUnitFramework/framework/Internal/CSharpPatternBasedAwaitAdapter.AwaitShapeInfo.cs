@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Copyright (c) 2018 Charlie Poole, Rob Prouse
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -44,7 +44,7 @@ namespace NUnit.Framework.Internal
                 _getResultMethod = getResultMethod;
             }
 
-            public static AwaitShapeInfo TryCreate(Type awaitableType)
+            public static AwaitShapeInfo? TryCreate(Type awaitableType)
             {
                 // See https://docs.microsoft.com/dotnet/csharp/language-reference/language-specification/expressions#awaitable-expressions
                 // This section was first established in C# 5 and has not been updated as of C# 7.3.
@@ -91,7 +91,8 @@ namespace NUnit.Framework.Internal
                 // and is much easier to follow, and add the complex thing only if we need to hit a perf goal.
 
                 return new ReflectionAdapter(
-                    _getAwaiterMethod.InvokeWithTransparentExceptions(awaitable),
+                    _getAwaiterMethod.InvokeWithTransparentExceptions(awaitable)
+                        ?? throw new InvalidOperationException("GetAwaiter must not return null."),
                     _isCompletedGetter,
                     _onCompletedMethod,
                     _getResultMethod);

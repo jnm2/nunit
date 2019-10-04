@@ -444,9 +444,9 @@ namespace NUnit.Framework.Internal
         {
             var actions = new List<ITestAction>();
 
-            if (type != null && type != typeof(object))
+            if (type?.GetTypeInfo().BaseType is { } baseType)
             {
-                actions.AddRange(GetActionsForType(type.GetTypeInfo().BaseType));
+                actions.AddRange(GetActionsForType(baseType));
 
                 foreach (Type interfaceType in TypeHelper.GetDeclaredInterfaces(type))
                     actions.AddRange(interfaceType.GetTypeInfo().GetAttributes<ITestAction>(false));

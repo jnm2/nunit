@@ -22,6 +22,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using NUnit.Compatibility;
 using NUnit.Framework.Internal;
@@ -39,7 +40,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="value">The value to be tested</param>
         /// <param name="name">The name of the argument</param>
-        public static void ArgumentNotNull(object value, string name)
+        public static void ArgumentNotNull(object? value, string name)
         {
             if (value == null)
                 throw new ArgumentNullException(name, "Argument " + name + " must not be null");
@@ -64,7 +65,7 @@ namespace NUnit.Framework
         /// <param name="condition">The condition that must be met</param>
         /// <param name="message">The exception message to be used</param>
         /// <param name="paramName">The name of the argument</param>
-        public static void ArgumentInRange(bool condition, string message, string paramName)
+        public static void ArgumentInRange([DoesNotReturnIf(false)] bool condition, string message, string paramName)
         {
             if (!condition)
                 throw new ArgumentOutOfRangeException(paramName, message);
@@ -76,7 +77,7 @@ namespace NUnit.Framework
         /// <param name="condition">The condition that must be met</param>
         /// <param name="message">The exception message to be used</param>
         /// <param name="paramName">The name of the argument</param>
-        public static void ArgumentValid(bool condition, string message, string paramName)
+        public static void ArgumentValid([DoesNotReturnIf(false)] bool condition, string message, string paramName)
         {
             if (!condition)
                 throw new ArgumentException(message, paramName);
@@ -87,7 +88,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="condition">The condition that must be met</param>
         /// <param name="message">The exception message to be used</param>
-        public static void OperationValid(bool condition, string message)
+        public static void OperationValid([DoesNotReturnIf(false)] bool condition, string message)
         {
             if (!condition)
                 throw new InvalidOperationException(message);
@@ -98,7 +99,8 @@ namespace NUnit.Framework
         /// </summary>
         public static void ArgumentNotAsyncVoid(Delegate @delegate, string paramName)
         {
-            ArgumentNotAsyncVoid(@delegate.GetMethodInfo(), paramName);
+            // !: https://github.com/dotnet/corefx/issues/41346
+            ArgumentNotAsyncVoid(@delegate.GetMethodInfo()!, paramName);
         }
 
         /// <summary>

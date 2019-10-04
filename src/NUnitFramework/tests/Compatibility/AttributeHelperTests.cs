@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -75,7 +75,7 @@ namespace NUnit.Framework.Compatibility
             Assert.That(type, Is.Not.Null);
             var method = type.GetTypeInfo().GetMethod("Add");
             Assert.That(method, Is.Not.Null);
-            var attr = AttributeHelper.GetCustomAttributes(method, typeof(AuthorAttribute), true);
+            var attr = AttributeHelper.GetCustomAttributes(method!, typeof(AuthorAttribute), true);
             Assert.That(attr, Is.Not.Null);
             Assert.That(attr.Length, Is.EqualTo(1));
         }
@@ -87,7 +87,7 @@ namespace NUnit.Framework.Compatibility
             Assert.That(type, Is.Not.Null);
             var property = type.GetTypeInfo().GetProperty("MyProperty");
             Assert.That(property, Is.Not.Null);
-            var attr = AttributeHelper.GetCustomAttributes(property, typeof(DatapointSourceAttribute), true);
+            var attr = AttributeHelper.GetCustomAttributes(property!, typeof(DatapointSourceAttribute), true);
             Assert.That(attr, Is.Not.Null);
             Assert.That(attr.Length, Is.EqualTo(1));
         }
@@ -99,7 +99,7 @@ namespace NUnit.Framework.Compatibility
             Assert.That(type, Is.Not.Null);
             var field = type.GetTypeInfo().GetField(nameof(A.Field));
             Assert.That(field, Is.Not.Null);
-            var attr = AttributeHelper.GetCustomAttributes(field, typeof(DatapointAttribute), true);
+            var attr = AttributeHelper.GetCustomAttributes(field!, typeof(DatapointAttribute), true);
             Assert.That(attr, Is.Not.Null);
             Assert.That(attr.Length, Is.EqualTo(1));
         }
@@ -109,7 +109,7 @@ namespace NUnit.Framework.Compatibility
         {
             var type = typeof(A);
             Assert.That(type, Is.Not.Null);
-            var method = type.GetTypeInfo().GetMethod("Add");
+            var method = type.GetTypeInfo().GetMethod("Add")!;
             Assert.That(method, Is.Not.Null);
             ParameterInfo[] param = method.GetParameters();
             Assert.That(param, Is.Not.Null);

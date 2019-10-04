@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -53,11 +53,14 @@ namespace NUnit.Framework
         /// <returns></returns>
         public ICollection Property( string name )
         {
-            var propList = new List<object>();
-            foreach( object item in original )
+            var propList = new List<object?>();
+
+            foreach (object? item in original)
             {
-                PropertyInfo property = item.GetType().GetProperty( name, 
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance );
+                if (item is null) throw new InvalidOperationException("The collection must not contain null elements.");
+
+                PropertyInfo? property = item.GetType().GetProperty(name,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                 if ( property == null )
                     throw new ArgumentException( string.Format(
                         "{0} does not have a {1} property", item, name ) );

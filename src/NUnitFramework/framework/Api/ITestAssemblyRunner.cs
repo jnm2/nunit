@@ -48,7 +48,7 @@ namespace NUnit.Framework.Api
         /// Gets the tree of test results, if the test
         /// run is completed, otherwise null.
         /// </summary>
-        ITestResult Result { get; }
+        ITestResult? Result { get; }
 
         /// <summary>
         /// Indicates whether a test has been loaded

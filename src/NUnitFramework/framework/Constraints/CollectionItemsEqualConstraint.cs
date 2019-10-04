@@ -48,7 +48,7 @@ namespace NUnit.Framework.Constraints
         /// Construct a CollectionConstraint
         /// </summary>
         /// <param name="arg"></param>
-        protected CollectionItemsEqualConstraint(object arg) : base(arg) { }
+        protected CollectionItemsEqualConstraint(object? arg) : base(arg) { }
 
         #region Protected Properties
 
@@ -155,7 +155,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Compares two collection members for equality
         /// </summary>
-        protected bool ItemsEqual(object x, object y)
+        protected bool ItemsEqual(object? x, object? y)
         {
             Tolerance tolerance = Tolerance.Default;
             return _comparer.AreEqual(x, y, ref tolerance);
