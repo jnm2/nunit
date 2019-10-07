@@ -72,7 +72,7 @@ namespace NUnit.Framework.Attributes
 
             public bool IsStaticClass => _baseInfo.IsStaticClass;
 
-            public object Construct(object[] args)
+            public object Construct(object?[] args)
             {
                 return _baseInfo.Construct(args);
             }
@@ -92,7 +92,7 @@ namespace NUnit.Framework.Attributes
                 return _baseInfo.GetDisplayName();
             }
 
-            public string GetDisplayName(object[] args)
+            public string GetDisplayName(object?[] args)
             {
                 return _baseInfo.GetDisplayName(args);
             }

@@ -58,7 +58,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void AssumptionPasses_BooleanWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
+            Func<string?> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
             Assume.That(2 + 2 == 4, getExceptionMessage);
         }
 
@@ -83,7 +83,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void AssumptionPasses_BooleanLambdaWithWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
+            Func<string?> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
             Assume.That(() => 2 + 2 == 4, getExceptionMessage);
         }
 
@@ -108,7 +108,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void AssumptionPasses_ActualAndConstraintWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
+            Func<string?> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
             Assume.That(2 + 2, Is.EqualTo(4), getExceptionMessage);
         }
 
@@ -133,7 +133,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void AssumptionPasses_ActualLambdaAndConstraintWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
+            Func<string?> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
             Assume.That(() => 2 + 2, Is.EqualTo(4), getExceptionMessage);
         }
 
@@ -158,7 +158,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void AssumptionPasses_DelegateAndConstraintWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
+            Func<string?> getExceptionMessage = () => string.Format("Not Equal to {0}", 4);
             Assume.That(new ActualValueDelegate<int>(ReturnsFour), Is.EqualTo(4), getExceptionMessage);
         }
 
@@ -190,7 +190,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void FailureThrowsInconclusiveException_BooleanWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => "got 5";
+            Func<string?> getExceptionMessage = () => "got 5";
             var ex = Assert.Throws<InconclusiveException>(() => Assume.That(2 + 2 == 5, getExceptionMessage));
             Assert.That(ex.Message, Does.Contain("got 5"));
         }
@@ -218,7 +218,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void FailureThrowsInconclusiveException_BooleanLambdaWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => "got 5";
+            Func<string?> getExceptionMessage = () => "got 5";
             var ex = Assert.Throws<InconclusiveException>(() => Assume.That(() => 2 + 2 == 5, getExceptionMessage));
             Assert.That(ex.Message, Does.Contain("got 5"));
         }
@@ -246,7 +246,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void FailureThrowsInconclusiveException_ActualAndConstraintWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => "Should be 5";
+            Func<string?> getExceptionMessage = () => "Should be 5";
             var ex = Assert.Throws<InconclusiveException>(() => Assume.That(2 + 2, Is.EqualTo(5), getExceptionMessage));
             Assert.That(ex.Message, Does.Contain("Should be 5"));
         }
@@ -274,7 +274,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void FailureThrowsInconclusiveException_ActualLambdaAndConstraintWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => "Should be 5";
+            Func<string?> getExceptionMessage = () => "Should be 5";
             var ex = Assert.Throws<InconclusiveException>(() => Assume.That(() => 2 + 2, Is.EqualTo(5), getExceptionMessage));
             Assert.That(ex.Message, Does.Contain("Should be 5"));
         }
@@ -303,7 +303,7 @@ namespace NUnit.Framework.Assertions
         [Test]
         public void FailureThrowsInconclusiveException_DelegateAndConstraintWithMessageStringFunc()
         {
-            Func<string> getExceptionMessage = () => "Should be 4";
+            Func<string?> getExceptionMessage = () => "Should be 4";
             var ex = Assert.Throws<InconclusiveException>(
                 () => Assume.That(new ActualValueDelegate<int>(ReturnsFive), Is.EqualTo(4), getExceptionMessage));
             Assert.That(ex.Message, Does.Contain("Should be 4"));
@@ -314,7 +314,7 @@ namespace NUnit.Framework.Assertions
         {
             // Arrange
             var funcWasCalled = false;
-            Func<string> getExceptionMessage = () =>
+            Func<string?> getExceptionMessage = () =>
             {
                 funcWasCalled = true;
                 return "Func was called";
@@ -332,7 +332,7 @@ namespace NUnit.Framework.Assertions
         {
             // Arrange
             var funcWasCalled = false;
-            Func<string> getExceptionMessage = () =>
+            Func<string?> getExceptionMessage = () =>
             {
                 funcWasCalled = true;
                 return "Func was called";

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,7 +36,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Prefix used in forming the constraint description
         /// </summary>
-        protected string DescriptionPrefix { get; set; }
+        protected string? DescriptionPrefix { get; set; }
 
         /// <summary>
         /// Construct given a base constraint
@@ -62,7 +62,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Formats a prefix constraint's description.
         /// </summary>
-        internal static string FormatDescription(string descriptionPrefix, IConstraint baseConstraint)
+        internal static string FormatDescription(string? descriptionPrefix, IConstraint baseConstraint)
         {
             return string.Format(
                 baseConstraint is EqualConstraint ? "{0} equal to {1}" : "{0} {1}",

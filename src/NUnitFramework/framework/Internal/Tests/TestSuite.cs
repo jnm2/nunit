@@ -50,7 +50,7 @@ namespace NUnit.Framework.Internal
         /// <param name="name">The name of the suite.</param>
         public TestSuite(string name) : base(name)
         {
-            Arguments = new object[0];
+            Arguments = new object?[0];
             OneTimeSetUpMethods = new MethodInfo[0];
             OneTimeTearDownMethods = new MethodInfo[0];
         }
@@ -63,7 +63,7 @@ namespace NUnit.Framework.Internal
         public TestSuite(string parentSuiteName, string name)
             : base(parentSuiteName, name)
         {
-            Arguments = new object[0];
+            Arguments = new object?[0];
             OneTimeSetUpMethods = new MethodInfo[0];
             OneTimeTearDownMethods = new MethodInfo[0];
         }
@@ -73,10 +73,10 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="fixtureType">Type of the fixture.</param>
         /// <param name="arguments">Arguments used to instantiate the test fixture, or null if none used.</param>
-        public TestSuite(ITypeInfo fixtureType, object[] arguments = null)
+        public TestSuite(ITypeInfo fixtureType, object?[]? arguments = null)
             : base(fixtureType)
         {
-            Arguments = arguments ?? new object[0];
+            Arguments = arguments ?? new object?[0];
             OneTimeSetUpMethods = new MethodInfo[0];
             OneTimeTearDownMethods = new MethodInfo[0];
         }
@@ -88,7 +88,7 @@ namespace NUnit.Framework.Internal
         public TestSuite(Type fixtureType)
             : base(new TypeWrapper(fixtureType))
         {
-            Arguments = new object[0];
+            Arguments = new object?[0];
             OneTimeSetUpMethods = new MethodInfo[0];
             OneTimeTearDownMethods = new MethodInfo[0];
         }
@@ -218,7 +218,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// The arguments to use in creating the fixture, or empty array if none are provided.
         /// </summary>
-        public override object[] Arguments { get; }
+        public override object?[] Arguments { get; }
 
         /// <summary>
         /// Set to true to suppress sorting this suite's contents

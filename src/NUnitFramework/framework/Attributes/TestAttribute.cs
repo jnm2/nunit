@@ -98,8 +98,8 @@ namespace NUnit.Framework
             if (!test.Properties.ContainsKey(PropertyNames.Author) && Author != null)
                 test.Properties.Set(PropertyNames.Author, Author);
 
-            if (!test.Properties.ContainsKey(PropertyNames.TestOf) && TestOf != null)
-                test.Properties.Set(PropertyNames.TestOf, TestOf.FullName);
+            if (!test.Properties.ContainsKey(PropertyNames.TestOf) && TestOf is { FullName: { } fullName })
+                test.Properties.Set(PropertyNames.TestOf, fullName);
 
             if (_hasExpectedResult && test.Method.GetParameters().Length > 0)
                 test.MakeInvalid("The 'TestAttribute.ExpectedResult' property may not be used on parameterized methods.");

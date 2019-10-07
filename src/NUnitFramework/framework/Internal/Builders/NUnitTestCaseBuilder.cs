@@ -140,9 +140,9 @@ namespace NUnit.Framework.Internal.Builders
         /// The return value is no longer used internally, but is retained
         /// for testing purposes.
         /// </remarks>
-        private static bool CheckTestMethodSignature(TestMethod testMethod, TestCaseParameters parms)
+        private static bool CheckTestMethodSignature(TestMethod testMethod, TestCaseParameters? parms)
         {
-            if (testMethod.Method.IsAbstract)
+            if (testMethod.Method!.IsAbstract)
                 return MarkAsNotRunnable(testMethod, "Method is abstract");
 
             if (!testMethod.Method.IsPublic)

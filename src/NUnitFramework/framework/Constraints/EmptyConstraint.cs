@@ -32,13 +32,13 @@ namespace NUnit.Framework.Constraints
     /// </summary>
     public class EmptyConstraint : Constraint
     {
-        private Constraint realConstraint;
+        private Constraint? realConstraint;
 
         /// <summary>
         /// The Description of what this constraint tests, for
         /// use in messages and in the ConstraintResult.
         /// </summary>
-        public override string Description
+        public override string? Description
         {
             get { return realConstraint == null ? "<empty>" : realConstraint.Description; }
         }
@@ -50,9 +50,9 @@ namespace NUnit.Framework.Constraints
         /// <returns>True for success, false for failure</returns>
         public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
-            // NOTE: actual is string will fail for a null typed as string           
+            // NOTE: actual is string will fail for a null typed as string
             Type actualType = typeof(TActual);
-            
+
             if (actualType == typeof(string))
                 realConstraint = new EmptyStringConstraint();
             else if (actual == null)

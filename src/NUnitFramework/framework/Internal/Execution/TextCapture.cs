@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Copyright (c) 2014 Charlie Poole, Rob Prouse
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -73,7 +73,7 @@ namespace NUnit.Framework.Internal.Execution
         /// Writes a string
         /// </summary>
         /// <param name="value">The string to write</param>
-        public override void Write(string value)
+        public override void Write(string? value)
         {
             var context = TestExecutionContext.CurrentContext;
 
@@ -87,7 +87,7 @@ namespace NUnit.Framework.Internal.Execution
         /// Writes a string followed by a line terminator
         /// </summary>
         /// <param name="value">The string to write</param>
-        public override void WriteLine(string value)
+        public override void WriteLine(string? value)
         {
             var context = TestExecutionContext.CurrentContext;
 

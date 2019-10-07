@@ -54,7 +54,7 @@ namespace NUnit.Compatibility
             var assembly = actual as Assembly;
             if (assembly != null) return (Attribute[])assembly.GetCustomAttributes(attributeType);
 
-            var interfaceType = actual?.GetType().GetInterfaces().SingleOrDefault(i => i.FullName == "System.Reflection.ICustomAttributeProvider");
+            var interfaceType = actual.GetType().GetInterfaces().SingleOrDefault(i => i.FullName == "System.Reflection.ICustomAttributeProvider");
             if (interfaceType != null)
             {
                 var method = interfaceType.GetMethod("GetCustomAttributes", new[] { typeof(Type), typeof(bool) });

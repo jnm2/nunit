@@ -22,6 +22,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using NUnit.Compatibility;
 
@@ -73,7 +74,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="argList">The arguments to the method</param>
         /// <param name="typeArguments">If successful, an array of type arguments.</param>
-        public bool TryGetTypeArguments(object[] argList, out Type[] typeArguments)
+        public bool TryGetTypeArguments(object?[] argList, [NotNullWhen(true)] out Type[]? typeArguments)
         {
             Guard.ArgumentValid(argList.Length == ParmTypes.Length, "Supplied arguments do not match required method parameters", nameof(argList));
 
@@ -110,7 +111,7 @@ namespace NUnit.Framework.Internal
             else if (parmType.GetTypeInfo().ContainsGenericParameters)
             {
                 var genericArgTypes = parmType.IsArray
-                    ? new[] { parmType.GetElementType() }
+                    ? new[] { parmType.GetElementType()! }
                     : parmType.GetGenericArguments();
 
                 if (argType.HasElementType)
@@ -128,7 +129,7 @@ namespace NUnit.Framework.Internal
             }
         }
 
-        private void ApplyArgType(Type parmType, Type argType)
+        private void ApplyArgType(Type parmType, Type? argType)
         {
             // Note: parmType must be generic parameter type - checked by caller
             var index = parmType.GenericParameterPosition;

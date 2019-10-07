@@ -65,7 +65,7 @@ namespace NUnit.Framework.Constraints
         public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
             Guard.ArgumentNotNull(actual, nameof(actual));
-            Attribute[] attrs = AttributeHelper.GetCustomAttributes(actual!, expectedType, true);
+            Attribute[] attrs = AttributeHelper.GetCustomAttributes(actual, expectedType, true);
             ConstraintResult result = new ConstraintResult(this, actual);
             result.Status = attrs.Length > 0
                 ? ConstraintStatus.Success : ConstraintStatus.Failure;

@@ -42,7 +42,7 @@ namespace NUnit.Framework
         /// Initializes a new instance of the <see cref="TestFixtureData"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        public TestFixtureData(params object[] args)
+        public TestFixtureData(params object?[] args)
             : base(args == null ? new object[] { null } : args)
         {
         }

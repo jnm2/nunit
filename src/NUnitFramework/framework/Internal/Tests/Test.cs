@@ -45,12 +45,12 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Used to cache the declaring type for this MethodInfo
         /// </summary>
-        private ITypeInfo _declaringTypeInfo;
+        private ITypeInfo? _declaringTypeInfo;
 
         /// <summary>
         /// Method property backing field
         /// </summary>
-        private IMethodInfo _method;
+        private IMethodInfo? _method;
 
         #endregion
 
@@ -146,11 +146,11 @@ namespace NUnit.Framework.Internal
         /// Gets the name of the class where this test was declared.
         /// Returns null if the test is not associated with a class.
         /// </summary>
-        public string ClassName
+        public string? ClassName
         {
             get
             {
-                ITypeInfo typeInfo = TypeInfo;
+                ITypeInfo? typeInfo = TypeInfo;
 
                 if (Method != null)
                 {
@@ -173,7 +173,7 @@ namespace NUnit.Framework.Internal
         /// Gets the name of the method implementing this test.
         /// Returns null if the test is not implemented as a method.
         /// </summary>
-        public virtual string MethodName
+        public virtual string? MethodName
         {
             get { return null; }
         }
@@ -181,19 +181,19 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// The arguments to use in creating the test or empty array if none required.
         /// </summary>
-        public abstract object[] Arguments { get; }
+        public abstract object?[] Arguments { get; }
 
         /// <summary>
         /// Gets the TypeInfo of the fixture used in running this test
         /// or null if no fixture type is associated with it.
         /// </summary>
-        public ITypeInfo TypeInfo { get; private set; }
+        public ITypeInfo? TypeInfo { get; private set; }
 
         /// <summary>
         /// Gets a MethodInfo for the method implementing this test.
         /// Returns null if the test is not implemented as a method.
         /// </summary>
-        public IMethodInfo Method
+        public IMethodInfo? Method
         {
             get { return _method; }
             set
@@ -256,7 +256,7 @@ namespace NUnit.Framework.Internal
         /// Gets the parent as a Test object.
         /// Used by the core to set the parent.
         /// </summary>
-        public ITest Parent { get; set; }
+        public ITest? Parent { get; set; }
 
         /// <summary>
         /// Gets this test's child tests
@@ -267,7 +267,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Gets or sets a fixture object for running this test.
         /// </summary>
-        public virtual object Fixture { get; set; }
+        public virtual object? Fixture { get; set; }
 
         #endregion
 

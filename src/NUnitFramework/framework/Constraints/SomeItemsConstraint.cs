@@ -34,7 +34,7 @@ namespace NUnit.Framework.Constraints
     /// </summary>
     public class SomeItemsConstraint : PrefixConstraint
     {
-        private readonly EqualConstraint _equalConstraint;
+        private readonly EqualConstraint? _equalConstraint;
 
         /// <summary>
         /// Construct a SomeItemsConstraint on top of an existing constraint
@@ -65,7 +65,7 @@ namespace NUnit.Framework.Constraints
         {
             var enumerable = ConstraintUtils.RequireActual<IEnumerable>(actual, nameof(actual));
 
-            foreach (object item in enumerable)
+            foreach (object? item in enumerable)
                 if (BaseConstraint.ApplyTo(item).IsSuccess)
                     return new ConstraintResult(this, actual, ConstraintStatus.Success);
 

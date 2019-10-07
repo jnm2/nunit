@@ -254,7 +254,7 @@ namespace NUnit.Framework
         /// <param name="arg2">The second value, expected to be less</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Greater(IComparable arg1, IComparable arg2, string? message, params object?[]? args)
+        public static void Greater(IComparable? arg1, IComparable? arg2, string? message, params object?[]? args)
         {
             Assert.That(arg1, Is.GreaterThan(arg2), message, args);
         }
@@ -266,7 +266,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
         /// <param name="arg2">The second value, expected to be less</param>
-        public static void Greater(IComparable arg1, IComparable arg2)
+        public static void Greater(IComparable? arg1, IComparable? arg2)
         {
             Assert.That(arg1, Is.GreaterThan(arg2), null, null);
         }
@@ -502,7 +502,7 @@ namespace NUnit.Framework
         /// <param name="arg2">The second value, expected to be greater</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Less(IComparable arg1, IComparable arg2, string? message, params object?[]? args)
+        public static void Less(IComparable? arg1, IComparable? arg2, string? message, params object?[]? args)
         {
             Assert.That(arg1, Is.LessThan(arg2), message, args);
         }
@@ -514,7 +514,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
         /// <param name="arg2">The second value, expected to be greater</param>
-        public static void Less(IComparable arg1, IComparable arg2)
+        public static void Less(IComparable? arg1, IComparable? arg2)
         {
             Assert.That(arg1, Is.LessThan(arg2), null, null);
         }
@@ -750,7 +750,7 @@ namespace NUnit.Framework
         /// <param name="arg2">The second value, expected to be less</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void GreaterOrEqual(IComparable arg1, IComparable arg2, string? message, params object?[]? args)
+        public static void GreaterOrEqual(IComparable? arg1, IComparable? arg2, string? message, params object?[]? args)
         {
             Assert.That(arg1, Is.GreaterThanOrEqualTo(arg2), message, args);
         }
@@ -762,7 +762,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="arg1">The first value, expected to be greater</param>
         /// <param name="arg2">The second value, expected to be less</param>
-        public static void GreaterOrEqual(IComparable arg1, IComparable arg2)
+        public static void GreaterOrEqual(IComparable? arg1, IComparable? arg2)
         {
             Assert.That(arg1, Is.GreaterThanOrEqualTo(arg2), null, null);
         }
@@ -998,7 +998,7 @@ namespace NUnit.Framework
         /// <param name="arg2">The second value, expected to be greater</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void LessOrEqual(IComparable arg1, IComparable arg2, string? message, params object?[]? args)
+        public static void LessOrEqual(IComparable? arg1, IComparable? arg2, string? message, params object?[]? args)
         {
             Assert.That(arg1, Is.LessThanOrEqualTo(arg2), message, args);
         }
@@ -1010,7 +1010,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="arg1">The first value, expected to be less</param>
         /// <param name="arg2">The second value, expected to be greater</param>
-        public static void LessOrEqual(IComparable arg1, IComparable arg2)
+        public static void LessOrEqual(IComparable? arg1, IComparable? arg2)
         {
             Assert.That(arg1, Is.LessThanOrEqualTo(arg2), null, null);
         }

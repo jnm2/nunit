@@ -47,7 +47,7 @@ namespace NUnit.Framework
 #pragma warning disable IDE1006
         // ReSharper disable once InconsistentNaming
         // Disregarding naming convention for back-compat
-        protected object[] data;
+        protected object?[] data;
 #pragma warning restore IDE1006
 
         /// <summary>
@@ -56,16 +56,16 @@ namespace NUnit.Framework
         /// </summary>
         public ValuesAttribute()
         {
-            data = new object[]{};
+            data = new object?[]{};
         }
 
         /// <summary>
         /// Construct with one argument
         /// </summary>
         /// <param name="arg1"></param>
-        public ValuesAttribute(object arg1)
+        public ValuesAttribute(object? arg1)
         {
-            data = new object[] { arg1 };
+            data = new object?[] { arg1 };
         }
 
         /// <summary>
@@ -73,9 +73,9 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
-        public ValuesAttribute(object arg1, object arg2)
+        public ValuesAttribute(object? arg1, object? arg2)
         {
-            data = new object[] { arg1, arg2 };
+            data = new object?[] { arg1, arg2 };
         }
 
         /// <summary>
@@ -84,18 +84,18 @@ namespace NUnit.Framework
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
         /// <param name="arg3"></param>
-        public ValuesAttribute(object arg1, object arg2, object arg3)
+        public ValuesAttribute(object? arg1, object? arg2, object? arg3)
         {
-            data = new object[] { arg1, arg2, arg3 };
+            data = new object?[] { arg1, arg2, arg3 };
         }
 
         /// <summary>
         /// Construct with an array of arguments
         /// </summary>
         /// <param name="args"></param>
-        public ValuesAttribute(params object[] args)
+        public ValuesAttribute(params object?[]? args)
         {
-            data = args ?? new object[] { null };
+            data = args ?? new object?[] { null };
         }
 
         /// <summary>
@@ -115,9 +115,10 @@ namespace NUnit.Framework
         /// </summary>
         private static IEnumerable GenerateData(Type targetType)
         {
-            if (IsNullableEnum(targetType))
+            if (Nullable.GetUnderlyingType(targetType) is { } underlyingType
+                && underlyingType.GetTypeInfo().IsEnum)
             {
-                var enumValues = Enum.GetValues(Nullable.GetUnderlyingType(targetType));
+                var enumValues = Enum.GetValues(underlyingType);
                 var enumValuesWithNull = new object[enumValues.Length + 1];
                 Array.Copy(enumValues, enumValuesWithNull, enumValues.Length);
                 return enumValuesWithNull;
@@ -136,15 +137,6 @@ namespace NUnit.Framework
             }
 
             return new object[] { };
-        }
-
-        /// <summary>
-        /// To Check if type is nullable enum.
-        /// </summary>
-        private static bool IsNullableEnum(Type t)
-        {
-            Type u = Nullable.GetUnderlyingType(t);
-            return (u != null) && u.GetTypeInfo().IsEnum;
         }
     }
 }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,7 +56,7 @@ namespace NUnit.Framework.Constraints
         /// Initializes a new instance of the <see cref="ComparisonConstraint"/> class.
         /// </summary>
         /// <param name="expected">The value against which to make a comparison.</param>
-        protected ComparisonConstraint(object? expected) : base(expected)
+        protected ComparisonConstraint(object expected) : base(expected)
         {
             Guard.ArgumentValid(expected != null, "Cannot compare using a null reference.", nameof(_expected));
             _expected = expected;
@@ -67,7 +67,7 @@ namespace NUnit.Framework.Constraints
         #region Overrides
 
         /// <summary>
-        /// Test whether the constraint is satisfied by a given value   
+        /// Test whether the constraint is satisfied by a given value
         /// </summary>
         /// <param name="actual">The value to be tested</param>
         /// <returns>A ConstraintResult</returns>
@@ -81,7 +81,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Protected function overridden by derived class to actually perform the comparison
         /// </summary>
-        protected abstract bool PerformComparison(ComparisonAdapter comparer, object actual, object? expected, Tolerance tolerance);
+        protected abstract bool PerformComparison(ComparisonAdapter comparer, object? actual, object expected, Tolerance tolerance);
 
         #endregion
 
@@ -148,9 +148,9 @@ namespace NUnit.Framework.Constraints
         }
 
         #endregion
-        
+
         #region Protected Methods
-        
+
         /// <summary>
         /// Provides standard description of what the constraint tests
         /// based on comparison text.
@@ -162,10 +162,10 @@ namespace NUnit.Framework.Constraints
         {
             if (comparisonText == null)
                 throw new ArgumentNullException(nameof(comparisonText), "Comparison text can not be null");
-            
+
             StringBuilder sb = new StringBuilder(comparisonText);
             sb.Append(MsgUtils.FormatValue(_expected));
-                
+
             if (_tolerance != null && !_tolerance.IsUnsetOrDefault)
             {
                 sb.Append(" within ");
@@ -176,10 +176,10 @@ namespace NUnit.Framework.Constraints
                     sb.Append(" percent");
                 }
             }
-                
+
             return sb.ToString();
         }
-        
+
         #endregion
     }
 }

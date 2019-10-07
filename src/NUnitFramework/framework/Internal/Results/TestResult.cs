@@ -581,8 +581,8 @@ namespace NUnit.Framework.Internal
         private struct ExceptionResult
         {
             public ResultState ResultState { get; }
-            public string Message { get; }
-            public string StackTrace { get; }
+            public string? Message { get; }
+            public string? StackTrace { get; }
 
             public ExceptionResult(Exception ex, FailureSite site)
             {
@@ -647,7 +647,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Record an assertion result
         /// </summary>
-        public void RecordAssertion(AssertionStatus status, string message, string stackTrace)
+        public void RecordAssertion(AssertionStatus status, string? message, string? stackTrace)
         {
             RecordAssertion(new AssertionResult(status, message, stackTrace));
         }
@@ -655,7 +655,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Record an assertion result
         /// </summary>
-        public void RecordAssertion(AssertionStatus status, string message)
+        public void RecordAssertion(AssertionStatus status, string? message)
         {
             RecordAssertion(status, message, null);
         }

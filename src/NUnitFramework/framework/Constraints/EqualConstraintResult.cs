@@ -62,7 +62,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Construct an EqualConstraintResult
         /// </summary>
-        public EqualConstraintResult(EqualConstraint constraint, object actual, bool hasSucceeded)
+        public EqualConstraintResult(EqualConstraint constraint, object? actual, bool hasSucceeded)
             : base(constraint, actual, hasSucceeded)
         {
             this.expectedValue = constraint.Arguments[0];
@@ -82,7 +82,7 @@ namespace NUnit.Framework.Constraints
             DisplayDifferences(writer, expectedValue, ActualValue, 0);
         }
 
-        private void DisplayDifferences(MessageWriter writer, object? expected, object actual, int depth)
+        private void DisplayDifferences(MessageWriter writer, object? expected, object? actual, int depth)
         {
             if (expected is string && actual is string)
                 DisplayStringDifferences(writer, (string)expected, (string)actual);
@@ -199,8 +199,8 @@ namespace NUnit.Framework.Constraints
         /// <param name="indent">The indentation level for the message line</param>
         private void DisplayFailurePoint(MessageWriter writer, IEnumerable expected, IEnumerable actual, NUnitEqualityComparer.FailurePoint failurePoint, int indent)
         {
-            Array expectedArray = expected as Array;
-            Array actualArray = actual as Array;
+            Array? expectedArray = expected as Array;
+            Array? actualArray = actual as Array;
 
             int expectedRank = expectedArray != null ? expectedArray.Rank : 1;
             int actualRank = actualArray != null ? actualArray.Rank : 1;

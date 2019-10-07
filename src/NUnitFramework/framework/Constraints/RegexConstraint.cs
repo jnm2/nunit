@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,7 @@ namespace NUnit.Framework.Constraints
         /// Initializes a new instance of the <see cref="RegexConstraint"/> class.
         /// </summary>
         /// <param name="pattern">The pattern.</param>
-        public RegexConstraint(string pattern) : base(pattern) 
+        public RegexConstraint(string pattern) : base(pattern)
         {
             descriptionText = "String matching";
         }
@@ -45,7 +45,7 @@ namespace NUnit.Framework.Constraints
         /// </summary>
         /// <param name="actual">The value to be tested</param>
         /// <returns>True for success, false for failure</returns>
-        protected override bool Matches(string actual)
+        protected override bool Matches(string? actual)
         {
             return actual != null && Regex.IsMatch(
                     actual,

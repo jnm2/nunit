@@ -120,7 +120,7 @@ namespace NUnit.Framework
         public static void That<TActual>(
             ActualValueDelegate<TActual> del,
             IResolveConstraint expr,
-            Func<string> getExceptionMessage)
+            Func<string?> getExceptionMessage)
         {
             CheckMultipleAssertLevel();
 
@@ -165,7 +165,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="condition">The evaluated condition</param>
         /// <param name="getExceptionMessage">A function to build the message included with the Exception</param>
-        public static void That(bool condition, Func<string> getExceptionMessage)
+        public static void That(bool condition, Func<string?> getExceptionMessage)
         {
             Assume.That(condition, Is.True, getExceptionMessage);
         }
@@ -202,7 +202,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="condition">A lambda that returns a Boolean</param>
         /// <param name="getExceptionMessage">A function to build the message included with the Exception</param>
-        public static void That(Func<bool> condition, Func<string> getExceptionMessage)
+        public static void That(Func<bool> condition, Func<string?> getExceptionMessage)
         {
             Assume.That(condition.Invoke(), Is.True, getExceptionMessage);
         }
@@ -275,7 +275,7 @@ namespace NUnit.Framework
         public static void That<TActual>(
             TActual actual,
             IResolveConstraint expression,
-            Func<string> getExceptionMessage)
+            Func<string?> getExceptionMessage)
         {
             CheckMultipleAssertLevel();
 

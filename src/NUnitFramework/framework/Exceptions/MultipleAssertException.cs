@@ -47,7 +47,7 @@ namespace NUnit.Framework
         /// The current result, up to this point. The result is not used
         /// internally by NUnit but is provided to facilitate debugging.
         /// </param>
-        public MultipleAssertException(ITestResult? testResult)
+        public MultipleAssertException(ITestResult testResult)
             : base(testResult?.Message)
         {
             Guard.ArgumentNotNull(testResult, "testResult");

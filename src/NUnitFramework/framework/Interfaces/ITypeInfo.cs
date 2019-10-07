@@ -111,7 +111,7 @@ namespace NUnit.Framework.Interfaces
         /// <summary>
         /// Get the display name for an object of this type, constructed with specific arguments
         /// </summary>
-        string GetDisplayName(object[] args);
+        string GetDisplayName(object?[] args);
 
         /// <summary>
         /// Returns a Type representing a generic type definition from which this Type can be constructed.
@@ -147,7 +147,7 @@ namespace NUnit.Framework.Interfaces
         /// <summary>
         /// Construct an object of this Type, using the specified arguments.
         /// </summary>
-        object Construct(object[] args);
+        object Construct(object?[] args);
 
         #endregion
     }

@@ -129,7 +129,7 @@ namespace NUnit.Framework.Constraints
         //        this.expectedColor = expectedColor;
         //    }
 
-        //    public override IConstraintResult Matches(object actual)
+        //    public override IConstraintResult Matches(object? actual)
         //    {
         //        this.actual = actual;
         //        return new Result

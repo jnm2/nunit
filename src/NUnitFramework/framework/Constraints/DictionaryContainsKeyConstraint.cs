@@ -114,6 +114,8 @@ namespace NUnit.Framework.Constraints
         /// <param name="actual">The value to be tested</param>
         public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
+            if (actual is null) throw new ArgumentNullException(nameof(actual));
+
             return new ConstraintResult(this, actual, Matches(actual));
         }
 
@@ -211,7 +213,7 @@ namespace NUnit.Framework.Constraints
 
         #endregion
 
-        private static MethodInfo GetContainsKeyMethod(object keyedItemContainer)
+        private static MethodInfo? GetContainsKeyMethod(object keyedItemContainer)
         {
             if (keyedItemContainer == null) throw new ArgumentNullException(nameof(keyedItemContainer));
             var instanceType = keyedItemContainer.GetType();
@@ -269,11 +271,11 @@ namespace NUnit.Framework.Constraints
 
         private static IEnumerable<Type> GetBaseTypes(Type type)
         {
-            for (; ; )
+            for (Type? current = type; ;)
             {
-                type = type.GetTypeInfo().BaseType;
-                if (type == null) break;
-                yield return type;
+                current = current.GetTypeInfo().BaseType;
+                if (current == null) break;
+                yield return current;
             }
         }
     }

@@ -44,7 +44,7 @@ namespace NUnit.Framework.Internal
         /// Initializes a new instance of the <see cref="InvalidTestFixtureException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public InvalidTestFixtureException(string message) : base(message)
+        public InvalidTestFixtureException(string? message) : base(message)
         {}
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner.</param>
-        public InvalidTestFixtureException(string message, Exception inner) : base(message, inner)
+        public InvalidTestFixtureException(string? message, Exception? inner) : base(message, inner)
         { }
 
 #if SERIALIZATION

@@ -108,7 +108,7 @@ namespace NUnit.Framework.Internal
         /// <param name="type">The Type for which a display name is needed.</param>
         /// <param name="arglist">The arglist provided.</param>
         /// <returns>The display name for the Type</returns>
-        public static string GetDisplayName(Type type, object[] arglist)
+        public static string GetDisplayName(Type type, object?[] arglist)
         {
             string baseName = GetDisplayName(type);
             if (arglist == null || arglist.Length == 0)
@@ -121,7 +121,7 @@ namespace NUnit.Framework.Internal
             {
                 if (i > 0) sb.Append(",");
 
-                object arg = arglist[i];
+                object? arg = arglist[i];
                 string display = arg == null ? "null" : arg.ToString();
 
                 if (arg is double || arg is float)
@@ -151,7 +151,10 @@ namespace NUnit.Framework.Internal
         /// Returns the best fit for a common type to be used in
         /// matching actual arguments to a methods Type parameters.
         /// </summary>
-        public static bool TryGetBestCommonType(Type type1, Type type2, out Type bestCommonType)
+        public static bool TryGetBestCommonType(
+            Type? type1,
+            Type? type2,
+            [NotNullIfNotNull("type1"), NotNullIfNotNull("type2")] out Type? bestCommonType)
         {
             if (type1 == type2) { bestCommonType = type1; return true; }
             if (type1 == null) { bestCommonType = type2; return true; }
@@ -207,7 +210,7 @@ namespace NUnit.Framework.Internal
         /// <returns>
         /// 	<c>true</c> if the specified type is numeric; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNumeric(Type type)
+        public static bool IsNumeric(Type? type)
         {
             return type == typeof(double) ||
                    type == typeof(float) ||
@@ -228,13 +231,13 @@ namespace NUnit.Framework.Internal
         /// </summary>
         /// <param name="arglist">An array of args to be converted</param>
         /// <param name="parameters">A ParameterInfo[] whose types will be used as targets</param>
-        public static void ConvertArgumentList(object[] arglist, IParameterInfo[] parameters)
+        public static void ConvertArgumentList(object?[] arglist, IParameterInfo[] parameters)
         {
             System.Diagnostics.Debug.Assert(arglist.Length <= parameters.Length);
 
             for (int i = 0; i < arglist.Length; i++)
             {
-                object arg = arglist[i];
+                object? arg = arglist[i];
 
                 if (arg is IConvertible)
                 {
@@ -280,7 +283,7 @@ namespace NUnit.Framework.Internal
                 if (parameters.Length != arglist.Length)
                     continue;
 
-                Type[] typeArgs = new Type[typeParameters.Length];
+                Type?[]? typeArgs = new Type?[typeParameters.Length];
                 for (int i = 0; i < typeArgs.Length; i++)
                 {
                     for (int j = 0; j < arglist.Length; j++)
@@ -307,7 +310,7 @@ namespace NUnit.Framework.Internal
 
                 if (typeArgs != null)
                 {
-                    typeArgsOut = typeArgs;
+                    typeArgsOut = typeArgs!;
                     return true;
                 }
             }

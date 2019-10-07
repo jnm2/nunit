@@ -38,7 +38,7 @@ namespace NUnit.Framework
         // results in AccessViolationException when the stack trace is accessed even indirectly e.g. Exception.ToString.
         [System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptions]
 #endif
-        public static string GetStackTraceWithoutThrowing(this Exception exception)
+        public static string? GetStackTraceWithoutThrowing(this Exception exception)
         {
             if (exception is null) throw new ArgumentNullException(nameof(exception));
 
@@ -62,7 +62,7 @@ namespace NUnit.Framework
         // results in AccessViolationException when the stack trace is accessed even indirectly e.g. Exception.ToString.
         [System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptions]
 #endif
-        public static string GetMessageWithoutThrowing(this Exception exception)
+        public static string? GetMessageWithoutThrowing(this Exception exception)
         {
             if (exception is null) throw new ArgumentNullException(nameof(exception));
 
@@ -85,17 +85,17 @@ namespace NUnit.Framework
         // results in AccessViolationException when the stack trace is accessed even indirectly e.g. Exception.ToString.
         [System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptions]
 #endif
-        public static Result<IDictionary> GetDataWithoutThrowing(this Exception exception)
+        public static Result<IDictionary?> GetDataWithoutThrowing(this Exception exception)
         {
             if (exception is null) throw new ArgumentNullException(nameof(exception));
 
             try
             {
-                return Result.Success(exception.Data);
+                return Result.Success<IDictionary?>(exception.Data);
             }
             catch (Exception ex)
             {
-                return Result.Error<IDictionary>(ex.GetType().Name + " was thrown by the Exception.Data property.");
+                return Result.Error<IDictionary?>(ex.GetType().Name + " was thrown by the Exception.Data property.");
             }
         }
     }

@@ -204,7 +204,7 @@ namespace NUnit.TestData.TestCaseSourceAttributeFixture
         #region Test name tests
 
         [TestCaseSource(nameof(TestCaseNameTestDataSource))]
-        public static void TestCaseNameTestDataMethod(params object[] args) { }
+        public static void TestCaseNameTestDataMethod(params object?[] args) { }
 
         public static IEnumerable<TestCaseData> TestCaseNameTestDataSource() =>
             from spec in TestDataSpec.Specs

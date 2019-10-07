@@ -186,7 +186,7 @@ namespace NUnit.Framework.Assertions
         {
             // Arrange
             var funcWasCalled = false;
-            Func<string> getExceptionMessage = () =>
+            Func<string?> getExceptionMessage = () =>
             {
                 funcWasCalled = true;
                 return "Func was called";
@@ -205,7 +205,7 @@ namespace NUnit.Framework.Assertions
         {
             // Arrange
             var funcWasCalled = false;
-            Func<string> getExceptionMessage = () =>
+            Func<string?> getExceptionMessage = () =>
             {
                 funcWasCalled = true;
                 return "Func was called";

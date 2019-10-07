@@ -141,20 +141,20 @@ namespace NUnit.Framework
 
             try
             {
-                IEnumerable source = GetTestFixtureSource(sourceType);
+                IEnumerable? source = GetTestFixtureSource(sourceType);
 
                 if (source != null)
                 {
-                    foreach (object item in source)
+                    foreach (object? item in source)
                     {
                         var parms = item as ITestFixtureData;
 
                         if (parms == null)
                         {
-                            object[] args = item as object[];
+                            object?[]? args = item as object?[];
                             if (args == null)
                             {
-                                args = new object[] { item };
+                                args = new object?[] { item };
                             }
 
                             parms = new TestFixtureParameters(args);

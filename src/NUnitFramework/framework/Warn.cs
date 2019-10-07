@@ -120,7 +120,7 @@ namespace NUnit.Framework
         public static void Unless<TActual>(
             ActualValueDelegate<TActual> del,
             IResolveConstraint expr,
-            Func<string> getExceptionMessage)
+            Func<string?> getExceptionMessage)
         {
             var constraint = expr.Resolve();
 
@@ -160,7 +160,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="condition">The evaluated condition</param>
         /// <param name="getExceptionMessage">A function to build the message included with the Exception</param>
-        public static void Unless(bool condition, Func<string> getExceptionMessage)
+        public static void Unless(bool condition, Func<string?> getExceptionMessage)
         {
             Warn.Unless(condition, Is.True, getExceptionMessage);
         }
@@ -197,7 +197,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="condition">A lambda that returns a Boolean</param>
         /// <param name="getExceptionMessage">A function to build the message included with the Exception</param>
-        public static void Unless(Func<bool> condition, Func<string> getExceptionMessage)
+        public static void Unless(Func<bool> condition, Func<string?> getExceptionMessage)
         {
             Warn.Unless(condition.Invoke(), Is.True, getExceptionMessage);
         }
@@ -264,7 +264,7 @@ namespace NUnit.Framework
         public static void Unless<TActual>(
             TActual actual,
             IResolveConstraint expression,
-            Func<string> getExceptionMessage)
+            Func<string?> getExceptionMessage)
         {
             var constraint = expression.Resolve();
 
@@ -333,7 +333,7 @@ namespace NUnit.Framework
         public static void If<TActual>(
             ActualValueDelegate<TActual> del,
             IResolveConstraint expr,
-            Func<string> getExceptionMessage)
+            Func<string?> getExceptionMessage)
         {
             var constraint = new NotConstraint(expr.Resolve());
 
@@ -373,7 +373,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="condition">The evaluated condition</param>
         /// <param name="getExceptionMessage">A function to build the message included with the Exception</param>
-        public static void If(bool condition, Func<string> getExceptionMessage)
+        public static void If(bool condition, Func<string?> getExceptionMessage)
         {
             Warn.If(condition, Is.True, getExceptionMessage);
         }
@@ -407,7 +407,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="condition">A lambda that returns a Boolean</param>
         /// <param name="getExceptionMessage">A function to build the message included with the Exception</param>
-        public static void If(Func<bool> condition, Func<string> getExceptionMessage)
+        public static void If(Func<bool> condition, Func<string?> getExceptionMessage)
         {
             Warn.If(condition.Invoke(), Is.True, getExceptionMessage);
         }
@@ -459,7 +459,7 @@ namespace NUnit.Framework
         public static void If<TActual>(
             TActual actual,
             IResolveConstraint expression,
-            Func<string> getExceptionMessage)
+            Func<string?> getExceptionMessage)
         {
             var constraint = new NotConstraint(expression.Resolve());
 

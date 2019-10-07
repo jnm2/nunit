@@ -135,7 +135,7 @@ namespace NUnit.Framework.Internal
         /// <param name="actual">The actual value causing the failure</param>
         /// <param name="expectedType">Output of the unique type name for expected</param>
         /// <param name="actualType">Output of the unique type name for actual</param>
-        private void ResolveTypeNameDifference(object? expected, object actual, out string expectedType, out string actualType) {
+        private void ResolveTypeNameDifference(object expected, object actual, out string expectedType, out string actualType) {
             TypeNameDifferenceResolver resolver = new TypeNameDifferenceResolver();
             resolver.ResolveTypeNameDifference(expected, actual, out expectedType, out actualType);
 

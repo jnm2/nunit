@@ -51,12 +51,12 @@ namespace NUnit.Framework.Internal.Execution
         /// <summary>
         /// Event raised whenever a shift is starting.
         /// </summary>
-        public event ShiftChangeEventHandler ShiftStarting;
+        public event ShiftChangeEventHandler? ShiftStarting;
 
         /// <summary>
         /// Event raised whenever a shift has ended.
         /// </summary>
-        public event ShiftChangeEventHandler ShiftFinished;
+        public event ShiftChangeEventHandler? ShiftFinished;
 
         #endregion
 

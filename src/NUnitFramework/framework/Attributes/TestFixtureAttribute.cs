@@ -75,7 +75,7 @@ namespace NUnit.Framework
         /// <summary>
         /// The arguments originally provided to the attribute
         /// </summary>
-        public object[] Arguments { get; }
+        public object?[] Arguments { get; }
 
         /// <summary>
         /// Properties pertaining to this fixture

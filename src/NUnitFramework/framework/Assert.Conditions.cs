@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -126,7 +126,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is false. If the condition is true the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
@@ -138,7 +138,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is false. If the condition is true the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
@@ -150,7 +150,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is false. If the condition is true the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         public static void False(bool? condition)
         {
@@ -160,7 +160,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is false. If the condition is true the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         public static void False(bool condition)
         {
@@ -170,7 +170,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is false. If the condition is true the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
@@ -182,7 +182,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is false. If the condition is true the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
@@ -194,7 +194,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is false. If the condition is true the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         public static void IsFalse(bool? condition)
         {
@@ -204,7 +204,7 @@ namespace NUnit.Framework
         /// <summary>
         /// Asserts that a condition is false. If the condition is true the method throws
         /// an <see cref="AssertionException"/>.
-        /// </summary> 
+        /// </summary>
         /// <param name="condition">The evaluated condition</param>
         public static void IsFalse(bool condition)
         {
@@ -223,7 +223,7 @@ namespace NUnit.Framework
         /// <param name="anObject">The object that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void NotNull(object anObject, string? message, params object?[]? args)
+        public static void NotNull(object? anObject, string? message, params object?[]? args)
         {
             Assert.That(anObject, Is.Not.Null ,message, args);
         }
@@ -234,7 +234,7 @@ namespace NUnit.Framework
         /// is thrown.
         /// </summary>
         /// <param name="anObject">The object that is to be tested</param>
-        public static void NotNull(object anObject)
+        public static void NotNull(object? anObject)
         {
             Assert.That(anObject, Is.Not.Null ,null, null);
         }
@@ -247,7 +247,7 @@ namespace NUnit.Framework
         /// <param name="anObject">The object that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNotNull(object anObject, string? message, params object?[]? args)
+        public static void IsNotNull(object? anObject, string? message, params object?[]? args)
         {
             Assert.That(anObject, Is.Not.Null ,message, args);
         }
@@ -258,7 +258,7 @@ namespace NUnit.Framework
         /// is thrown.
         /// </summary>
         /// <param name="anObject">The object that is to be tested</param>
-        public static void IsNotNull(object anObject)
+        public static void IsNotNull(object? anObject)
         {
             Assert.That(anObject, Is.Not.Null ,null, null);
         }
@@ -275,7 +275,7 @@ namespace NUnit.Framework
         /// <param name="anObject">The object that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void Null(object anObject, string? message, params object?[]? args)
+        public static void Null(object? anObject, string? message, params object?[]? args)
         {
             Assert.That(anObject, Is.Null ,message, args);
         }
@@ -286,7 +286,7 @@ namespace NUnit.Framework
         /// is thrown.
         /// </summary>
         /// <param name="anObject">The object that is to be tested</param>
-        public static void Null(object anObject)
+        public static void Null(object? anObject)
         {
             Assert.That(anObject, Is.Null ,null, null);
         }
@@ -299,7 +299,7 @@ namespace NUnit.Framework
         /// <param name="anObject">The object that is to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNull(object anObject, string? message, params object?[]? args)
+        public static void IsNull(object? anObject, string? message, params object?[]? args)
         {
             Assert.That(anObject, Is.Null ,message, args);
         }
@@ -310,7 +310,7 @@ namespace NUnit.Framework
         /// is thrown.
         /// </summary>
         /// <param name="anObject">The object that is to be tested</param>
-        public static void IsNull(object anObject)
+        public static void IsNull(object? anObject)
         {
             Assert.That(anObject, Is.Null ,null, null);
         }
@@ -379,7 +379,7 @@ namespace NUnit.Framework
         /// <param name="aString">The string to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsEmpty(string aString, string? message, params object?[]? args)
+        public static void IsEmpty(string? aString, string? message, params object?[]? args)
         {
             Assert.That(aString, new EmptyStringConstraint() ,message, args);
         }
@@ -388,7 +388,7 @@ namespace NUnit.Framework
         /// Assert that a string is empty - that is equal to string.Empty
         /// </summary>
         /// <param name="aString">The string to be tested</param>
-        public static void IsEmpty(string aString)
+        public static void IsEmpty(string? aString)
         {
             Assert.That(aString, new EmptyStringConstraint() ,null, null);
         }
@@ -431,7 +431,7 @@ namespace NUnit.Framework
         /// <param name="aString">The string to be tested</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNotEmpty(string aString, string? message, params object?[]? args)
+        public static void IsNotEmpty(string? aString, string? message, params object?[]? args)
         {
             Assert.That(aString, Is.Not.Empty ,message, args);
         }
@@ -440,7 +440,7 @@ namespace NUnit.Framework
         /// Assert that a string is not empty - that is not equal to string.Empty
         /// </summary>
         /// <param name="aString">The string to be tested</param>
-        public static void IsNotEmpty(string aString)
+        public static void IsNotEmpty(string? aString)
         {
             Assert.That(aString, Is.Not.Empty ,null, null);
         }

@@ -32,7 +32,7 @@ namespace NUnit.Framework.Internal
     public class TestMethod : Test
     {
         #region Fields
-        private static readonly object[] NoArguments = new object[0];
+        private static readonly object?[] NoArguments = new object?[0];
 
         /// <summary>
         /// The ParameterSet used to create this test method
@@ -82,10 +82,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// The arguments to use in executing the test method, or empty array if none are provided.
         /// </summary>
-        public override object[] Arguments
-        {
-            get { return parms != null ? parms.Arguments : NoArguments; }
-        }
+        public override object?[] Arguments => parms?.Arguments ?? NoArguments;
 
         /// <summary>
         /// Overridden to return a TestCaseResult.

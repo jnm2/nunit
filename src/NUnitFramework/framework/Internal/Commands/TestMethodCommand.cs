@@ -33,7 +33,7 @@ namespace NUnit.Framework.Internal.Commands
     public class TestMethodCommand : TestCommand
     {
         private readonly TestMethod testMethod;
-        private readonly object[] arguments;
+        private readonly object?[] arguments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestMethodCommand"/> class.
@@ -61,7 +61,7 @@ namespace NUnit.Framework.Internal.Commands
             // make it impossible to write a wrapper command to
             // implement ExpectedException, among other things.
 
-            object result = RunTestMethod(context);
+            object? result = RunTestMethod(context);
 
             if (testMethod.HasExpectedResult)
                 NUnit.Framework.Assert.AreEqual(testMethod.ExpectedResult, result);
@@ -74,19 +74,19 @@ namespace NUnit.Framework.Internal.Commands
             return context.CurrentResult;
         }
 
-        private object RunTestMethod(TestExecutionContext context)
+        private object? RunTestMethod(TestExecutionContext context)
         {
-            if (AsyncToSyncAdapter.IsAsyncOperation(testMethod.Method.MethodInfo))
+            if (AsyncToSyncAdapter.IsAsyncOperation(testMethod.Method!.MethodInfo))
             {
-                return AsyncToSyncAdapter.Await(() => InvokeTestMethod(context));
+                return AsyncToSyncAdapter.Await(() => InvokeTestMethod(context)!);
             }
 
             return InvokeTestMethod(context);
         }
 
-        private object InvokeTestMethod(TestExecutionContext context)
+        private object? InvokeTestMethod(TestExecutionContext context)
         {
-            return testMethod.Method.Invoke(context.TestObject, arguments);
+            return testMethod.Method!.Invoke(context.TestObject, arguments);
         }
     }
 }

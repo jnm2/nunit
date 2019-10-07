@@ -55,7 +55,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// May be called from any thread.
         /// </summary>
-        public override void Post(SendOrPostCallback d, object state)
+        public override void Post(SendOrPostCallback d, object? state)
         {
             Guard.ArgumentNotNull(d, nameof(d));
 
@@ -65,7 +65,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// May be called from any thread.
         /// </summary>
-        public override void Send(SendOrPostCallback d, object state)
+        public override void Send(SendOrPostCallback d, object? state)
         {
             Guard.ArgumentNotNull(d, nameof(d));
 

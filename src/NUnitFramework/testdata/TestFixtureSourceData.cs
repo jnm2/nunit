@@ -258,7 +258,7 @@ namespace NUnit.TestData.TestFixtureSourceData
     [TestFixtureSource(nameof(IndividualInstanceNameTestDataSource))]
     public sealed class IndividualInstanceNameTestDataFixture
     {
-        public IndividualInstanceNameTestDataFixture(params object[] args)
+        public IndividualInstanceNameTestDataFixture(params object?[] args)
         {
         }
 

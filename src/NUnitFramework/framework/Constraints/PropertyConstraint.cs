@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@ namespace NUnit.Framework.Constraints
     public class PropertyConstraint : PrefixConstraint
     {
         private readonly string name;
-        private object propValue;
+        private object? propValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyConstraint"/> class.
@@ -57,11 +57,11 @@ namespace NUnit.Framework.Constraints
             // TODO: Use an error result for null
             Guard.ArgumentNotNull(actual, nameof(actual));
 
-            Type actualType = actual as Type;
+            Type? actualType = actual as Type;
             if (actualType == null)
                 actualType = actual.GetType();
 
-            PropertyInfo property = Reflect.GetUltimateShadowingProperty(actualType, name,
+            PropertyInfo? property = Reflect.GetUltimateShadowingProperty(actualType, name,
                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
             // TODO: Use an error result here
@@ -70,7 +70,7 @@ namespace NUnit.Framework.Constraints
 
             propValue = property.GetValue(actual, null);
             var baseResult = BaseConstraint.ApplyTo(propValue);
-            return new PropertyConstraintResult(this, baseResult);              
+            return new PropertyConstraintResult(this, baseResult);
         }
 
         /// <summary>

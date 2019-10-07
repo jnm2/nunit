@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,7 +30,7 @@ namespace NUnit.Framework.Constraints
     /// <summary>
     /// PropertyExistsConstraint tests that a named property
     /// exists on the object provided through Match.
-    /// 
+    ///
     /// Originally, PropertyConstraint provided this feature
     /// in addition to making optional tests on the value
     /// of the property. The two constraints are now separate.
@@ -39,7 +39,7 @@ namespace NUnit.Framework.Constraints
     {
         private readonly string name;
 
-        Type actualType;
+        Type? actualType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyExistsConstraint"/> class.
@@ -73,7 +73,7 @@ namespace NUnit.Framework.Constraints
             if (actualType == null)
                 actualType = actual.GetType();
 
-            PropertyInfo property = Reflect.GetUltimateShadowingProperty(actualType, name,
+            PropertyInfo? property = Reflect.GetUltimateShadowingProperty(actualType, name,
                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             return new ConstraintResult(this, actualType, property != null);
         }

@@ -767,7 +767,7 @@ namespace NUnit.Framework.Constraints
         }
 
         [Test, TestCaseSource(nameof(DifferentTypeSameValueTestData))]
-        public void SameValueDifferentTypeRegexMatch(object? expected, object actual)
+        public void SameValueDifferentTypeRegexMatch(object? expected, object? actual)
         {
             var ex = Assert.Throws<AssertionException>(() => Assert.AreEqual(expected, actual));
             Assert.That(ex.Message, Does.Match(@"\s*Expected\s*:\s*.*\s*\(.+\)\r?\n\s*But\s*was\s*:\s*.*\s*\(.+\)"));

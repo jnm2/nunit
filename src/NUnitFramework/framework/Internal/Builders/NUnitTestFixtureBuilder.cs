@@ -94,7 +94,7 @@ namespace NUnit.Framework.Internal.Builders
         {
             Guard.ArgumentNotNull(testFixtureData, nameof(testFixtureData));
 
-            object[] arguments = testFixtureData.Arguments;
+            object?[] arguments = testFixtureData.Arguments;
 
             if (typeInfo.ContainsGenericParameters)
             {
@@ -102,17 +102,17 @@ namespace NUnit.Framework.Internal.Builders
                 if (typeArgs == null || typeArgs.Length == 0)
                 {
                     int cnt = 0;
-                    foreach (object o in arguments)
+                    foreach (object? o in arguments)
                         if (o is Type) cnt++;
                         else break;
 
                     typeArgs = new Type[cnt];
                     for (int i = 0; i < cnt; i++)
-                        typeArgs[i] = (Type)arguments[i];
+                        typeArgs[i] = (Type)arguments[i]!;
 
                     if (cnt > 0)
                     {
-                        object[] args = new object[arguments.Length - cnt];
+                        object?[] args = new object[arguments.Length - cnt];
                         for (int i = 0; i < args.Length; i++)
                             args[i] = arguments[cnt + i];
 

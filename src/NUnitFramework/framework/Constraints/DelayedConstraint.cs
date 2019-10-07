@@ -277,7 +277,7 @@ namespace NUnit.Framework.Constraints
             long now = Stopwatch.GetTimestamp();
             long delayEnd = TimestampOffset(now, DelayInterval.AsTimeSpan);
 
-            object actual;
+            object? actual;
             if (PollingInterval.IsNotZero)
             {
                 long nextPoll = TimestampOffset(now, PollingInterval.AsTimeSpan);
@@ -350,7 +350,7 @@ namespace NUnit.Framework.Constraints
         private static object? InvokeDelegate<T>(ActualValueDelegate<T> del)
         {
             if (AsyncToSyncAdapter.IsAsyncOperation(del))
-                return AsyncToSyncAdapter.Await(() => del.Invoke());
+                return AsyncToSyncAdapter.Await(() => del.Invoke()!);
 
             return del();
         }

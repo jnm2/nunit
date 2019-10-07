@@ -154,7 +154,7 @@ namespace NUnit.Framework.Internal
                 WriteLog(level, message);
         }
 
-        private void Log(InternalTraceLevel level, string format, params object[] args)
+        private void Log(InternalTraceLevel level, string format, params object?[] args)
         {
             if (this.maxLevel >= level)
                 WriteLog(level, string.Format( format, args ) );

@@ -108,14 +108,14 @@ namespace NUnit.Framework.Internal
         };
 
         [TestCaseSource(nameof(TypeArgData))]
-        public void GetTypeArgumentsForMethodTests(string methodName, object[] args, Type[] typeArgs)
+        public void GetTypeArgumentsForMethodTests(string methodName, object?[] args, Type[] typeArgs)
         {
             MethodInfo method = GetType().GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic)!;
 
             Assert.That(new GenericMethodHelper(method).TryGetTypeArguments(args, out var typeArguments) ? typeArguments : null, Is.EqualTo(typeArgs));
         }
 
-        private static object[] ArgList(params object[] args) { return args; }
+        private static object[] ArgList(params object?[] args) { return args; }
 
         private static Type[] TypeArgs<T>() { return new Type[] { typeof(T) }; }
         private static Type[] TypeArgs<T1, T2>() { return new Type[] { typeof(T1), typeof(T2) }; }

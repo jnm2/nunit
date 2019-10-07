@@ -472,19 +472,19 @@ namespace NUnit.Options
     [Serializable]
     public class OptionException : Exception
     {
-        private readonly string option;
+        private readonly string? option;
 
         public OptionException ()
         {
         }
 
-        public OptionException (string message, string optionName)
+        public OptionException (string? message, string? optionName)
             : base (message)
         {
             this.option = optionName;
         }
 
-        public OptionException (string message, string optionName, Exception innerException)
+        public OptionException (string? message, string? optionName, Exception? innerException)
             : base (message, innerException)
         {
             this.option = optionName;
@@ -498,7 +498,7 @@ namespace NUnit.Options
         }
 #endif
 
-        public string OptionName {
+        public string? OptionName {
             get {return this.option;}
         }
 

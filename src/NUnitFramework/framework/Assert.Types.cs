@@ -36,7 +36,7 @@ namespace NUnit.Framework
         /// <param name="actual">The object under examination</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsAssignableFrom(Type expected, object actual, string? message, params object?[]? args)
+        public static void IsAssignableFrom(Type expected, object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.AssignableFrom(expected) ,message, args);
         }
@@ -46,7 +46,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="expected">The expected Type.</param>
         /// <param name="actual">The object under examination</param>
-        public static void IsAssignableFrom(Type expected, object actual)
+        public static void IsAssignableFrom(Type expected, object? actual)
         {
             Assert.That(actual, Is.AssignableFrom(expected) ,null, null);
         }
@@ -62,7 +62,7 @@ namespace NUnit.Framework
         /// <param name="actual">The object under examination</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsAssignableFrom<TExpected>(object actual, string? message, params object?[]? args)
+        public static void IsAssignableFrom<TExpected>(object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.AssignableFrom(typeof(TExpected)) ,message, args);
         }
@@ -72,7 +72,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <typeparam name="TExpected">The expected Type.</typeparam>
         /// <param name="actual">The object under examination</param>
-        public static void IsAssignableFrom<TExpected>(object actual)
+        public static void IsAssignableFrom<TExpected>(object? actual)
         {
             Assert.That(actual, Is.AssignableFrom(typeof(TExpected)) ,null, null);
         }
@@ -88,7 +88,7 @@ namespace NUnit.Framework
         /// <param name="actual">The object under examination</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNotAssignableFrom(Type expected, object actual, string? message, params object?[]? args)
+        public static void IsNotAssignableFrom(Type expected, object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.AssignableFrom(expected) ,message, args);
         }
@@ -98,7 +98,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="expected">The expected Type.</param>
         /// <param name="actual">The object under examination</param>
-        public static void IsNotAssignableFrom(Type expected, object actual)
+        public static void IsNotAssignableFrom(Type expected, object? actual)
         {
             Assert.That(actual, Is.Not.AssignableFrom(expected) ,null, null);
         }
@@ -114,7 +114,7 @@ namespace NUnit.Framework
         /// <param name="actual">The object under examination</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNotAssignableFrom<TExpected>(object actual, string? message, params object?[]? args)
+        public static void IsNotAssignableFrom<TExpected>(object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.AssignableFrom(typeof(TExpected)) ,message, args);
         }
@@ -124,7 +124,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <typeparam name="TExpected">The expected Type.</typeparam>
         /// <param name="actual">The object under examination</param>
-        public static void IsNotAssignableFrom<TExpected>(object actual)
+        public static void IsNotAssignableFrom<TExpected>(object? actual)
         {
             Assert.That(actual, Is.Not.AssignableFrom(typeof(TExpected)) ,null, null);
         }
@@ -140,7 +140,7 @@ namespace NUnit.Framework
         /// <param name="actual">The object being examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsInstanceOf(Type expected, object actual, string? message, params object?[]? args)
+        public static void IsInstanceOf(Type expected, object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.InstanceOf(expected) ,message, args);
         }
@@ -150,7 +150,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="expected">The expected Type</param>
         /// <param name="actual">The object being examined</param>
-        public static void IsInstanceOf(Type expected, object actual)
+        public static void IsInstanceOf(Type expected, object? actual)
         {
             Assert.That(actual, Is.InstanceOf(expected) ,null, null);
         }
@@ -166,7 +166,7 @@ namespace NUnit.Framework
         /// <param name="actual">The object being examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsInstanceOf<TExpected>(object actual, string? message, params object?[]? args)
+        public static void IsInstanceOf<TExpected>(object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.InstanceOf(typeof(TExpected)) ,message, args);
         }
@@ -176,7 +176,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <typeparam name="TExpected">The expected Type</typeparam>
         /// <param name="actual">The object being examined</param>
-        public static void IsInstanceOf<TExpected>(object actual)
+        public static void IsInstanceOf<TExpected>(object? actual)
         {
             Assert.That(actual, Is.InstanceOf(typeof(TExpected)) ,null, null);
         }
@@ -192,7 +192,7 @@ namespace NUnit.Framework
         /// <param name="actual">The object being examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNotInstanceOf(Type expected, object actual, string? message, params object?[]? args)
+        public static void IsNotInstanceOf(Type expected, object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.InstanceOf(expected) ,message, args);
         }
@@ -202,7 +202,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <param name="expected">The expected Type</param>
         /// <param name="actual">The object being examined</param>
-        public static void IsNotInstanceOf(Type expected, object actual)
+        public static void IsNotInstanceOf(Type expected, object? actual)
         {
             Assert.That(actual, Is.Not.InstanceOf(expected) ,null, null);
         }
@@ -218,7 +218,7 @@ namespace NUnit.Framework
         /// <param name="actual">The object being examined</param>
         /// <param name="message">The message to display in case of failure</param>
         /// <param name="args">Array of objects to be used in formatting the message</param>
-        public static void IsNotInstanceOf<TExpected>(object actual, string? message, params object?[]? args)
+        public static void IsNotInstanceOf<TExpected>(object? actual, string? message, params object?[]? args)
         {
             Assert.That(actual, Is.Not.InstanceOf(typeof(TExpected)) ,message, args);
         }
@@ -228,7 +228,7 @@ namespace NUnit.Framework
         /// </summary>
         /// <typeparam name="TExpected">The expected Type</typeparam>
         /// <param name="actual">The object being examined</param>
-        public static void IsNotInstanceOf<TExpected>(object actual)
+        public static void IsNotInstanceOf<TExpected>(object? actual)
         {
             Assert.That(actual, Is.Not.InstanceOf(typeof(TExpected)) ,null, null);
         }

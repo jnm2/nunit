@@ -101,7 +101,7 @@ namespace NUnit.Framework.Internal
         /// The arguments to be used in running the test,
         /// which must match the method signature.
         /// </summary>
-        public object?[]? Arguments { get; internal set; }
+        public object?[] Arguments { get; internal set; }
 
         private string? _testName;
 

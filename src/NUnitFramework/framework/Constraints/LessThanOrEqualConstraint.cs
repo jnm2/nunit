@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,13 +28,13 @@ namespace NUnit.Framework.Constraints
     /// </summary>
     public class LessThanOrEqualConstraint : ComparisonConstraint
     {
-        private string _description;
+        private string? _description;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LessThanOrEqualConstraint"/> class.
         /// </summary>
         /// <param name="expected">The expected value.</param>
-        public LessThanOrEqualConstraint(object? expected) : base(expected) {}
+        public LessThanOrEqualConstraint(object expected) : base(expected) {}
 
         /// <summary>
         /// The Description of what this constraint tests, for
@@ -46,7 +46,7 @@ namespace NUnit.Framework.Constraints
             {
                 if (_description == null)
                     _description = DefaultDescription("less than or equal to ");
-                
+
                 return _description;
             }
         }
@@ -54,7 +54,7 @@ namespace NUnit.Framework.Constraints
         /// <summary>
         /// Perform the comparison
         /// </summary>
-        protected override bool PerformComparison(ComparisonAdapter comparer, object actual, object? expected, Tolerance tolerance)
+        protected override bool PerformComparison(ComparisonAdapter comparer, object? actual, object expected, Tolerance tolerance)
         {
             return comparer.Compare(actual, tolerance.ApplyToValue(expected).UpperBound) <= 0;
         }

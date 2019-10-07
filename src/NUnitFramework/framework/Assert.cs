@@ -111,7 +111,7 @@ namespace NUnit.Framework
         /// of success returned to NUnit.
         /// </summary>
         /// <param name="message">The message to initialize the <see cref="AssertionException"/> with.</param>
-        static public void Pass(string message)
+        static public void Pass(string? message)
         {
             Assert.Pass(message, null);
         }
@@ -150,7 +150,7 @@ namespace NUnit.Framework
         /// passed in. This is used by the other Assert functions.
         /// </summary>
         /// <param name="message">The message to initialize the <see cref="AssertionException"/> with.</param>
-        static public void Fail(string message)
+        static public void Fail(string? message)
         {
             Assert.Fail(message, null);
         }
@@ -186,7 +186,7 @@ namespace NUnit.Framework
         /// Issues a warning using the message provided.
         /// </summary>
         /// <param name="message">The message to display.</param>
-        static public void Warn(string message)
+        static public void Warn(string? message)
         {
             IssueWarning(message);
         }
@@ -219,7 +219,7 @@ namespace NUnit.Framework
         /// passed in. This causes the test to be reported as ignored.
         /// </summary>
         /// <param name="message">The message to initialize the <see cref="AssertionException"/> with.</param>
-        static public void Ignore(string message)
+        static public void Ignore(string? message)
         {
             Assert.Ignore(message, null);
         }
@@ -261,7 +261,7 @@ namespace NUnit.Framework
         /// passed in. This causes the test to be reported as inconclusive.
         /// </summary>
         /// <param name="message">The message to initialize the <see cref="InconclusiveException"/> with.</param>
-        static public void Inconclusive(string message)
+        static public void Inconclusive(string? message)
         {
             Assert.Inconclusive(message, null);
         }
@@ -382,7 +382,7 @@ namespace NUnit.Framework
             ReportFailure(writer.ToString());
         }
 
-        private static void ReportFailure(string message)
+        private static void ReportFailure(string? message)
         {
             // Record the failure in an <assertion> element
             var result = TestExecutionContext.CurrentContext.CurrentResult;
@@ -394,7 +394,7 @@ namespace NUnit.Framework
                 throw new AssertionException(result.Message);
         }
 
-        private static void IssueWarning(string message)
+        private static void IssueWarning(string? message)
         {
             var result = TestExecutionContext.CurrentContext.CurrentResult;
             result.RecordAssertion(AssertionStatus.Warning, message, GetStackTrace());

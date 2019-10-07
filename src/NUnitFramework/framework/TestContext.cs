@@ -97,7 +97,7 @@ namespace NUnit.Framework
         /// of the public instance property WorkDirectory. This is
         /// a bit odd but necessary to avoid breaking user tests.
         /// </summary>
-        internal static string DefaultWorkDirectory;
+        internal static string? DefaultWorkDirectory;
 
         /// <summary>
         /// Get a representation of the current test.
@@ -243,7 +243,7 @@ namespace NUnit.Framework
         public static void Write(string format, object arg1, object arg2, object arg3) { Out.Write(format, arg1, arg2, arg3); }
 
         /// <summary>Write a formatted string to the current result</summary>
-        public static void Write(string format, params object[] args) { Out.Write(format, args); }
+        public static void Write(string format, params object?[] args) { Out.Write(format, args); }
 
         /// <summary>Write a line terminator to the current result</summary>
         public static void WriteLine() { Out.WriteLine(); }
@@ -296,7 +296,7 @@ namespace NUnit.Framework
         public static void WriteLine(string format, object arg1, object arg2, object arg3) { Out.WriteLine(format, arg1, arg2, arg3); }
 
         /// <summary>Write a formatted string to the current result followed by a line terminator</summary>
-        public static void WriteLine(string format, params object[] args) { Out.WriteLine(format, args); }
+        public static void WriteLine(string format, params object?[] args) { Out.WriteLine(format, args); }
 
         /// <summary>
         /// This method adds the a new ValueFormatterFactory to the

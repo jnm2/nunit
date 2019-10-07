@@ -106,7 +106,7 @@ namespace NUnit.Framework.Interfaces
         /// <param name="fixture">The object on which to invoke the method</param>
         /// <param name="args">The argument list for the method</param>
         /// <returns>The return value from the invoked method</returns>
-        object Invoke(object fixture, params object[] args);
+        object Invoke(object fixture, params object?[] args);
 
         #endregion
     }

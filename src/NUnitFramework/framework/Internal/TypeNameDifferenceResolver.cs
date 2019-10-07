@@ -40,7 +40,7 @@ namespace NUnit.Framework.Internal
         /// <param name="actual">The actual object.</param>
         /// <param name="expectedTypeShortened">Output of the unique type name for the expected object.</param>
         /// <param name="actualTypeShortened">Output of the unique type name for actual object.</param>
-        public void ResolveTypeNameDifference(object? expected, object actual, out string expectedTypeShortened, out string actualTypeShortened)
+        public void ResolveTypeNameDifference(object expected, object actual, out string expectedTypeShortened, out string actualTypeShortened)
         {
             ResolveTypeNameDifference(expected.GetType(), actual.GetType(), out expectedTypeShortened, out actualTypeShortened);
         }
@@ -185,7 +185,7 @@ namespace NUnit.Framework.Internal
         /// <summary>
         /// Returns the fully qualified generic <see cref="Type"/> name of a given <see cref="Type"/>.
         /// </summary>
-        public string GetGenericTypeName(Type type)
+        public string? GetGenericTypeName(Type type)
         {
             Guard.ArgumentNotNull(type, nameof(type));
 

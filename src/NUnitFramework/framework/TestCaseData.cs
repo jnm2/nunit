@@ -42,7 +42,7 @@ namespace NUnit.Framework
         /// Initializes a new instance of the <see cref="TestCaseData"/> class.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        public TestCaseData(params object[] args)
+        public TestCaseData(params object?[] args)
             : base(args == null ? new object[] { null } : args)
         {
         }

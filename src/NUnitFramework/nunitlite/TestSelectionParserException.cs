@@ -38,14 +38,14 @@ namespace NUnit.Common
         /// <summary>
         /// Construct with a message
         /// </summary>
-        public TestSelectionParserException(string message) : base(message) { }
+        public TestSelectionParserException(string? message) : base(message) { }
 
         /// <summary>
         /// Construct with a message and inner exception
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public TestSelectionParserException(string message, Exception innerException) : base(message, innerException) { }
+        public TestSelectionParserException(string? message, Exception? innerException) : base(message, innerException) { }
 
 #if SERIALIZATION
         /// <summary>

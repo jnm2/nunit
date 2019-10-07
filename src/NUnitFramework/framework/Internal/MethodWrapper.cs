@@ -175,7 +175,7 @@ namespace NUnit.Framework.Internal
         /// <param name="fixture">The object on which to invoke the method</param>
         /// <param name="args">The argument list for the method</param>
         /// <returns>The return value from the invoked method</returns>
-        public object Invoke(object fixture, params object[] args)
+        public object Invoke(object fixture, params object?[] args)
         {
             return Reflect.InvokeMethod(MethodInfo, fixture, args);
         }
